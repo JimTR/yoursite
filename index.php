@@ -1,5 +1,5 @@
 <?php
-require 'includes/master.inc.php'; // do login or not
+require 'includes/master.inc.php'; // do login and stuff
 $a=0;
 $id = session_id();
 if($Auth->loggedIn()) 
