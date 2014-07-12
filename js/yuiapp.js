@@ -1,3 +1,4 @@
+// needs major update
 YUI().use('node', function(Y) {
      function init() {
         Y.all('#page-width-switcher a').on('click', function(e) {
