@@ -3,7 +3,7 @@
     <div id="doc3" class="yui-t6">
 <div id="hd"><br />
 <div style="float:right;">#datetime#</div>
-            <h1><a href="#path#/index.php"><img src="/fw/images/fixedlogo.png"></a></h1>
+            <h1><a href="#path#"><img src="/fw/images/fixedlogo.png"></a></h1>
             <div id="navigation">
                 <ul id="primary-navigation">
                     <li><a href="#path#">Home</a></li>

@@ -41,6 +41,6 @@ $settings['avataruploadpath'] = "./uploads/avatars";
 $settings['boardclosed'] = "0";
 $settings['boardclosed_reason'] = "These forums are currently closed for maintenance. Please check back later.";
 $settings['bbname'] = "Version 16.12";
-$settings['url'] = "http://localhost/fw";
+$settings['url'] = "http://localhost/yoursite";
 $settings['showphp'] = false;
 ?>
