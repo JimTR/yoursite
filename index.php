@@ -1,4 +1,9 @@
+
 <?php
+/*
+ * main Index file
+ * does very little as it does not need to !
+ */ 
 require 'includes/master.inc.php'; // do login and stuff
 $a=0;
 $id = session_id();
