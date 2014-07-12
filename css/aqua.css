@@ -1,7 +1,8 @@
 /* This is the bare minimum needed to create your own theme.
    In this example, all we're doing is overriding the default
    color scheme with our own. In the real world, you'd probably
-   want to do more complex operations. */
+   want to do more complex operations.
+   thes is aqua green  */
 
 #hd { background-color:#187a7a; }
 .block .hd { background-color:#187a7a; color:#fff; border-bottom:10px solid #262626; }
