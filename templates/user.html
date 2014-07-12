@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>#title#</title>#include# #css#
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+    <link rel="stylesheet" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+    <link rel="stylesheet" href="css/yuiapp.css" type="text/css">
+    <link id="theme" rel="stylesheet" href="css/aqua.css" type="text/css"> 
+    <script src="http://yui.yahooapis.com/3.0.0pr2/build/yui/yui-min.js" type="text/javascript"></script>
+    <script src="js/yuiapp.js" type="text/javascript"></script>
+</head>
+#header#
+
+        <div id="bd">
+            <div id="yui-main">
+                <div class="yui-b"><div class="yui-g">
+                    
+                 
+
+                    <!-- Basic block with tabs -->
+                    <div class="block tabs">
+                        <div class="hd">
+                            <h2>Fake Header For SEO Purposes</h2>
+                            <ul>
+                                
+                                <li class="active tab" abbr="tc1"><a href="#">Forum Settings</a></li>
+                                <li class="tab" abbr="tc2"><a href="#">Message Settings</a></li>
+                                <li class ="tab" abbr="tc3"><a href="#">XX</a></li>
+                               
+                                <li class ="tab" abbr="tc4"><a href="#">Tab 4</a></li>
+                                <li><a href="#">Tab 5</a></li>
+                                <li><a href="#">Tab 6</a></li>
+                            </ul>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="bd">
+                             <div id="tc1" class="content">
+                            
+                              <form action="usercp.php" method="post">
+<input type="hidden" name="my_post_key" value="{$mybb->post_code#" />
+<table width="100%" border="0" align="center">
+<tr>
+<td valign="top">
+<!--{$errors# -->
+<table border="0" cellspacing="{$theme['borderwidth']#" cellpadding="{$theme['tablespace']#" class="tborder">
+<tr>
+<td class="hd" colspan="2" style="height:27px;"><div style ="Font-weight:bold;padding-left:1%;">Forum Options</div></td>
+</tr>
+<tr>
+<td width="50%" class="trow1" valign="top">
+<fieldset class="trow2">
+<legend><strong>#login_cookies_privacy#</strong></legend>
+<table cellspacing="0" cellpadding="2">
+<tr>
+<td valign="top" width="1"><input type="checkbox" class="checkbox" name="invisible" id="invisible" value="1" #invisiblecheck# /></td>
+<td><span class="smalltext"><label for="invisible">#invisible_mode#</label></span></td>
+</tr>
+</table>
+</fieldset>
+<br />
+<fieldset class="trow2">
+<legend><strong>#messaging_notification#</strong></legend>
+<table cellspacing="0" cellpadding="2">
+<tr>
+<td valign="top" width="1"><input type="checkbox" class="checkbox" name="allownotices" id="allownotices" value="1" {$allownoticescheck# /></td>
+<td><span class="smalltext"><label for="allownotices">#allow_notices#</label></span></td>
+</tr>
+<tr>
+<td valign="top" width="1"><input type="checkbox" class="checkbox" name="hideemail" id="hideemail" value="1" {$hideemailcheck# /></td>
+<td><span class="smalltext"><label for="hideemail">#allow_emails#</label></span></td>
+</tr>
+<tr>
+<td valign="top" width="1"><input type="checkbox" class="checkbox" name="receivepms" id="receivepms" value="1" {$receivepmscheck# /></td>
+<td><span class="smalltext"><label for="receivepms">#receive_pms#</label></span></td>
+</tr>
+
+<tr>
+<td valign="top" width="1"><input type="checkbox" class="checkbox" name="pmnotice" id="pmnotice" value="1"{$pmnoticecheck# /></td>
+<td><span class="smalltext"><label for="pmnotice">#pm_notice#</label></span></td>
+</tr>
+<tr>
+<td valign="top" width="1"><input type="checkbox" class="checkbox" name="pmnotify" id="pmnotify" value="1" {$pmnotifycheck# /></td>
+<td><span class="smalltext"><label for="pmnotify">#pm_notify#</label></span></td>
+</tr>
+<tr>
+<td colspan="2"><span class="smalltext"><label for="subscriptionmethod">#subscription_method#</label></span></td>
+</tr>
+<tr>
+<td colspan="2">
+	<select name="subscriptionmethod" id="subscriptionmethod">
+		<option value="0" #no_subscribe_selected#>#no_auto_subscribe#</option>
+		<option value="1" #no_email_subscribe_selected#>#no_email_subscribe#</option>
+		<option value="2" {$instant_email_subscribe_selected#>#instant_email_subscribe#</option>
+	</select>
+</td>
+</tr>
+
+</table>
+</fieldset>
+<br />
+<fieldset class="trow2">
+<legend><strong>#date_time_options#</strong></legend>
+<table cellspacing="0" cellpadding="2">
+<tr>
+<td><span class="smalltext">#date_format#</span></td>
+</tr>
+<tr>
+<td>
+<select name="dateformat">
+{$date_format_options#
+</select>
+</td>
+</tr>
+<tr>
+<td><span class="smalltext">#time_format#</span></td>
+</tr>
+<tr>
+<td>
+<select name="timeformat">
+{$time_format_options#
+</select>
+</td>
+</tr>
+<tr>
+<td><span class="smalltext">#time_offset_desc#</span></td>
+</tr>
+<tr>
+<td>{$tzselect#</td>
+</tr>
+<tr>
+<td><span class="smalltext">#dst_correction#</span></td>
+</tr>
+<tr>
+<td>
+	<select name="dstcorrection">
+		<option value="2" {$dst_auto_selected#>#dst_correction_auto#</option>
+		<option value="1" {$dst_enabled_selected#>#dst_correction_enabled#</option>
+		<option value="0" {$dst_disabled_selected#>#dst_correction_disabled#</option>
+	</select>
+</td>
+</tr>
+</table>
+</fieldset>
+</td>
+<td width="50%" class="trow1" valign="top">
+<fieldset class="trow2">
+<legend><strong>#forum_display_options#</strong></legend>
+<table cellspacing="0" cellpadding="2">
+{$tppselect#
+<tr>
+<td><span class="smalltext">#thread_view#</span></td>
+</tr>
+<tr>
+<td>
+<select name="daysprune">
+<option value="">#use_default#</option>
+<option value="1" {$daysprunesel['1']#>#thread_view_lastday#</option>
+<option value="5" {$daysprunesel['5']#>#thread_view_5days#</option>
+<option value="10" {$daysprunesel['10']#>#thread_view_10days#</option>
+<option value="20" {$daysprunesel['20']#>#thread_view_20days#</option>
+<option value="50" {$daysprunesel['50']#>#thread_view_50days#</option>
+<option value="75" {$daysprunesel['75']#>#thread_view_75days#</option>
+<option value="100" {$daysprunesel['100']#>#thread_view_100days#</option>
+<option value="365" {$daysprunesel['365']#>#thread_view_year#</option>
+<option value="9999" {$daysprunesel['9999']#>#thread_view_all#</option>
+</select>
+</td>
+</tr>
+</table>
+</fieldset>
+<br />
+<fieldset class="trow2">
+<legend><strong>#thread_view_options#</strong></legend>
+<table cellspacing="0" cellpadding="2">
+	<tr>
+	<td valign="top" width="1"><input type="checkbox" class="checkbox" name="classicpostbit" id="classicpostbit" value="1" {$classicpostbitcheck# /></td>
+	<td><span class="smalltext"><label for="classicpostbit">#show_classic_postbit#</label></span></td>
+	</tr>
+<tr>
+<td valign="top" width="1"><input type="checkbox" class="checkbox" name="showsigs" id="showsigs" value="1" {$showsigscheck# /></td>
+<td><span class="smalltext"><label for="showsigs">#show_sigs#</label></span></td>
+</tr>
+<tr>
+<td valign="top" width="1"><input type="checkbox" class="checkbox" name="showavatars" id="showavatars" value="1" {$showavatarscheck# /></td>
+<td><span class="smalltext"><label for="showavatars">#show_avatars#</label></span></td>
+</tr>
+<tr>
+<td valign="top" width="1"><input type="checkbox" class="checkbox" name="showquickreply" id="showquickreply" value="1" {$showquickreplycheck# /></td>
+<td><span class="smalltext"><label for="showquickreply">#show_quick_reply#</label></span></td>
+</tr>
+{$pppselect#
+<tr>
+<td colspan="2"><span class="smalltext">#thread_mode#</span></td>
+</tr>
+<tr>
+<td colspan="2"><select name="threadmode"><option value="">#use_default#</option><option value="linear" {$threadview['linear']#>#linear#</option><option value="threaded" {$threadview['threaded']#>#threaded#</option></select></td>
+</tr>
+</table>
+</fieldset>
+<br />
+<fieldset class="trow2">
+<legend><strong>#other_options#</strong></legend>
+<table cellspacing="0" cellpadding="2">
+<tr>
+<td valign="top" width="1"><input type="checkbox" class="checkbox" name="showredirect" id="showredirect" value="1" {$showredirectcheck# /></td>
+<td><span class="smalltext"><label for="showredirect">#show_redirect#</label></span></td>
+</tr>
+<tr>
+<td valign="top" width="1"><input type="checkbox" class="checkbox" name="showcodebuttons" id="showcodebuttons" value="1" {$showcodebuttonscheck# /></td>
+<td><span class="smalltext"><label for="showcodebuttons">#show_codebuttons#</label></span></td>
+</tr>
+<tr>
+<td colspan="2"><span class="smalltext">#style#</span></td>
+</tr>
+<tr>
+<td colspan="2">{$stylelist#</td>
+</tr>
+<tr>
+<td colspan="2"><span class="smalltext">#board_language#</span></td>
+</tr>
+<tr>
+<td colspan="2"><select name="language"><option value="">#use_default#</option><option value="0">-----------</option>{$langoptions#</select></td>
+</tr>
+</table>
+</fieldset>
+</td>
+</tr>
+</table>
+<br />
+<div align="center">
+<input type="hidden" name="action" value="do_options" />
+<input type="submit" class="button" name="regsubmit" value="#update_options#" />
+</div>
+</td>
+</tr>
+</table>
+</form>
+                            </div>
+                             <div id="tc2" class="content">
+                            <h2>Tab 2 Example</h2>
+                            <p>Tabs are a built in function for Your Site, they can be used in each subject area <br> <code>yoursite/forums</code> will have different tabs to <code>yoursite/shop</code> </p>
+                            <p>this is tab 2</p>
+                            </div>
+                             <div id="tc3" class="content">
+                            <h2>Tab 3 Example</h2>
+                            <p>The tabs at the top of this block are made using an &lt;ul&gt; &mdash; </p>
+                            <p>this is tab 3</p>
+                            </div>
+                        </div>
+                    </div>
+             
+
+                   
+
+                   
+                </div></div>
+            </div>
+            <div id="sidebar" class="yui-b">
+
+                <!-- Sidebar block (same markup as basic block) -->
+                <div class="block">
+                    <div class="hd">
+                        <h2 style="font-weight:bold;">Messages</h2>
+                    </div>
+                    <div class="bd">
+                        <p>Private Messages #pmcount#</p>
+                        <p> Messages Unread #pmunread#</p>
+                    </div>
+                </div>
+
+               
+                <div class="block">
+                    <div class="hd">
+                       <h3> Shop Activity</h3> 
+                    </div>
+                    <div class="bd">
+                    <p>Items Purchased #shop_purchase#</p>
+                    <p>Items awaiting payment #shop_notpaid#</p> 
+                    </div>
+                </div>
+
+<div class="block">
+                    <div class="hd">
+                       <h3> Friends Online</h3> 
+                    </div>
+                    <div class="bd">
+                    we have #vari# online 
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+
+        <div id="ft">
+            <p class="inner">Copyright &copy; 2014 NoIdeer Software online users #vari#</p>
+            
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!--
+   login.html
+   
+   Copyright 2014 Jim Richardson <jim@noideersoftware.co.uk>
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+   
+   
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="generator" content="Bluefish 2.2.5" />
+	<title>#title#</title>
+    #css# 
+    #include#
+</head>
+
+<body>
+#header#
+<!-- <center>
+<form action="<?PHP echo $_SERVER['PHP_SELF']; ?>" method="post">
+        <center><h3>#error#</h3></center>
+        <br>
+        <p><label for="username">Username:</label> <input type="text" name="username" value="<?PHP echo $username;?>" id="username" /></p>
+        <p><label for="password">Password:</label> <input type="password" name="password" value="" id="password" /></p>
+        <p><label for="remember">Remember </label> <input type="checkbox" name="remember" value="" id="remember"/> </p>
+        <p><input type="submit" name="btnlogin" value="Login" id="btnlogin" /></p>
+        <input type="hidden" name="r" value="<?PHP echo $_SERVER['HTTP_REFERER']; ?>" id="r">
+    </form>
+    </center> -->
+    <div class="bd" style="padding:2%" >
+                            <h3 style="text-align:center">Login</h3>
+                            <form action="<?PHP echo $_SERVER['PHP_SELF']; ?>" method="post">
+                                <div class="column left">
+                                    <p><label for="username">Username</label>
+                                        <input type="text" name="username" id="username" value="">
+                                        <span class="info">Ex: some text</span>
+                                    </p>
+                                    <p><label for="Password ">Password </label>
+                                        <input type="password"  name="password" id="password" value="">
+                                       <label> <span class="validation"> passwords are case sensitive</span></label>
+                                    </p>
+                                   
+                                </div>
+                                <div class="column right">
+                                    <p>I bet you thought two column forms would be difficult, eh? <span class="highlight">Don't worry</span>. We've got you covered.</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                </div>
+                                <div class="clear"></div>
+                                <p><input type="submit" name="btnlogin" id="btnlogin" value="Login"> or <a href="#">Cancel</a></p>
+                            </form>
+                        </div>
+#footer#
+
+</body>
+
+</html>
+    

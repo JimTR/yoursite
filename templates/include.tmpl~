@@ -1,0 +1,40 @@
+<meta http-equiv="Content-Type" content="text/html; charset={$charset}" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+ <script src="http://code.jquery.com/jquery-1.8.1.js"></script>
+ <link rel="stylesheet" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+    <link rel="stylesheet" href="#path#/css/yuiapp.css" type="text/css">
+    <!-- <link id="theme" rel="stylesheet" href="#path#/css/aqua.css" type="text/css"> -->
+    <link id="theme" rel="stylesheet" href="#base#.css" type="text/css">
+    <script src="http://yui.yahooapis.com/3.0.0pr2/build/yui/yui-min.js" type="text/javascript"></script>
+    <script src="#path#/js/yuiapp.js" type="text/javascript"></script>
+<!-- <script  type="text/javascript" src="#path#/jquery.ui.datepicker.js"></script> -->
+<!-- 
+<script src="#path#/jscripts/jquery.colorbox.js"></script>
+-->
+<script type="text/javascript">
+	jQuery.noConflict();
+</script>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+	var currentState = history.state;
+		jQuery('.tab').click(function(){
+			jQuery('.active').removeClass('active');
+			jQuery(this).addClass('active');
+			jQuery('.content').slideUp();
+			var catshow = jQuery(this).attr('abbr');
+			jQuery('#'+ catshow).slideDown();
+			alert(currentstate);
+			jQuery(document).attr('href').replace(/\#*/g, "");
+		});
+	});
+</script>
+<style type="text/css">
+#tc2, #tc3, #tc4{
+	display: none;
+}
+
+.tab {
+       cursor:pointer;
+}  
+</style>
+
