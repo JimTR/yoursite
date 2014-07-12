@@ -6,3 +6,5 @@ The idea behind this software is to produce a cms/forum  that is easy for the en
 use a html editor (drag & drop or otherwise) to edit the non dynamic content (templates)
 dynamic content will be supplied by a very simple php structure, obtained by very simple classes and functions.
 Let's keep it simple !
+
+:)
