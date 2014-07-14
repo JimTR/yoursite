@@ -31,6 +31,7 @@
 	<title>#title#</title>
     #css# 
     #include#
+
 </head>
 
 <body>
@@ -39,7 +40,7 @@
 <form action="<?PHP echo $_SERVER['PHP_SELF']; ?>" method="post">
         <center><h3>#error#</h3></center>
         <br>
-        <p><label for="username">Username:</label> <input type="text" name="username" value="<?PHP echo $username;?>" id="username" /></p>
+        <p><label for="username">Username:</label> <input type="text" name="username" value="#name#" id="username" /></p>
         <p><label for="password">Password:</label> <input type="password" name="password" value="" id="password" /></p>
         <p><label for="remember">Remember </label> <input type="checkbox" name="remember" value="" id="remember"/> </p>
         <p><input type="submit" name="btnlogin" value="Login" id="btnlogin" /></p>
@@ -47,12 +48,12 @@
     </form>
     </center> -->
     <div class="bd" style="padding:2%" >
-                            <h3 style="text-align:center">Login</h3>
-                            <form action="<?PHP echo $_SERVER['PHP_SELF']; ?>" method="post">
+                            <h3 style="text-align:left">Login</h3>
+                            <form action="<?PHP echo $_SERVER['PHP_SELF']; ?>" method="post" id="input">
                                 <div class="column left">
                                     <p><label for="username">Username</label>
                                         <input type="text" name="username" id="username" value="">
-                                        <span class="info">Ex: some text</span>
+                                        
                                     </p>
                                     <p><label for="Password ">Password </label>
                                         <input type="password"  name="password" id="password" value="">
@@ -65,9 +66,53 @@
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                                 </div>
                                 <div class="clear"></div>
-                                <p><input type="submit" name="btnlogin" id="btnlogin" value="Login"> or <a href="#">Cancel</a></p>
+                                <p><input type="submit" name="btnlogin" id="input" value="Login"> or <a href="#path#">Cancel</a></p>
                             </form>
                         </div>
+<script>jQuery.noConflict();</script>
+	<script>
+			
+		jQuery('#input').submit(function() {
+			title= jQuery('#username').val().length ;
+			
+if (title === 0)
+{
+message = '<div style="font-size:20px;color:red;">Error</div>You must supply a user name and password<br />';
+alertify.alert(message);
+			return false;
+}
+
+	title= jQuery('#password').val().length ;
+			
+if (title === 0)
+{
+message = '<div style="font-size:20px;color:red;">Error</div>You must supply a user name and Password<br />';
+alertify.alert(message);
+			return false;
+}
+	
+		});
+		jQuery('#password').onblur(function() {
+			title= jQuery('#username').val().length ;
+			
+if (title === 0)
+{
+message = '<div style="font-size:20px;color:red;">Error</div>You must supply a user name<br />';
+alertify.alert(message);
+			return false;
+}
+
+	title= jQuery('#password').val().length ;
+			
+if (title === 0)
+{
+message = '<div style="font-size:20px;color:red;">Error</div>You must supply a Password<br />';
+alertify.alert(message);
+			return false;
+}
+	
+		});
+	</script>
 #footer#
 
 </body>
