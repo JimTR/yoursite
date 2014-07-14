@@ -77,7 +77,7 @@
         {
             $this->loggedIn = false;
             $this->clearCookies();
-            $this->sendToLoginPage();
+            //$this->sendToLoginPage();
         }
 
         public function loggedIn()
