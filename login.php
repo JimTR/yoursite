@@ -33,6 +33,7 @@
 	
     // Clean the submitted username before redisplaying it.
     $username = isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '';
+    $password = isset($_POST['password']) ? htmlspecialchars($_POST['password']) : '';
     $users = $database->num_rows("select * from sessions");
     $job = $_SERVER['HTTP_REFERER'];
 	if (!$_COOKIE['redirect']) {setcookie('redirect',$job, time() + (60 * 5),'/');} // make sure we go back
