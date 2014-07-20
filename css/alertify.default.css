@@ -37,14 +37,10 @@
 	.alertify-button:hover,
 	.alertify-button:focus {
 		outline: none;
-		background-image: -webkit-linear-gradient(top, rgba(0,0,0,.1), rgba(0,0,0,0));
-		background-image:    -moz-linear-gradient(top, rgba(0,0,0,.1), rgba(0,0,0,0));
-		background-image:     -ms-linear-gradient(top, rgba(0,0,0,.1), rgba(0,0,0,0));
-		background-image:      -o-linear-gradient(top, rgba(0,0,0,.1), rgba(0,0,0,0));
-		background-image:         linear-gradient(top, rgba(0,0,0,.1), rgba(0,0,0,0));
+		
 	}
 	.alertify-button:focus {
-		box-shadow: 0 0 15px #2B72D5;
+		
 	}
 	.alertify-button:active {
 		position: relative;
