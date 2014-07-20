@@ -50,6 +50,6 @@ if($site->settings['showphp'] === false)
 {
 $template->removephp();
 }
-$template->listv("lang.php","");
+$template->listv("lang/lang.php","");
 $template->publish();
 ?>
