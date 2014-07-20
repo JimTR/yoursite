@@ -33,15 +33,13 @@ class Template {
    }
 
    function replace($var, $content) {
-
+		// replaces a single variable
       $this->template = str_replace("#$var#", $content, $this->template);
 
    }
 
    function publish() {
-			//echo "test";
-			//echo $this->template;
-			//die();
+			
      		eval("?>".$this->template."<?");
 
    }
@@ -62,23 +60,39 @@ class Template {
 	
    }
 
-	function listv ($file,$group) {
-		/* return template with the vars in place 
-		 *use $vars as the variable list
+	function listv ($file) {
+		/* return template with the vars in place from a lang file
+		  *use $file as the variable list in php array format
 		 * each var populated or left blank if the var has no value
-		 * source being the html file
+		 * 
 		 */ 
-		  include "lang/".$file;
-		 $lang->usercp = &$l;
-		 //print_r ($lang); 
-		 //echo $lang->usercp['redirect_avatarupdated'];
-		 //die ("<br>we are here");
-		 foreach ($lang->usercp as $k => $v) {
+		  include $file;
+		 $lang->group = &$l;
+		
+		 foreach ($lang->group as $k => $v) {
 			$this->template = str_replace("#$k#", $v, $this->template);
 	}
  
-	} // end of list v
-	// add class function here 
+	} 
+	
+		function get_template() {
+		/* returns a template main use is for sub templates
+		 * this function must be called AFTER the variables have been replaced
+		 */ 
+		$sub_template = $this->template ;
+		return $sub_template;
+	}  
+	
+	function replace_vars($vars) {
+		/* replace vars as an array
+		 * supply an array
+		 * you should have defined the template with the template->load function
+		 * simular to listv but uses an array rather than a file
+		 */
+		 foreach ($vars as $k => $v) {
+			 $this->template = str_replace("#$k#", $v, $this->template);
+		 } 
+	 }
 }
 
 ?>
