@@ -7,7 +7,7 @@ html, body { background-color:#f0f0ee; color:#222; }
 #hd { padding:1.2em 1.5em 0 1.5em; background-color:#7a1818; }
 h1 { font-size:230%; color:#fff; }
 
-#navigation { margin-top:1.5em; background-color:#262626; height:1%; }
+#navigation { margin-top:1.5em; background-color:#262626; }
 #navigation li { float:left; display:inline; }
 #navigation li a { display:block; color:#fff; text-decoration:none; }
 #navigation li a:hover { text-decoration:underline; }
