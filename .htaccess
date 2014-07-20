@@ -3,7 +3,7 @@
 # PHP using $_SERVER['REQUEST_URI'] and $_SERVER['REDIRECT_URL']. This is an easy
 # way to avoid having hundreds of rewrite rules slowing down Apache and making things
 # more complicated than they should be.
-
+#don't forget to un comment !
 # Note: If you're having trouble making Apache pickup your .htaccess file,
 # make sure AllowOverride is set to "All" instead of "None".
 
