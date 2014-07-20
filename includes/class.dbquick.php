@@ -298,6 +298,7 @@ class db
         {
             $r = mysqli_fetch_row( $query );
             mysqli_free_result( $query );
+            //die (print_r($r));
             return $r;   
         }
     }
