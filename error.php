@@ -19,9 +19,9 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
- * 13-7-14 
+ * updated 21-7-14 
  */
- 
+ $action = $_POST['action'];
  require 'includes/master.inc.php'; // do login or not
  
  if(!empty($_POST['username']))
@@ -53,7 +53,7 @@ if($Auth->loggedIn())
 			   $name = $Auth->username;
 			   //$_REQUEST[\'r\'] ;
 			    $login = '<a href="logout.php">logout link</a>';
-			    redirect("index.php");
+			    //redirect("index.php");
 			   }
 			   
 	else
@@ -62,7 +62,6 @@ if($Auth->loggedIn())
 					$login = file_get_contents('templates/login.html') ;
 				}
 $header = file_get_contents('templates/header.html');
-$header= str_replace("#login#", $content, $header);
 $footer = file_get_contents ( 'templates/footer.tmpl');
 $include = file_get_contents ('templates/include.tmpl');
 $login = file_get_contents ('templates/login.html');
@@ -78,7 +77,7 @@ $template->replace("footer", $footer);
 $template->replace("include", $include);
 $template->replace ("path", $site->settings['url']);
 $template->replace("name",$name );
-$template->replace("login",$login);
+//$template->replace("login",$login);
 $template->replace("vari",DOC_ROOT);
 $template->replace("stuff",$stuff);
 $template->replace("datetime", FORMAT_TIME);
