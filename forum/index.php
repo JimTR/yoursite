@@ -28,9 +28,9 @@ if($Auth->loggedIn())
 	
 	$template = new Template; // start the template workspace		
 	$users = $database->num_rows("select * from sessions");	
-	$pms="0";
-	$newthread="12";
-	$newpost ="24";			
+	$pms=0;
+	$newthread=0;
+	$newpost =0;			
 	$header = file_get_contents ( $site->settings['url'].'/templates/header.html');
 	$footer = file_get_contents (  $site->settings['url'].'/templates/footer.tmpl');
 	$include = file_get_contents ( $site->settings['url'].'/templates/include.tmpl');
@@ -59,6 +59,7 @@ if($Auth->loggedIn())
 		{			
 				//$data=$row; // start the array forum row array
 				$threads= $database->num_rows("select * from topics where topic_cat ='".$row['cat_id']."'");
+				//$threads= $row['topics'];
 				$countpost= 
 							"SELECT posts . * , topic_date, topic_cat, topic_subject, topic_id, cat_id,username
 							FROM posts
@@ -122,7 +123,7 @@ if($Auth->loggedIn())
 			}
 			
         
-$template->load($site->settings['url'].'/templates/forum.html');
+$template->load('templates/index.html');
 $template->replace("result","Forum");
 $template->replace("css",$css);
 $template->replace("error",$Error);
@@ -134,7 +135,7 @@ $template->replace("include", $include);
 $template->replace ("path", $site->settings['url']);
 $template->replace("name",$name );
 $template->replace("vari",$users);
-$template->replace("pms",$pms);
+$template->replace("pmnew",$pms);
 $template->replace("rowd",$rowd);
 $template->replace("newthread",$newthread);
 $template->replace("newpost",$newpost);
