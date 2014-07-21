@@ -1,0 +1,138 @@
+<!--
+   category.html
+   
+   Copyright 2014 Jim Richardson <jim@noideersoftware.co.uk>
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+   
+	Update 20/7/14 19:56    
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>#title#</title>#include#
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+     <script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
+    <link rel="stylesheet" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+    <link rel="stylesheet" href="http://localhost/yoursite/css/yuiapp.css" type="text/css">
+    <link id="theme" rel="stylesheet" href="#path#/css/aqua.css" type="text/css"> 
+    <script src="http://yui.yahooapis.com/3.0.0pr2/build/yui/yui-min.js" type="text/javascript"></script>
+    <script src="#path#/js/yuiapp.js" type="text/javascript"></script>
+    <script src="#path#/js/ckeditor.js"></script>
+<!-- 
+add the editor jquery here
+<script type="text/javascript">
+jQuery(document).ready(function(){
+
+});
+</script> 
+-->
+
+</head>
+<body>
+#header#
+
+        <div id="bd">
+            <div id="yui-main">
+                <div class="yui-b"><div class="yui-g">
+                    
+
+                    <!-- Basic block -->
+                    <div class="block">
+                        <div class="hd">
+                            <h2 style="font-weight:bold;">#navi# </h2>
+                        </div>
+                        <div class="bd">
+                            
+										<table>
+				<thead> 
+                                    <tr>
+                                        <td colspan="2">Create a Thread </td></tr></thead>
+<tr><td width="50%">
+                                         <form method="post" action="create_topic.php">
+
+					<div style="float:left;padding:2%;">Subject: <input type="text" name="topic_subject" /> </div>
+					<div style="float:left;">#catlist#</div>
+				<br style ="clear:both">
+				<textarea cols="30" class="ckeditor" name="post_content" id= "editor1" /></textarea>
+				#editor_opts#
+				
+				<br /><br />
+				
+					<input class="button" type="submit" value="Create Thread" />
+				 </form>
+
+
+</td><td valign="top" style="padding-top:4%">Other create thread options will appear here</td>
+                                       
+                                       
+                                    </tr>
+                                
+                                          #rowd#
+                                
+                            </table>                    
+                        </div>
+                    </div>
+                
+                </div></div>
+            </div>
+            <div id="sidebar" class="yui-b">
+
+                <!-- Sidebar block (same markup as basic block) -->
+                <div class="block">
+                    <div class="hd">
+                        <h2>Your Statistics</h2>
+                    </div>
+                    <div class="bd">
+                        <p>Unread Private Messages #pmnew#</p>
+                        <p>New Threads #newthread#</p>
+                        <p>New Posts #newpost#</p>  
+                    </div>
+                </div>
+
+              
+                <div class="block">
+                    <div class="hd">
+                       <h3> Side Boxes</h3> 
+                    </div>
+                    <div class="bd">
+                    Side boxes will have a side box manager and not just be HTML, you will be able to add scripts
+                    </div>
+                </div>
+
+<div class="block">
+                    <div class="hd">
+                       <h3> Online Users</h3> 
+                    </div>
+                    <div class="bd">
+                    we have #vari# online 
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+
+        <div>
+            #footer#
+            
+        </div>
+
+    </div>
+</body>
+</html>
