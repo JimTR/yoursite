@@ -342,7 +342,7 @@ table {
 .tborder {
 	width: 100%;
 	margin: auto auto;
-	/* border: 1px solid #E42217; */
+	border: 1px solid #000000; 
 	border-radius: 0.5em
 }
 
@@ -371,9 +371,10 @@ table {
 }
 
 .tcat {
-	background: #f1e9d2;
-	color: #a0a0a0;
+	background: #187A7A;
+	color: #FFFFFF;
 	font-size: 12px;
+	font-weight: bold;
 }
 
 .tcat a:link {
