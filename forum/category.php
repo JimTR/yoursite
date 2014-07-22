@@ -25,9 +25,9 @@ if($Auth->loggedIn())
 	writeid ($id,$nid,$database);
 	$template = new Template; // start the template workspace		
 	$users = $database->num_rows("select * from sessions");
-	$header = file_get_contents ( $site->settings['url'].'/templates/header.html');
-	$footer = file_get_contents (  $site->settings['url'].'/templates/footer.tmpl');
-	$include = file_get_contents ( $site->settings['url'].'/templates/include.tmpl');
+	$header = $template->load('templates/header.html');
+	$footer = $template->load(  $site->settings['url'].'/templates/footer.tmpl');
+	$include = $template->load( $site->settings['url'].'/templates/include.tmpl');
 	$css = $site->settings['url'].'/css/aqua.css';
     $css ="<style>".file_get_contents ($css)."</style>";
     $base = $site->settings['url'].'/css/'.$basecolour;
@@ -74,7 +74,8 @@ else
 					topic_id,
 					topic_subject,
 					topic_date,
-					topic_cat
+					topic_cat,
+					topic_views
 				FROM
 					topics
 				WHERE
@@ -97,13 +98,14 @@ else
 				{			
 					// lets get the stats
 					$stats= $database->num_rows("SELECT * FROM posts where post_topic =".$row['topic_id']);
-					$replies=$stats-1; 
+					$replies=$row['topic_views']; 
 					$topicsql = "SELECT
 									posts.*,
 									topic_date,
 									topic_cat,
 									topic_subject,
 									topic_id,
+									topic_views,
 									username,
 									level
 								FROM
@@ -123,8 +125,8 @@ else
 									$data = $database->get_results($topicsql);
 									foreach ($data as $userstuff) {};
 										
-					$rowd .= '<tr><td class="leftpart"><h3><a href="topic.php?id=' . $row['topic_id'] . '">' . $row['topic_subject'] . '</a><br /><h3></td>
-						 <td  style="text-align:center">'.$stats.'</td><td><center>'.$replies.'</center></td><td><center>'.date('d-m-Y H:i:s', strtotime($userstuff['post_date'])).'<br>By  '.$userstuff['username'].'</center></td></tr>'; 
+					$rowd .= '<tr style ="border-bottom:1px solid #000000;border-top:1px solid transparent"><td class="leftpart"><h3><a href="topic.php?id=' . $row['topic_id'] . '">' . $row['topic_subject'] . '</a><br /><h3></td>
+						 <td  style="text-align:center">'.$stats.'</td><td><center>'.$replies.'</center></td><td><center>'.date('d-m-Y H:i:s', strtotime($userstuff['post_date'])).' By  '.$userstuff['username'].'</center></td></tr>'; 
 				}
 			}
 		}
