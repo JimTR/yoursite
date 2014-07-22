@@ -28,7 +28,7 @@ if($Auth->loggedIn())
 	$css = $site->settings['url'].'/css/aqua.css';
 	$page['css'] ="<style>".file_get_contents ($css)."</style>";
     $page['base'] = $site->settings['url'].'/css/'.$page['basecolour'];
-    $page['header'] = $template->load($site->settings['url']."/templates/header.html");
+    $page['header'] = $template->load("templates/header.html");
 	$page['include'] = $template->load($site->settings['url']."/templates/include.tmpl");
 	$page['footer'] = $template->load ($site->settings['url'].'/templates/footer.tmpl');
 	$page['vari'] = $database->num_rows("select * from sessions");	
@@ -44,6 +44,7 @@ $sql = "SELECT
 			topic_id,
 			topic_subject,
 			topic_cat,
+			topic_views,
 			cat_name
 						
 		FROM
@@ -73,11 +74,19 @@ else
 		
 		      $data = $database->get_results($sql);
 						 foreach ($data as $row) {}; // i need to alter the db class
+						 $ids['topic_id'] = $row['topic_id'];
+						 //$dataset['topic_view'] = "10";
+						 //$dataset['id'] = $row['topic_id'];
+						 $dataset['topic_views'] = $row['topic_views']+1;
+						 //die (print_r($dataset)."<br>". print_r($ids));
+						 //$datas['topic_views'] = $row['topic_views']  ; add a view of the topic
+						 $database->update("topics",$dataset,$ids);
 		{
 			//display post data
 			 
 			        $page['navi'].='-><a style="color:#fff" href="category.php?id='.$row['topic_cat'].'">'.$row['cat_name'].'</a>->'.$row['topic_subject'];
 					$subject=$row['topic_subject'];
+					$page['topic_id'] = $row['topic_id'];
 					
 		
 			//fetch the posts from the database
@@ -158,12 +167,12 @@ else
 				$template->replace("datetime", FORMAT_TIME);
 				$template->replace("topicsubject",$subject);
 				$template->publish();
-				echo '<tr><td colspan="2"><h2>Reply:</h2><br />
+				/*echo '<tr><td colspan="2"><h2>Reply:</h2><br />
 					<form method="post" action="reply.php?id=' . $row['topic_id'] . '">
 						<textarea name="reply-content"></textarea><br /><br />
 						<input type="submit" value="Submit reply" />
 					</form></td></tr>';	
-					die();
+					die(); */
 		}
 	}
 }
