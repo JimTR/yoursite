@@ -31,7 +31,7 @@ if($Auth->loggedIn())
 	$pms=0;
 	$newthread=0;
 	$newpost =0;			
-	$header = file_get_contents ( $site->settings['url'].'/templates/header.html');
+	$header = file_get_contents ('templates/header.html');
 	$footer = file_get_contents (  $site->settings['url'].'/templates/footer.tmpl');
 	$include = file_get_contents ( $site->settings['url'].'/templates/include.tmpl');
 	$css = $site->settings['url'].'/css/aqua.css';
@@ -58,8 +58,8 @@ if($Auth->loggedIn())
 			foreach($root as $row)
 		{			
 				//$data=$row; // start the array forum row array
-				$threads= $database->num_rows("select * from topics where topic_cat ='".$row['cat_id']."'");
-				//$threads= $row['topics'];
+				$threads = $database->num_rows("select * from topics where topic_cat ='".$row['cat_id']."'");
+				
 				$countpost= 
 							"SELECT posts . * , topic_date, topic_cat, topic_subject, topic_id, cat_id,username
 							FROM posts
@@ -81,6 +81,7 @@ if($Auth->loggedIn())
 									topic_cat,
 									topic_subject,
 									topic_id,
+									topic_views,
 									username,
 									level
 								FROM
@@ -104,7 +105,7 @@ if($Auth->loggedIn())
 							$post_topic= $userstuff['post_topic'];
 							$topic_subject = $userstuff['topic_subject'];
 							$user_name = $userstuff['username'];
-							$last_time = date('d-m-Y H:i:s', strtotime($userstuff['post_date']));
+							$last_time =  time2str($userstuff['post_date']); 
 							
                          if ($posts === 0) { $template->replace("last_user","Never");}
 								
