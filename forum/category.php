@@ -2,8 +2,7 @@
 //category.php
  define('DOC_ROOT', realpath(dirname(__FILE__) . '/../'));
 require DOC_ROOT.'/includes/master.inc.php'; // do login or not
-//include 'connect.php';
-//include 'header.php';
+
 if($Auth->loggedIn()) 
            {
 			   
@@ -69,13 +68,7 @@ else
 			echo '<h2>Threads in &prime;' . $row['cat_name'] . '&prime; category</h2><br />';
 			
 		}
-	/*SELECT posts. * , topic_id, topic_subject, topic_date, topic_cat, username, COUNT( * ) AS count
-FROM posts
-LEFT JOIN users ON post_by = id
-LEFT JOIN topics ON topic_id = post_topic
-WHERE topic_cat =  '3'
-GROUP BY post_topic
-ORDER BY  `posts`.`post_date` DESC */
+	
 		//do a query for the topics
 		$sql = "SELECT	
 					topic_id,
@@ -131,7 +124,7 @@ ORDER BY  `posts`.`post_date` DESC */
 									foreach ($data as $userstuff) {};
 										
 					$rowd .= '<tr><td class="leftpart"><h3><a href="topic.php?id=' . $row['topic_id'] . '">' . $row['topic_subject'] . '</a><br /><h3></td>
-						 <td  style="text-align:center">'.$stats.'</td><td><center>'.$replies.'</center></td><td><center>'.date('d-m-Y H:i:s', strtotime($userstuff['post_date'])).' By  '.$userstuff['username'].'</center></td></tr>'; 
+						 <td  style="text-align:center">'.$stats.'</td><td><center>'.$replies.'</center></td><td><center>'.date('d-m-Y H:i:s', strtotime($userstuff['post_date'])).'<br>By  '.$userstuff['username'].'</center></td></tr>'; 
 				}
 			}
 		}
