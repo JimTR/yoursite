@@ -29,7 +29,7 @@ class Template {
    function load($filepath) {
 
       $this->template = file_get_contents($filepath);
-
+      return $this->template; 
    }
 
    function replace($var, $content) {
