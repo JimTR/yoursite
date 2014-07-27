@@ -3,6 +3,9 @@
 define('DOC_ROOT', realpath(dirname(__FILE__) . '/../'));
 require DOC_ROOT.'/includes/master.inc.php'; // required
 $template = new Template;
+  $getid = intval($_GET['id']);
+    
+
 if($Auth->loggedIn()) 
            {
 			   
@@ -33,7 +36,7 @@ if($Auth->loggedIn())
 	$page['footer'] = $template->load ($site->settings['url'].'/templates/footer.tmpl');
 	$page['vari'] = $database->num_rows("select * from sessions");	
 	$page['login'] = $login;
-	$post_info['signature'] = "Sigs are not set up";
+	$post_info['signature'] = "Signatures disabled";
 	$page['navi'] ='<a style="color:#FFFFFF" href="index.php">Forum</a>';
 	$page['newthread'] = 0;
 	$page['pmnew'] =0;
@@ -54,7 +57,7 @@ $sql = "SELECT
 			on topic_cat = cat_id
 		
 		WHERE
-			topics.topic_id = " . mysql_real_escape_string($_GET['id']);
+			topics.topic_id = " . mysql_real_escape_string($getid);
 			
 $result = $database->query($sql);
 
@@ -75,13 +78,9 @@ else
 		      $data = $database->get_results($sql);
 						 foreach ($data as $row) {}; // i need to alter the db class
 						 $ids['topic_id'] = $row['topic_id'];
-						 //$dataset['topic_view'] = "10";
-						 //$dataset['id'] = $row['topic_id'];
 						 $dataset['topic_views'] = $row['topic_views']+1;
-						 //die (print_r($dataset)."<br>". print_r($ids));
-						 //$datas['topic_views'] = $row['topic_views']  ; add a view of the topic
 						 $database->update("topics",$dataset,$ids);
-		{
+		
 			//display post data
 			 
 			        $page['navi'].='-><a style="color:#fff" href="category.php?id='.$row['topic_cat'].'">'.$row['cat_name'].'</a>->'.$row['topic_subject'];
@@ -95,6 +94,7 @@ else
 						posts.post_content,
 						posts.post_date,
 						posts.post_by,
+						posts.post_id,
 						users.id,
 						users.username,
 						users.level,
@@ -108,7 +108,7 @@ else
 					ON
 						posts.post_by = users.id
 					WHERE
-						posts.post_topic = " . mysql_real_escape_string($_GET['id']);
+						posts.post_topic = " . mysql_real_escape_string($getid);
 						
 						
 			$posts_result = $database->query($posts_sql);
@@ -125,17 +125,19 @@ else
 				foreach ($post_data as $posts_row)
 				{
 					$pid =++ $pid;
-					
 					$online = $database->num_rows("select * from sessions where nid = '".$posts_row['nid']."'");
-					if ($online == 1){$online="On Line";} else {$online = "Off Line";}
+					if ($online == 1){$online='<img src ="'.$page['path'].'/images/online.png">';} else {$online = '<img src ="'.$page['path'].'/images/offline.png">';}
 					$post_info['postid'] = $pid;
+					$post_info['path']= $page['path'];
 					$post_info['postdate'] = date('d-m-Y', strtotime($posts_row['post_date']));
 					$post_info['posttime'] = date('H:i', strtotime($posts_row['post_date']));
 					$post_info['username'] = $posts_row['username'];
 					$post_info['post_content'] = html_entity_decode(stripslashes($posts_row['post_content']));
-					$post_info['post_subject'] = $subject;
+					$post_info['post_subject'] = $subject; // will update when each post has a subject
 					$post_info['profilelink']= $posts_row['username']; // later do a link
 					$post_info['onlinestatus'] = $online;
+					$post_info['attachments'] = "";
+					$post_info['iplogged']="";
 					$template->load("templates/post.html");
 					$template->replace_vars($post_info);
 					$page['posts'].= $template->get_template();
@@ -144,21 +146,15 @@ else
 
 			}
 			
-			if(!$Auth->loggedIn())
-			{
-				echo '<tr><td colspan=2>You must be <a href="#path#/login.php">signed in</a> to reply. You can also <a href="#path#/register.php">sign up</a> for an account.';
-			}
-			else
-			{
-				//show reply box
-				/*echo '<tr><td colspan="2"><h2>Reply:</h2><br />
-					<form method="post" action="reply.php?id=' . $row['topic_id'] . '">
-						<textarea name="reply-content"></textarea><br /><br />
-						<input type="submit" value="Submit reply" />
-					</form></td></tr>'; */
-			}
+			
 			
 			//finish the table
+			if(!$Auth->loggedIn())
+			{
+				
+				$page['warn']= 'You must be signed in to reply.';
+			}
+			else {$page['warn']= "";}
 			
 				$template->load("templates/topic.html");
 				$template->replace_vars($page);
@@ -167,13 +163,9 @@ else
 				$template->replace("datetime", FORMAT_TIME);
 				$template->replace("topicsubject",$subject);
 				$template->publish();
-				/*echo '<tr><td colspan="2"><h2>Reply:</h2><br />
-					<form method="post" action="reply.php?id=' . $row['topic_id'] . '">
-						<textarea name="reply-content"></textarea><br /><br />
-						<input type="submit" value="Submit reply" />
-					</form></td></tr>';	
-					die(); */
-		}
+				
+			
+		
 	}
 }
 
