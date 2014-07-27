@@ -69,17 +69,26 @@ jQuery(document).ready(function(){
 					<div style="float:left;padding:2%;">Subject: <input type="text" name="topic_subject" /> </div>
 					<div style="float:left;">#catlist#</div>
 				<br style ="clear:both">
-				<textarea cols="30" class="ckeditor" name="post_content" id= "editor1" /></textarea>
-				#editor_opts#
+				<div style="margin-left:2%"> <textarea  cols="30" class="ckeditor" name="post_content" id= "editor1" /></textarea>
+				#editor_opts#</div>
 				
 				<br /><br />
 				
 					<input class="button" type="submit" value="Create Thread" />
-				 </form>
+				 
 
 
-</td><td valign="top" style="padding-top:4%">Other create thread options will appear here</td>
-                                       
+</td><td valign="top" style="padding-top:4%">
+<h6>Subscribe to this thread</h6>
+<div> 
+	<input type="radio" name="sex" value="male"> Instant Email - receive an email if a new reply is made to this thread<br>
+<input type="radio" name="sex" value="female"> Weekly Update - receive an email every week if a new reply is made to this thread 
+<br /><input type="radio" name="sex" value="dunno"> Do not subscribe<br>
+<!--Points: 0<input type="range" name="points" min="1" max="10">10-->
+</div>
+
+</td>
+                                 </form>      
                                        
                                     </tr>
                                 
