@@ -3,6 +3,9 @@
  define('DOC_ROOT', realpath(dirname(__FILE__) . '/../'));
 require DOC_ROOT.'/includes/master.inc.php'; // do login or not
 
+    $getid = intval($_GET['id']);
+    //die ("get = ".$getid);
+    if ($getid === 0) {die ("get = ".$getid);}
 if($Auth->loggedIn()) 
            {
 			   
@@ -41,7 +44,7 @@ $sql = "SELECT
 		FROM
 			categories
 		WHERE
-			cat_id = " . mysql_real_escape_string($_GET['id']);
+			cat_id = " . mysql_real_escape_string($getid);
 
 $result = $database->get_results($sql);
 $toprow = $database->get_row($sql);
@@ -79,7 +82,7 @@ else
 				FROM
 					topics
 				WHERE
-					topic_cat = " . mysql_real_escape_string($_GET['id']);
+					topic_cat = " . mysql_real_escape_string($getid);
 	
 		$result = $database->get_results ($sql);
 		
