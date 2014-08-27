@@ -5,27 +5,34 @@
  define('DOC_ROOT', realpath(dirname(__FILE__) . '/../'));
 //
 require DOC_ROOT.'/includes/master.inc.php'; // do login or not
+//printr ($Auth);
+//die();
+$template = new Template; 
 if($Auth->loggedIn()) 
            {
 			   
 			   $name = $Auth->username;
 			   $id = session_id();
-			   $nid = $Auth->user->columns['nid'];
-			    $login = '<li><a href="'.$site->settings['url'].'/user.php">Settings</a></li><li><a href="'.$site->settings['url'].'/logout.php">Logout</a></li>';
-			    $basecolour = "aqua";
+			   $nid = $Auth->nid;
+			   $login = '<ul class="egmenu"><li><a href="'.$site->settings['url'].'/user.php">Settings</a>
+			   			   
+			   </li><li><a href="'.$site->settings['url'].'/logout.php">Logout</a></li></ul>';
+			   $basecolour = "aqua";
+			   
 			    
 			   }
 			   
 	else
 				{
 					$name ="Guest";
-					$login = file_get_contents( $site->settings['url'].'/templates/guest.html') ;
+					$login = $template->load( $site->settings['url'].'/templates/guest.html') ;
 					$basecolour = "aqua";
 					// add default colour from config
 				}
 				
-	writeid ($id,$nid,$database);
 	
+	//die ("nid= ".$nid);
+	writeid ($id,$nid,$database);
 	$template = new Template; // start the template workspace		
 	$users = $database->num_rows("select * from sessions");	
 	$pms=0;
@@ -142,11 +149,7 @@ $template->replace("newthread",$newthread);
 $template->replace("newpost",$newpost);
 $template->replace("datetime", FORMAT_TIME);
 $template->replace("base",$base);
-if($site->settings['showphp'] === false)
-{
-$template->removephp();
-}
-//    echo "Forum Lives here<br>";
-//die();
+if($site->settings['showphp'] === false) { $template->removephp();}
+
 $template->publish();
 ?>

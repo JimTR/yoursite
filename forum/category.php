@@ -3,15 +3,15 @@
  define('DOC_ROOT', realpath(dirname(__FILE__) . '/../'));
 require DOC_ROOT.'/includes/master.inc.php'; // do login or not
 
-    $getid = intval($_GET['id']);
-    //die ("get = ".$getid);
+    $getid = intval($_GET['id']); //stop injection 
+    
     if ($getid === 0) {die ("get = ".$getid);}
 if($Auth->loggedIn()) 
            {
 			   
 			   $name = $Auth->username;
 			   $id = session_id();
-			   $nid = $Auth->user->columns['nid'];
+			   $nid = $Auth->nid;
 			    $login = '<li><a href="'.$site->settings['url'].'/user.php">Settings</a></li><li><a href="'.$site->settings['url'].'/logout.php">Logout</a></li>';
 			    $basecolour = "aqua";
 			    
@@ -48,7 +48,6 @@ $sql = "SELECT
 
 $result = $database->get_results($sql);
 $toprow = $database->get_row($sql);
-//die (print_r($toprow));
 $navi= '<a style="color:#FFFFFF" href="index.php">Forum->'.$toprow[1].'</a>';
 $newthreads = '<a href="create_topic.php?id='.$toprow[0].'">New Thread</a>';
 
@@ -82,7 +81,8 @@ else
 				FROM
 					topics
 				WHERE
-					topic_cat = " . mysql_real_escape_string($getid);
+					topic_cat = " . mysql_real_escape_string($getid).
+					" ORDER BY `topic_date` DESC ";
 	
 		$result = $database->get_results ($sql);
 		
@@ -127,9 +127,9 @@ else
 									1";
 									$data = $database->get_results($topicsql);
 									foreach ($data as $userstuff) {};
-										
+									$last_time =  time2str($userstuff['post_date']); 	
 					$rowd .= '<tr style ="border-bottom:1px solid #000000;border-top:1px solid transparent"><td class="leftpart"><h3><a href="topic.php?id=' . $row['topic_id'] . '">' . $row['topic_subject'] . '</a><br /><h3></td>
-						 <td  style="text-align:center">'.$stats.'</td><td><center>'.$replies.'</center></td><td><center>'.date('d-m-Y H:i:s', strtotime($userstuff['post_date'])).' By  '.$userstuff['username'].'</center></td></tr>'; 
+						 <td  style="text-align:center">'.$stats.'</td><td><center>'.$replies.'</center></td><td><center>'.$last_time.' By  '.$userstuff['username'].'</center></td></tr>'; 
 				}
 			}
 		}
@@ -152,7 +152,6 @@ $template->replace("navi",$navi);
 $template->replace("rowd",$rowd);
 $template->replace("newthread",0);
 $template->replace("newpost",0);
-//die ($newthreads);
 $template->replace("newthreads",$newthreads);
 $template->replace("datetime", FORMAT_TIME);
 $template->replace("base",$base);
@@ -162,5 +161,5 @@ if($site->settings['showphp'] === false)
 $template->removephp();
 }
 $template->publish();
-//include 'footer.php';
+
 ?>

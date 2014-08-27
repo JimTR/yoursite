@@ -25,8 +25,8 @@
                             <ul>
                                 
                                 <li class="active tab" abbr="tc1"><a href="#">Forum Settings</a></li>
-                                <li class="tab" abbr="tc2"><a href="#">Message Settings</a></li>
-                                <li class ="tab" abbr="tc3"><a href="#">XX</a></li>
+                                <li class="tab" abbr="tc2"><a href="#">Profile Settings</a></li>
+                                <li class ="tab" abbr="tc3"><a href="#">Avatar & Signature</a></li>
                                
                                 <li class ="tab" abbr="tc4"><a href="#">Tab 4</a></li>
                                 <li><a href="#">Tab 5</a></li>
@@ -91,7 +91,7 @@
 	<select name="subscriptionmethod" id="subscriptionmethod">
 		<option value="0" #no_subscribe_selected#>#no_auto_subscribe#</option>
 		<option value="1" #no_email_subscribe_selected#>#no_email_subscribe#</option>
-		<option value="2" {$instant_email_subscribe_selected#>#instant_email_subscribe#</option>
+		<option value="2" #instant_email_subscribe_selected#>#instant_email_subscribe#</option>
 	</select>
 </td>
 </tr>
@@ -126,7 +126,7 @@
 <td><span class="smalltext">#time_offset_desc#</span></td>
 </tr>
 <tr>
-<td>{$tzselect#</td>
+<td>#tzselect#</td>
 </tr>
 <tr>
 <td><span class="smalltext">#dst_correction#</span></td>
@@ -147,7 +147,7 @@
 <fieldset class="trow2">
 <legend><strong>#forum_display_options#</strong></legend>
 <table cellspacing="0" cellpadding="2">
-{$tppselect#
+#$tppselect#
 <tr>
 <td><span class="smalltext">#thread_view#</span></td>
 </tr>
@@ -189,7 +189,7 @@
 <td valign="top" width="1"><input type="checkbox" class="checkbox" name="showquickreply" id="showquickreply" value="1" {$showquickreplycheck# /></td>
 <td><span class="smalltext"><label for="showquickreply">#show_quick_reply#</label></span></td>
 </tr>
-{$pppselect#
+#pppselect#
 <tr>
 <td colspan="2"><span class="smalltext">#thread_mode#</span></td>
 </tr>
@@ -214,13 +214,13 @@
 <td colspan="2"><span class="smalltext">#style#</span></td>
 </tr>
 <tr>
-<td colspan="2">{$stylelist#</td>
+<td colspan="2">#stylelist#</td>
 </tr>
 <tr>
 <td colspan="2"><span class="smalltext">#board_language#</span></td>
 </tr>
 <tr>
-<td colspan="2"><select name="language"><option value="">#use_default#</option><option value="0">-----------</option>{$langoptions#</select></td>
+<td colspan="2"><select name="language"><option value="">#use_default#</option><option value="0">-----------</option>#langoptions#</select></td>
 </tr>
 </table>
 </fieldset>
@@ -230,7 +230,7 @@
 <br />
 <div align="center">
 <input type="hidden" name="action" value="do_options" />
-<input type="submit" class="button" name="regsubmit" value="#update_options#" />
+<input type="submit" class="alertify-button alertify-button-ok" name="regsubmit" value="#update_options#" />
 </div>
 </td>
 </tr>
@@ -238,14 +238,215 @@
 </form>
                             </div>
                              <div id="tc2" class="content">
-                            <h2>Tab 2 Example</h2>
-                            <p>Tabs are a built in function for Your Site, they can be used in each subject area <br> <code>yoursite/forums</code> will have different tabs to <code>yoursite/shop</code> </p>
-                            <p>this is tab 2</p>
+                             <form action="usercp.php" method="post" name="input">
+<input type="hidden" name="my_post_key" value="{$mybb->post_code}" />
+<table width="100%" border="0" align="center">
+<tr>
+<td valign="top">
+<table border="0" cellspacing="{$theme['borderwidth']}" cellpadding="{$theme['tablespace']}" class="tborder">
+<tr>
+<td class="hd" colspan="2" style="height:27px;"><div style="padding-left:1%"><strong>#edit_profile#</strong></div></td>
+</tr>
+<tr>
+<td width="50%" class="trow1" valign="top">
+<fieldset class="trow2">
+<legend><strong>#profile_required#</strong></legend>
+<table cellspacing="0" cellpadding="{$theme['tablespace']}">
+<tr>
+<td colspan="2"><span class="smalltext"><strong>#change_email_notice#</strong></span></td>
+</tr>
+{$requiredfields}
+</table>
+</fieldset>
+<br />
+<fieldset class="trow2">
+<legend><strong>#profile_optional#</strong></legend>
+<table cellspacing="0" cellpadding="{$theme['tablespace']}">
+<tr>
+<td colspan="3"><span class="smalltext">#birthday#</span></td>
+</tr>
+<tr>
+<td width="2%">
+<select name="bday1">
+<option value="">&nbsp;</option>
+#bdaydaysel#
+</select>
+</td>
+<td width="4%">
+<select name="bday2">
+<option value="">&nbsp;</option>
+<option value="1" {$bdaymonthsel['1']}>#month_1#</option>
+<option value="2" {$bdaymonthsel['2']}>#month_2#</option>
+<option value="3" {$bdaymonthsel['3']}>#month_3#</option>
+<option value="4" {$bdaymonthsel['4']}>#month_4#</option>
+<option value="5" {$bdaymonthsel['5']}>#month_5#</option>
+<option value="6" {$bdaymonthsel['6']}>#month_6#</option>
+<option value="7" {$bdaymonthsel['7']}>#month_7#</option>
+<option value="8" {$bdaymonthsel['8']}>#month_8#</option>
+<option value="9" {$bdaymonthsel['9']}>#month_9#</option>
+<option value="10" {$bdaymonthsel['10']}>#month_10#</option>
+<option value="11" {$bdaymonthsel['11']}>#month_11#</option>
+<option value="12" {$bdaymonthsel['12']}>#month_12#</option>
+</select>
+</td>
+<td>
+<input type="text" class="textbox" size="4" maxlength="4" name="bday3" value="Year ?" />
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<span class="smalltext">#birthdayprivacy#</span>
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<select name="birthdayprivacy">
+{$bdayprivacysel}
+</select>
+</td>
+</tr>
+<tr>
+<td colspan="3"><span class="smalltext">#website_url#</span></td>
+</tr>
+<tr>
+<td colspan="3"><input type="text" class="textbox" name="website" size="25" maxlength="75" value="{$user['website']}" /></td>
+</tr>
+</table>
+</fieldset>
+
+</td>
+<td width="50%" class="trow1" valign="top">
+<fieldset class="trow2">
+<legend><strong>#custom_usertitle#</strong></legend>
+<table cellspacing="0" cellpadding="{$theme['tablespace']}">
+<tr>
+<td><span class="smalltext">#custom_usertitle_note#</span></td>
+</tr>
+<tr>
+<td><span class="smalltext">#default_usertitle#</span></td>
+</tr>
+<tr>
+<td><span class="smalltext"><strong>{$defaulttitle}</strong></span></td>
+</tr>
+<tr>
+<td><span class="smalltext">#current_custom_usertitle#</span></td>
+</tr>
+<tr>
+<td><span class="smalltext"><strong>{$user['usertitle']}</strong></span></td>
+</tr>
+<tr>
+<td><span class="smalltext">#new_custom_usertitle#</span></td>
+</tr>
+<tr>
+<td><input type="text" class="textbox" name="usertitle" size="25" maxlength="{$mybb->settings['customtitlemaxlength']}" value="{$newtitle}" /></td>
+</tr>
+<tr>
+<td><span class="smalltext"><input type="checkbox" name="reverttitle" id="reverttitle" class="checkbox" /> #revert_usertitle#</span></td>
+</tr>
+</table>
+</fieldset>
+<br />
+<fieldset class="trow2">
+<legend><strong>#additional_contact_details#</strong></legend>
+<table cellspacing="0" cellpadding="{$theme['tablespace']}">
+<tr>
+<td><span class="smalltext">#icq_number#</span></td>
+</tr>
+<tr>
+<td><input type="text" class="textbox" name="icq" size="25" value="{$user['icq']}" /></td>
+</tr>
+<tr>
+<td><span class="smalltext">#aim_screenname#</span></td>
+</tr>
+<tr>
+<td><input type="text" class="textbox" name="aim" size="25" value="{$user['aim']}" /></td>
+</tr>
+<tr>
+<td><span class="smalltext">#msn#</span></td>
+</tr>
+<tr>
+<td><input type="text" class="textbox" name="msn" size="25" value="{$user['msn']}" /></td>
+</tr>
+<tr>
+<td><span class="smalltext">#yahoo_id#</span></td>
+</tr>
+<tr>
+<td><input type="text" class="textbox" name="yahoo" size="25" value="{$user['yahoo']}" /></td>
+</tr>
+</table>
+</fieldset>
+{$awaysection}
+</td>
+</tr>
+</table>
+<br />
+<div align="center">
+<input type="hidden" name="action" value="do_profile" />
+<input type="submit" class="alertify-button alertify-button-ok" name="regsubmit" value="#update_profile#" />
+</div>
+</td>
+</tr>
+</table>
+</form>
+</body>
+</html>
+                            
                             </div>
                              <div id="tc3" class="content">
-                            <h2>Tab 3 Example</h2>
-                            <p>The tabs at the top of this block are made using an &lt;ul&gt; &mdash; </p>
-                            <p>this is tab 3</p>
+                           
+				<table width="100%" border="0" align="center">
+<tr>
+<td valign="top">
+<table border="0" cellspacing="{$theme['borderwidth']}" cellpadding="{$theme['tablespace']}" class="tborder">
+<tr>
+<td class="hd" colspan="2"style="height:27px;"><div style ="Font-weight:bold;padding-left:1%;">#change_avatar#</div></td>
+</tr>
+<tr>
+<td class="trow1" colspan="2">
+<table cellspacing="0" cellpadding="0" width="100%"><tr>
+<td>#avatar_note#
+</td>
+<img width="64px" src="#avatar#"/>
+</tr></table>
+</td>
+</tr>
+<tr>
+<td class="trow2" width="40%"><strong>#avatar_url#</strong></td>
+<td class="trow2" width="60%"><input type="text" class="textbox" name="avatarurl" size="45" value="#avatar#" /></td></tr>
+<tr>
+<td class="tcat" colspan="2"><strong>#edit_sig#</strong></td>
+<tr>
+<td class="trow1" valign="top" width="20%"><span class="smalltext">#edit_sig_note#</span></td>
+<td class="trow1" width="80%">
+<textarea rows="15" cols="70" id="signature" name="signature">#sig#</textarea>
+</td>
+</tr>
+<tr>
+<td class="trow2">
+<span class="smalltext">#edit_sig_note2#</span>
+</td>
+<td class="trow2">
+<span class="smalltext">
+<label><input type="radio" class="radio" name="updateposts" value="enable" />&nbsp;#enable_sig_posts#</label><br />
+<label><input type="radio" class="radio" name="updateposts" value="disable" />&nbsp;#disable_sig_posts#</label><br />
+<label><input type="radio" class="radio" name="updateposts" value="0" checked="checked" />&nbsp;#leave_sig_settings#</label></span>
+</td>
+</tr>
+
+</tr>
+</table>
+<br />
+<div align="center">
+<input type="hidden" name="action" value="do_avatar" />
+<input type="submit" class="alertify-button alertify-button-ok" name="submit" value="#update_profile#" />
+</div>
+</td>
+</tr>
+</table>
+</form>
+
+</body>
+
                             </div>
                         </div>
                     </div>
@@ -294,7 +495,7 @@
         </div>
 
         <div id="ft">
-            <p class="inner">Copyright &copy; 2014 NoIdeer Software online users #vari#</p>
+            <p class="inner">Copyright &copy; 2014 NoIdeer Software</p>
             
         </div>
 

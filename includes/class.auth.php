@@ -9,9 +9,8 @@
         public $username;
         public $user;
         public $expiryDate;
-        public $loginUrl = '/fw/login.php'; // Where to direct users to login
-
-        private $nid;
+        public $nid;
+        
         private $loggedIn;
 
         public function __construct()
@@ -21,10 +20,12 @@
             $this->id         = null;
             $this->nid        = null;
             $this->username   = null;
-            $this->user       = null;
+            //$this->user       = null;
             $this->loggedIn   = false;
-            $this->expiryDate = $d->format("U"); //mktime(0, 0, 0, 6, 2, 2037);
-            $this->user       = new User();
+            $this->expiryDate = $d->format("U"); 
+            //$this->user       = new User();
+            $this->currentip = getip();
+            
         }
 
         public static function getAuth()
@@ -53,23 +54,21 @@
 
             if($row === false)
                 return false;
-            //$row = mysql_fetch_assoc($result))
+            
             $this->id       = $row['id'];
             $this->nid      = $row['nid'];
             $this->username = $row['username'];
             $this->email =    $row['email'];
-            $this->user     = new User();
-            $this->user->id = $this->id;
-            $this->user->load($row);
-            $this->test =$row;
-            //$this->generateBCCookies();
-            $value = $row['nid'];
-
-			// send a simple cookie
+            $this->currentip = getip();
+            $this->level = $row['level'];
+            $this->postnum = $row['postnum'];
+            $this->regdate = $row['regdate'];
+            // send a simple cookie
 			//setcookie("TestCookie",$value);
-			setcookie("yse",$value,$this->expiryDate,"/");
+			setcookie("yse",$this->nid,$this->expiryDate,"/");
+			setcookie("userid",$this->id,$this->expiryDate,"/");
             $this->loggedIn = true;
-
+			//$_SESSION['userid'] = $row['id'];
             return true;
         }
 
@@ -77,7 +76,7 @@
         {
             $this->loggedIn = false;
             $this->clearCookies();
-            //$this->sendToLoginPage();
+            session_destroy();
         }
 
         public function loggedIn()
@@ -168,7 +167,7 @@
         public static function createNewUser($username, $password = null)
         {
 	    $db = Database::getDatabase();
-            //die ("register ". $username); 
+            
             $user_exists = $db->getValue("SELECT COUNT(*) FROM users WHERE username = " . $db->quote($username));
             //die ("Users = ".$user_exists);
             if($user_exists > 0)
@@ -182,7 +181,7 @@
             $u->username = $username;
             $u->nid = self::newNid();
             $u->password = self::hashedPassword($password);
-            //die ("password = ".$u->password);
+            
             $u->insert();
             return $u;
         }
@@ -250,38 +249,7 @@
 
         private function attemptCookieLogin()
         {
-            /*if(!isset($_COOKIE['A']) || !isset($_COOKIE['B']) || !isset($_COOKIE['C']))
-                return false;
-
-            $ccookie = base64_decode(str_rot13($_COOKIE['C']));
-            if($ccookie === false)
-                return false;
-
-            $c = array();
-            parse_str($ccookie, $c);
-            if(!isset($c['n']) || !isset($c['l']))
-                return false;
-
-            $bcookie = base64_decode(str_rot13($_COOKIE['B']));
-            if($bcookie === false)
-                return false;
-
-            $b = array();
-            parse_str($bcookie, $b);
-            if(!isset($b['s']) || !isset($b['x']))
-                return false;
-
-            if($b['x'] < time())
-                return false;
-
-            $computed_sig = md5(str_rot13(base64_encode($ccookie)) . $b['x'] . self::SALT);
-            if($computed_sig != $b['s'])
-                return false;
-
-            $nid = base64_decode($c['n']);
-            if($nid === false)
-                return false;
-			*/
+            
 			if(!isset($_COOKIE['yse'])) 
 				return false;
 				
@@ -296,12 +264,15 @@
             $this->nid      = $row['nid'];
             $this->username = $row['username'];
             $this->email = $row['email'];
-            $this->demo = $row['test'];
-            $this->user     = new User();
-            $this->user->id = $this->id;
-            $this->user->load($row);
-            //cook new cookie
-			setcookie("yse",$this->nid,$this->expiryDate,'/');
+            $this->regip = $row['ip'];
+            $this->currentip = getip();
+            $this->lastseen = $row['lastseen'];
+            $this->level = $row['level'];
+            $this->postnum = $row['postnum'];
+            $this->regdate = $row['regdate'];
+            setcookie("userid",$this->id,$this->expiryDate,"/");
+            setcookie("yse",$this->nid,$this->expiryDate,'/');
+            //$_SESSION['userid'] = $row['id'];
             return true;
         }
 
@@ -337,7 +308,7 @@
         {
 			//die ("auth dom ".Config::get('authDomain'));
             setcookie ("yse", "", time() - 3600,'/');
-            //setcookie('C', '', time() - 3600, '/', Config::get('authDomain'));
+            setcookie('userid', '', time() - 3600, '/');
         }
 
         private function sendToLoginPage()

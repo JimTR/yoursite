@@ -6,7 +6,9 @@
     date_default_timezone_set('Europe/London');
 
     // Determine our absolute document root
+    if (!defined("DOC_ROOT")) {
     define('DOC_ROOT', realpath(dirname(__FILE__) . '/../'));
+}
     define("TIME_NOW", time()); //time
     define("FORMAT_TIME",  date("D d F Y  G:i:s")); 
     const SALT = 'insert some random text here';
@@ -27,6 +29,7 @@
 	define( 'SEND_ERRORS_TO', $site->config['database']['errors'] ); //set email notification email address
 	define( 'DISPLAY_DEBUG', $site->config['database']['display_error'] ); //display db errors?
 	define( 'comma',  '`'); // sql comma thingy 
+	define ( 'NEW_LINE', '&#13;&#10;');
 //echo "errors shown ".DISPLAY_DEBUG."<br>";
     $database = new db();
  
@@ -51,12 +54,13 @@
        
        
     // Initialize our session
-    session_name('yoursite');
-    session_start();
+		session_name('yoursite');
+		session_start();
 	  $id= session_id();
-	  //DBSession::write($id,"some data");
-        //die ("after register");
-
+	  $_SESSION['userid'] = intval($Auth->id);
+	  $_SESSION['nid'] = $Auth->nid;
+	  //DBSession::read ($id)
+	  
     // Object for tracking and displaying error messages
     $Error = Error::getError();
 

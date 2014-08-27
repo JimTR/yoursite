@@ -296,7 +296,7 @@ class db
         }
         else
         {
-            $r = mysqli_fetch_row( $query );
+            $r = mysqli_fetch_array( $query );
             mysqli_free_result( $query );
             //die (print_r($r));
             return $r;   
@@ -357,7 +357,7 @@ class db
         $values = '('. implode(', ', $values) .')';
         
         $sql .= $fields .' VALUES '. $values;
-
+        //die ($sql);
         $query = mysqli_query( $this->link, $sql );
         
         if( mysqli_error( $this->link ) )
@@ -494,7 +494,7 @@ class db
 
         if( mysqli_error( $this->link ) )
         {
-            //return false; //
+           
             $this->log_db_errors( mysqli_error( $this->link ), $sql, 'Fatal' );
             return false;
         }
@@ -516,6 +516,7 @@ class db
     public function lastid()
     {
         return mysqli_insert_id( $this->link );
+        //die ('in class '. mysqli_insert_id( $this->link ));
     }
     
     
@@ -607,8 +608,29 @@ class db
             return $out;
         }
     }
-    
-    
+    /*
+     * tests for a column in a table
+     * @param string tablename
+     * @param string fieldname
+     * @return integer
+     */
+      
+    public function field_exists($table,$field)
+    {
+		
+		$query = "SHOW COLUMNS FROM `".$table."` LIKE '".$field."'";
+		$query = $this->link->query( $query );
+        if( mysqli_error( $this->link ) )
+        {
+            $this->log_db_errors( mysqli_error( $this->link ), $query, 'Fatal' );
+            return mysqli_error( $this->link );
+        }
+        else
+        {
+            return mysqli_num_rows( $query );
+        }
+        mysqli_free_result( $query );
+	}
     /**
      * Disconnect from db server
      * Called automatically from __destruct function

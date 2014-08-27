@@ -2,7 +2,7 @@
 //create_cat.php
 define('DOC_ROOT', realpath(dirname(__FILE__) . '/../'));
 require DOC_ROOT.'/includes/master.inc.php'; // required
-include 'connect.php';
+//include 'connect.php';
 //include 'header.php';
 
 if($_SERVER['REQUEST_METHOD'] != 'POST')
@@ -20,18 +20,21 @@ else
 	else
 	{
 		//a real user posted a real reply
+		$ip = getip();
 		$reply= htmlentities( $_POST['reply-content'], ENT_QUOTES, "UTF-8");
 		$sql = "INSERT INTO 
 					posts(post_content,
 						  post_date,
 						  post_topic,
+						  post_ip,
 						  post_by) 
 				VALUES ('" .$reply. "',
 						NOW(),
 						" . mysql_real_escape_string($_GET['id']) . ",
+						'".$ip."',
 						" . $Auth->id . ")";
-						
-		$result = mysql_query($sql);
+						echo $sql;
+		$result = $database->query($sql);
 						
 		if(!$result)
 		{
@@ -40,7 +43,7 @@ else
 		else
 		{
 			redirect('topic.php?id=' . htmlentities($_GET['id']));
-			echo 'Your reply has been saved, check out <a href="topic.php?id=' . htmlentities($_GET['id']) . '">the topic</a>.';
+			//echo 'Your reply has been saved, check out <a href="topic.php?id=' . htmlentities($_GET['id']) . '">the topic</a>.';
 		}
 	}
 }

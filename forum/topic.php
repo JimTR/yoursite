@@ -11,9 +11,9 @@ if($Auth->loggedIn())
 			   
 			   $name = $Auth->username;
 			   $id = session_id();
-			   $nid = $Auth->user->columns['nid'];
-			    $login = '<li><a href="'.$site->settings['url'].'/user.php">Settings</a></li><li><a href="'.$site->settings['url'].'/logout.php">Logout</a></li>';
-			    //die ($page['login']);
+			   $nid = $Auth->nid;
+			   $login = '<li><a href="'.$site->settings['url'].'/user.php">Settings</a></li><li><a href="'.$site->settings['url'].'/logout.php">Logout</a></li>';
+			   
 			    $page['basecolour'] = "aqua";
 			    
 			   }
@@ -57,7 +57,8 @@ $sql = "SELECT
 			on topic_cat = cat_id
 		
 		WHERE
-			topics.topic_id = " . mysql_real_escape_string($getid);
+			topics.topic_id = " . mysql_real_escape_string($getid).
+			" ORDER BY `topic_date` DESC";
 			
 $result = $database->query($sql);
 
@@ -98,7 +99,9 @@ else
 						users.id,
 						users.username,
 						users.level,
-						users.nid
+						users.nid,
+						users.avatar,
+						users.sig
 						
 						
 					FROM
@@ -126,8 +129,11 @@ else
 				{
 					$pid =++ $pid;
 					$online = $database->num_rows("select * from sessions where nid = '".$posts_row['nid']."'");
+					if (empty($posts_row['avatar'])) {$posts_row['avatar'] = $page['path'].'/images/default_avatar.png';}
+					if (empty($posts_row['sig'])) {$posts_row['sig'] = '&nbsp;';}
 					if ($online == 1){$online='<img src ="'.$page['path'].'/images/online.png">';} else {$online = '<img src ="'.$page['path'].'/images/offline.png">';}
 					$post_info['postid'] = $pid;
+					$post_info['postid1'] = $posts_row['post_id'];
 					$post_info['path']= $page['path'];
 					$post_info['postdate'] = date('d-m-Y', strtotime($posts_row['post_date']));
 					$post_info['posttime'] = date('H:i', strtotime($posts_row['post_date']));
@@ -136,8 +142,10 @@ else
 					$post_info['post_subject'] = $subject; // will update when each post has a subject
 					$post_info['profilelink']= $posts_row['username']; // later do a link
 					$post_info['onlinestatus'] = $online;
+					$post_info['avatar'] = $posts_row['avatar'];
 					$post_info['attachments'] = "";
-					$post_info['iplogged']="";
+					$post_info['iplogged']='';
+					$post_info['signature'] = $posts_row['sig'];
 					$template->load("templates/post.html");
 					$template->replace_vars($post_info);
 					$page['posts'].= $template->get_template();

@@ -816,18 +816,31 @@ function getnid ()
 function writeid ($id, $nid,$database)
 	{
 				  $ip = getip();
+				  //print_r($_SERVER);
+				  //die();
 			   $checku['id'] = $id;
 			   
 		if ($database->exists("sessions","id",$checku))
 		{
+			//$host = substr($_SERVER['SCRIPT_URI'], 0, -1);
+			$location = 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
 			$datas['nid'] = $nid;
-			$datas['ip']= $ip;
+			$datas['ip'] = $ip;
+			$datas['location'] = $location;
+			$datas['useragent'] = $_SERVER['HTTP_USER_AGENT'];
 			$database->update("sessions",$datas,$checku);
 						
 			}
 		else
 		{
 			// work out what to do
+			$location = 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
+			$datas['id'] = $id;
+			$datas['nid'] = $nid;
+			$datas['ip'] = $ip;
+			$datas['location'] = $location;
+			$datas['useragent'] = $_SERVER['HTTP_USER_AGENT'];
+			$database->insert ("sessions",$datas);
 				$reload = true;	
 			    return $reload;
 		}
@@ -849,11 +862,14 @@ function log_to ($file,$info)
 	}
 function getip()
 	{
-		 if(! empty($_SERVER['REMOTE_ADDR']) ){
-						$ip = $_SERVER['REMOTE_ADDR'];
-					}
-					else{
-						$ip = empty($_SERVER['HTTP_X_FORWARDED_FOR']) ? '' : $_SERVER['HTTP_X_FORWARDED_FOR'];
-					}
-				return $ip;
+		if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)){
+            return  $_SERVER["HTTP_X_FORWARDED_FOR"];  
+        }else if (array_key_exists('REMOTE_ADDR', $_SERVER)) { 
+            return $_SERVER["REMOTE_ADDR"]; 
+        }else if (array_key_exists('HTTP_CLIENT_IP', $_SERVER)) {
+            return $_SERVER["HTTP_CLIENT_IP"]; 
+        }else if (array_key_exists('HTTP_X_REAL_IP', $_SERVER)) {
+			return $_SERVER ['HTTP_X_REAL_IP'];}
+			return "Unknown";  
+		 
 	}

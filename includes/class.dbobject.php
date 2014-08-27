@@ -6,10 +6,11 @@
         public $idColumnName;
         public $columns;
         protected $className;
-		protected static $autoColumns = true;
+		protected static $autoColumns;
 
         protected function __construct($table_name, $columns_or_id = null, $id = null)
         {
+            
             $this->className    = get_class($this);
             $this->tableName    = $table_name;
 

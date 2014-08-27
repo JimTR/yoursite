@@ -12,13 +12,16 @@ if($Auth->loggedIn())
 			  //print_r($Auth);
 			  //die(); 
 			   $name = $Auth->username;
-			   $nid = $Auth->user->columns['nid'];
-			   if ($Auth->user->columns['level'] === 'user') {
+			   $nid = $Auth->nid;
+			   if ($Auth->level === 'user') {
 				   //die ("user");
-			   $login = '<li><a href="'.$site->settings['url'].'/user.php">Settings</a></li><li><a href="'.$site->settings['url'].'/logout.php">Logout</a></li> ';
+				   
+			   $login = '
+			   <ul class="egmenu"><li><a href="'.$site->settings['url'].'/user.php">Settings</a></li>
+			   <li><a href="'.$site->settings['url'].'/logout.php">Logout</a></li></ul> ';
 		   }
-		   elseif ($Auth->user->columns['level'] === 'admin') {
-			   $login = '<li><a href="'.$site->settings['url'].'/user.php">Settings</a></li><li><a href="'.$site->settings['url'].'/logout.php">Logout</a></li> <li><a href="#">Admin</a></li>';
+		   elseif ($Auth->level === 'admin') {
+			   $login = '<ul class="egmenu"><li><a href="'.$site->settings['url'].'/user.php">Settings</a></li><li><a href="'.$site->settings['url'].'/logout.php">Logout</a></li> <li><a href="#">Admin</a></li></ul>';
 		   }
 		   }
 						   
@@ -26,13 +29,14 @@ if($Auth->loggedIn())
 				{
 					$name ="Guest";
 					$login = file_get_contents('templates/guest.html') ;
+					$nid = getnid();
 					
 				}
 
 
 $reload = writeid ($id,$nid,$database);
  //this is a fix it is there for IE
- if($reload)
+/* if($reload)
 	{
 		//die ('reload is true');
 		$rjs='<script type="text/javascript">
@@ -73,14 +77,16 @@ location = "";
 });
 </script> ';
 	}
+	*/ 
 $pms="0";	
+$template = new Template;
 $users = $database->num_rows("select * from sessions");
-$header = file_get_contents('templates/header.html');
-$footer = file_get_contents ( 'templates/footer.tmpl');
-$include = file_get_contents ('templates/include.tmpl');
+$header = $template->load('templates/header.html');
+$footer = $template->load ( 'templates/footer.tmpl');
+$include = $template->load ('templates/include.tmpl');
 $css = 'css/main.css';
 $css ="<style>".file_get_contents ($css)."</style>";
-$template = new Template;
+
 $template->load("templates/page.html");
 $template->replace("css",$css);
 $template->replace("title", "Home");

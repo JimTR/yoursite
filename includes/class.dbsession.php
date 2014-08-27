@@ -22,6 +22,7 @@
         {
             $db = Database::getDatabase();
             $db->query('SELECT `data` FROM `sessions` WHERE `id` = :id:', array('id' => $id));
+            
             return $db->hasRows() ? $db->getValue() : '';
         }
 
@@ -44,6 +45,7 @@
 
         public static function gc($max)
         {
+			
             $db = Database::getDatabase();
             $db->query('DELETE FROM `sessions` WHERE `updated_on` < :updated_on:', array('updated_on' => time() - $max));
             return true;

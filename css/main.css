@@ -371,7 +371,7 @@ table {
 }
 
 .tcat {
-	background: #187A7A;
+	background: #067AC5;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -390,11 +390,11 @@ table {
 }
 
 .trow1 {
-	background: #f1e9d2;
+	background: #363636;
 }
 
 .trow2 {
-	background: #f1e9d2;
+	background: #3A3A3A;
 }
 
 .trow_shaded {
@@ -711,8 +711,12 @@ blockquote {
 	margin: 0;
 	background: #fff;
 	padding: 5px;
+	color: #000000;
 }
-
+blockquote p {
+	color: #000000
+	}
+	
 blockquote cite {
 	font-weight: bold;
 	border-bottom: 1px solid #ccc;
@@ -956,7 +960,7 @@ div.error ul {
 
 .post_content {
 	padding: 5px 10px; 
-        color: #404040;
+        color: #FFFFFF;
 }
 
 a.css_button {

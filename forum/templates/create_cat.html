@@ -1,0 +1,194 @@
+<!--
+   category.html
+   
+   Copyright 2014 Jim Richardson <jim@noideersoftware.co.uk>
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+   
+	Update 20/7/14 19:56    
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <title>#title#</title>#include#
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+     <script src="http://code.jquery.com/jquery-1.9.1.js"></script> 
+    <link rel="stylesheet" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+    <link rel="stylesheet" href="http://localhost/yoursite/css/yuiapp.css" type="text/css">
+    <link id="theme" rel="stylesheet" href="#path#/css/aqua.css" type="text/css"> 
+    <script src="http://yui.yahooapis.com/3.0.0pr2/build/yui/yui-min.js" type="text/javascript"></script>
+    <script src="#path#/js/yuiapp.js" type="text/javascript"></script>
+    <script src="#path#/js/ckeditor.js"></script>
+<!-- 
+add the editor jquery here
+<script type="text/javascript">
+jQuery(document).ready(function(){
+
+});
+</script> 
+-->
+
+</head>
+<body>
+#header#
+
+        <div id="bd">
+            <div id="yui-main">
+                <div class="yui-b"><div class="yui-g">
+                    
+
+                    <!-- Basic block -->
+                    <div class="block">
+                        <div class="hd">
+                            <h2 style="font-weight:bold;">#navi# </h2>
+                        </div>
+                        <div class="bd">
+                            
+				<table>
+				<thead> 
+                                    <tr><td colspan="8">Create a Category </td></tr>
+				</thead>
+			            <tr><td width="50%">Details</td><td>Permissions</td></tr>
+                                <tr >
+                                          <form method="post" action="" id="input">
+			<td><table><tr>
+			<td width="10%">Category name:</td>
+			<td width="40%"> <input type="text" name="cat_name" id= "cat_name" /></td>
+			</tr>
+				<tr><td valign="top">Category description</td><td><textarea rows="4" cols="50" name="cat_description" /></textarea></td></tr>
+				<tr><td>Group:</td><td>#catlist#</td></tr>
+				<tr><td>Is Group ?</td><td><input type="checkbox" name="isgroup" value="1" id= "isgroup"></td></tr>
+				<!-- <tr><td>Is Link ?</td><td><input type="checkbox" name="islink" value="1" id= "islink"></td></tr> -->
+				</table></td>	
+                        <td style="text-align:left;width:50%" valign="top">
+				<table><tr style ="border-bottom:1px solid #000"><td>Group</td>
+					<td style="text-align:center">Can Read</td><td style="text-align:center">Can Post</td>
+					<td style="text-align:center">Can Reply</td>
+					<td style="text-align:center">Can Moderate</td>	
+			</tr>
+			<tr>
+				<td>Banned</td>
+				<td style="text-align:center"><input type="checkbox" name="banread" value="1" id= "banread"></td>
+				<td style="text-align:center"><input type="checkbox" name="banpost" value="1" id= "banpost"></td>
+				<td style="text-align:center"><input type="checkbox" name="banrep" value="1" id= "banrep"></td>
+				<td style="text-align:center"><input type="checkbox" name="banmod" value="1" id= "banmod"></td>
+
+			</tr>
+
+			<tr>
+				<td>Guests</td>
+				<td style="text-align:center"><input type="checkbox" name="guestread" value="1" id= "guestread"></td>
+				<td style="text-align:center"><input type="checkbox" name="guestpost" value="1" id= "guestpost"></td>
+				<td style="text-align:center"><input type="checkbox" name="guestrep" value="1" id= "guestrep"></td>
+				<td style="text-align:center"><input type="checkbox" name="guestmod" value="1" id= "guestmod"></td>
+
+			</tr>
+			<tr>
+				<td>Memebers</td>
+				<td style="text-align:center"><input type="checkbox" name="memberread" value="1" id= "memberread"></td>
+				<td style="text-align:center"><input type="checkbox" name="memberpost" value="1" id= "memberpost"></td>
+				<td style="text-align:center"><input type="checkbox" name="memberrep" value="1" id= "memberrep"></td>
+				<td style="text-align:center"><input type="checkbox" name="membermod" value="1" id= "membermod"></td>
+			</tr>
+			<tr>
+				<td>Moderators</td>
+				<td style="text-align:center"><input type="checkbox" name="modread" value="1" id= "modread"></td>
+				<td style="text-align:center"><input type="checkbox" name="modpost" value="1" id= "modpost"></td>
+				<td style="text-align:center"><input type="checkbox" name="modrep" value="1" id= "modrep"></td>
+				<td style="text-align:center"><input type="checkbox" name="modmod" value="1" id= "modmod"></td>
+			</tr>
+			<tr><td colspan="4">Admins have full permissions, but if you don't check the boxes no one will be able to see this category</td></tr>
+			</table>
+                        </tr>
+			<tr style ="border-bottom:1px solid #000"><td colspan="2">&nbsp</td></tr>
+			
+			 
+			<tr><td colspan="8"><center><input name="action" id="action" type="submit" class="alertify-button alertify-button-ok" value="Add" /><input name="action" id="quit" type="submit" class="alertify-button alertify-button-ok" value="Quit" /></center></td></tr>
+			</td>
+			</tr>
+			
+			
+		 </form>
+                                </tr>
+                            </table>                    
+                        </div>
+			<script>jQuery.noConflict();</script>
+	<script>
+		jQuery('#quit').click(function() {
+      		//navigate to Home;
+		
+		return true;
+});	
+		jQuery('#action').click(function() {
+			cat_name = jQuery('#cat_name').val().length;
+			isgroup = jQuery('#isgroup').is(":checked");
+			groupid = jQuery('#groupid').val();
+			action = jQuery ('#action').val();
+			action1= jQuery ('#quit').val();
+
+  
+
+if (cat_name == 0) {
+message = 'Category Name can not be blank';
+alertify.alert(message);
+return false;
+}
+
+if (isgroup == false && groupid == 0) {
+
+message = 'This Category needs a group or needs to be a group<br>Please retry';
+alertify.alert(message);
+return false
+}
+			
+return true;
+		});
+	</script>
+                    </div>
+                
+                </div></div>
+            </div>
+            <div id="sidebar" class="yui-b">
+
+                <!-- Sidebar block (same markup as basic block) -->
+                <div class="block">
+                    <div class="hd">
+                        <h2 style="font-weight:bold">Category Statistics</h2>
+                    </div>
+                    <div class="bd">
+                        <p>Total Groups #groups#</p>
+			<p>Total Categories #cats#</p>
+                        <p>Total Threads #topics#</p>
+			<p>Total Posts #posts#</p>  
+                    </div>
+                </div>
+
+              
+               
+
+
+        </div>
+
+        <div>
+            #footer#
+            
+        </div>
+
+    </div>
+</body>
+</html>

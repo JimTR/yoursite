@@ -1,0 +1,170 @@
+<!--
+   topic.html
+   
+   Copyright 2014 Jim Richardson <jim@noideersoftware.co.uk>
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+   
+	Update 27/7/14 19:56    
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+	    <title>#title#</title>#include#
+	    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+	    <link rel="stylesheet" href="http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css" type="text/css">
+	    <link rel="stylesheet" href="#path#/css/yuiapp.css" type="text/css">
+	    <link rel="stylesheet" href="#path#/css/main.css" type="text/css">	
+	    <link id="theme" rel="stylesheet" href="#base#.css" type="text/css"> 
+	    <script src="http://yui.yahooapis.com/3.0.0pr2/build/yui/yui-min.js" type="text/javascript"></script>
+	    <script src="#path#/js/ckeditor.js"></script>
+           
+   	</head>
+<body>
+#header#
+
+        <div id="bd">
+            <div id="yui-main">
+                <div class="yui-b">
+                    
+
+                    <!-- Basic block -->
+                    <div class="block">
+                        <div class="hd"><h2 style="font-weight:bold"> #navi#</h2> 
+                          
+                        </div>
+                        <div class="bd">
+                            
+										<table>
+				<thead> 
+                                    <tr>
+                                        <td>#topicsubject#</td>
+                                       <td><center></center></td>
+                                        <td><center></center></td>
+                                        <td><center></center></td>
+                                        <td><center></center></td>
+                                       
+                                    </tr>
+                                </thead>
+                                         <tr><td colspan="5"> #posts#</td></tr>
+						<tr><td colspan="5"><h2>Reply:</h2>#warn#<br />
+					<form method="post" action="reply.php?id=#topic_id#" id = "input">
+						<textarea class="ckeditor" name="reply-content" id="editor1" ></textarea>
+						 <script>CKEDITOR.replace( 'editor1', {uiColor: '#067AC5',removePlugins: 'elementspath',toolbar: [
+					[ 'Bold', 'Italic','Underline', 'Strike', 'Subscript', 'Superscript', 'RemoveFormat', '-', 'NumberedList', 'BulletedList' ],
+					[ 'FontSize', 'TextColor', 'Scayt' ], ['JustifyLeft', 'JustifyCenter', 'JustifyRight' ], [ 'Blockquote', 'Link', 'Image','Smiley','oembed', 'allMedias'] 
+				]
+			});</script>  	,
+						<br /><br />
+                                                <input type="hidden" name="username" id="username" value="#warn#" />  
+						<input type="submit" class="alertify-button alertify-button-ok" name="btnlogin" id="input1" value="Reply"> 
+					</form></td></tr>	
+                                        <script>jQuery.noConflict();</script>
+					<script>
+			
+						jQuery('#input').submit(function() {
+						title= jQuery('#username').val().length ;
+								
+						if (title > 0)
+								{
+								message = 'You must signed in to reply';
+								alertify.alert(message);
+								return false;
+								}
+						
+
+							});
+							
+					</script>
+<script>
+function myFunction(post,user,postdate) {
+//alert (postdate);
+	var dateline = postdate; 
+	var editor = CKEDITOR.instances.editor1;
+	var value ='<blockquote><b>On '+postdate+'&nbsp;&nbsp;'+user+' Wrote :</b><br><hr>'+ jQuery('#'+post).html()+'</blockquote><br><br>';
+
+	
+//alert ('value is '+value);
+
+	// Check the active editing mode.
+	if ( editor.mode == 'wysiwyg' )
+	{
+		// Insert HTML code.
+		// http://docs.ckeditor.com/#!/api/CKEDITOR.editor-method-insertHtml
+		//editor.insertHtml( value );
+		CKEDITOR.instances.editor1.insertHtml( value );
+	}
+	else
+		alert( 'You must be in WYSIWYG mode!' );
+}
+</script>
+
+
+                            </table>                    
+                        </div>
+                    </div>
+                
+                </div></div>
+            
+            <div id="sidebar" class="yui-b">
+
+                <!-- Sidebar block (same markup as basic block) -->
+                <div class="block">
+                    <div class="hd">
+                        <h2>Your Statistics</h2>
+                    </div>
+                    <div class="bd">
+                        <p>Unread Private Messages #pmnew#</p>
+                        <p>New Threads #newthread#</p>
+                    </div>
+                </div>
+
+              
+                <div class="block">
+                    <div class="hd">
+                       <h3> Empty Box</h3> 
+                    </div>
+                    <div class="bd">
+                    this is just an empty box :)
+                    </div>
+                </div>
+
+<div class="block">
+                    <div class="hd">
+                       <h3> Online Users</h3> 
+                    </div>
+                    <div class="bd">
+                    we have #vari# online 
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+
+        <div>
+
+
+            #footer#
+            
+        </div>
+
+    </div>
+
+</body>
+</html>
