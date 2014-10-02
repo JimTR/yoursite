@@ -39,6 +39,7 @@ if($Auth->loggedIn())
 	$post_info['signature'] = "Signatures disabled";
 	$page['navi'] ='<a style="color:#FFFFFF" href="index.php">Forum</a>';
 	$page['newthread'] = 0;
+	//$page['newthreads'] =  '<button class="button" onclick="window.location.replace("create_topic.php?id='.$toprow[0].'")>New Thread</button>'; 
 	$page['pmnew'] =0;
 	$page['path'] = $site->settings['url'];
 

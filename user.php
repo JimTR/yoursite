@@ -40,7 +40,7 @@ $template->load("templates/user.html");
 $template->replace("result"," Main Index");
 $template->replace("sig",$user['sig']);
 $template->replace("css",$css);
-$template->replace("title", "User Control");
+$template->replace("title", "Settings");
 $template->replace("header", $header);
 $template->replace("login",$login);
 $template->replace("footer", $footer);

@@ -1,8 +1,8 @@
 <a name="#postid#" id="#postid#"></a>
-<table border="0" cellspacing="0" cellpadding="0" class="tborder">
+<table border="0" cellspacing="0" cellpadding="0">
 	<tbody>
-		<tr style ="border-bottom:1px solid #000000">
-			<td class="tcat">
+		<tr>
+			<td>
 				<div class="float_left smalltext">
 					#postdate#, #posttime# 
 				</div>
@@ -27,9 +27,11 @@
 					#post_content#
 				</div>
 <div style ="padding-top:4px;">
-<hr style= "background-color:#000;width:100%;float:left;"><br/>				
+<br/>	
+<hr style= "background-color:#000;width:100%;float:left;">			
 				#attachments#
 				#signature#
+<hr style= "background-color:#000;width:100%;float:left;">
 </div>
 				<div class="post_meta" id="#postid#">
 				#iplogged#
@@ -39,20 +41,20 @@
 
 		<tr>
 			<td class="trow1 post_buttons {$unapproved_shade}">
-				<div class="float_left">
-					<input class="alertify-button alertify-button-ok" type="button" value="Home" onclick='window.location.replace("index.php");' > 
+				<div style="float:left">
+					<button class="button" value="Home" onclick='window.location.replace("index.php");' >Home</button> 
 				</div>
-				<div class="float_left ">
-					<input class ="alertify-button alertify-button-ok" type="button" id="reply" onclick="myFunction('pid_#postid#','#profilelink#','#postdate#')" value="Quote" > 
+				<div style="float:left">
+					<button class ="button" id="reply" onclick="myFunction('pid_#postid#','#profilelink#','#postdate#')" >Quote</button>  
 				</div>
-				<div class="float_right">
+				<div style="float:right">
 				
-					<input class="alertify-button alertify-button-ok" type="button" value="Delete" onclick='window.location.replace("deletepost.php?action=#postid1#");' > 
+					<button class="button" onclick='window.location.replace("deletepost.php?action=#postid1#");' >Delete</button>  
 				
 				</div>
-				<div class="float_right">
+				<div style="float:right">
 				
-					<input class="alertify-button alertify-button-ok" type="button" value="Edit" onclick='window.location.replace("editpost.php?pid=#postid1#");' > 
+					<button class="button" onclick='window.location.replace("editpost.php?pid=#postid1#");' >Edit</button> 
 				
 				</div>
 			</td>

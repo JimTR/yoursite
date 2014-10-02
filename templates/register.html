@@ -16,6 +16,8 @@
 	<title>#title#</title>
     #css# 
     #include#
+        <link rel="stylesheet" type="text/css" media="all"  href="cascade/assets/css/cascade/production/build-full.min.css" />
+        <link rel="stylesheet" type="text/css" media="all"  href="cascade/assets/css/site.css" />
 </head>
 
 <body>
@@ -48,6 +50,120 @@
     </form></div>
 </td><td></td></tr>
 </table>
+ <div class="col">
+                                <div class="cell panel">
+                                    <div class="body">
+                                        <div class="cell">
+                                            <div class="col">
+                                                <div class="cell">
+                                                    <form action="#" method="post">
+                                                        <div class="col">
+                                                            <div class="col width-1of4">
+                                                                <div class="cell">
+                                                                    <label for="firstname">First name<span class="color-red"> *</span></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col width-fill">
+                                                                <div class="cell">
+                                                                    <input type="text" id="firstname" placeholder="Your first name"  data-required="true" data-error-message="First name is required">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="col width-1of4">
+                                                                <div class="cell">
+                                                                    <label for="lastname">Last name<span class="color-red"> *</span></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col width-fill">
+                                                                <div class="cell">
+                                                                    <input type="text" id="lastname" placeholder="Your last name" data-required="true" data-error-message="Last name is required">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="col width-1of4">
+                                                                <div class="cell">
+                                                                    <label for="country">Country</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col width-fill">
+                                                                <div class="cell">
+                                                                    <select id="country">
+                                                                        <option>Canada</option>
+                                                                        <option>Mexico</option>
+                                                                        <option>USA</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="col width-1of4">
+                                                                <div class="cell">
+                                                                    <label for="male">Gender</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col width-fill">
+                                                                <div class="cell">
+                                                                    <input name="gender" id="male" type="radio" class="radio">
+                                                                    <label for="male">Man</label>
+                                                                    <input name="gender" id="female" type="radio" class="radio">
+                                                                    <label for="female">Woman</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="col width-1of4">
+                                                                <div class="cell">
+                                                                    <label for="occupation">Occupation</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col width-fill">
+                                                                <div class="cell">
+                                                                    <input type="text" id="occupation" placeholder="Your occupation" class="text">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="col width-1of4">
+                                                                <div class="cell">
+                                                                    <label for="webdev">Hobbies</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col width-fill">
+                                                                <div class="cell">
+                                                                    <input name="hobbies" id="webdev" type="checkbox" class="checkbox">
+                                                                    <label for="webdev">Web development</label>
+                                                                    <input name="hobbies" id="design" type="checkbox" class="checkbox">
+                                                                    <label for="design">Design</label>
+                                                                    <input name="hobbies" id="programming" type="checkbox" class="checkbox">
+                                                                    <label for="programming">Programming</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="col width-1of4">
+                                                                <div class="cell">
+                                                                    <label for="comment">Comment<span class="color-red"> *</span></label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col width-fill">
+                                                                <div class="cell">
+                                                                    <textarea id="comment" data-required="true" data-error-message="Comment is required"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="col width-1of4">
+                                                            </div>
+                                                            <div class="col width-fill">
+                                                                <div class="cell">
+                                                                    <button class="button" type="submit">Submit</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
 #footer#
 </body>
 
