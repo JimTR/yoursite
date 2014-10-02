@@ -5,6 +5,7 @@
  * does very little as it does not need to !
  */ 
 require 'includes/master.inc.php'; // do login and stuff
+$template = new Template;
 $a=0;
 $id = session_id();
 if($Auth->loggedIn()) 
@@ -32,66 +33,56 @@ if($Auth->loggedIn())
 					$nid = getnid();
 					
 				}
-
-
-$reload = writeid ($id,$nid,$database);
- //this is a fix it is there for IE
-/* if($reload)
-	{
-		//die ('reload is true');
-		$rjs='<script type="text/javascript">
-jQuery(document).ready(function(){
-
-//Check if the current URL contains # 
-if(document.URL.indexOf("#")==-1)
-{
-// Set the URL to whatever it was plus "#".
-url = document.URL+"#";
-location = "#";
-
-//Reload the page
-location.reload(true);
-
-}
-});
-</script>  ';
-	}
-	else {
-$file='log1.txt';
-	$ip=getip();
-	$person = $name.' '.FORMAT_TIME.' '.$ip;
-		//die("a= ". $a);
-		log_to ($file,$person);
-		$rjs=
-		'<script type="text/javascript">
-jQuery(document).ready(function(){
-
-//Check if the current URL contains # 
-if(document.URL.indexOf("#")>=0)
-{
-// Set the URL to whatever it was without "#".
-url = document.URL;
-location = "";
-//alert (url);
-}
-});
-</script> ';
-	}
-	*/ 
-$pms="0";	
-$template = new Template;
+$css = 'css/main.css';
+$css ="<style>".file_get_contents ($css)."</style>";
 $users = $database->num_rows("select * from sessions");
 $header = $template->load('templates/header.html');
 $footer = $template->load ( 'templates/footer.tmpl');
 $include = $template->load ('templates/include.tmpl');
-$css = 'css/main.css';
-$css ="<style>".file_get_contents ($css)."</style>";
+writeid ($id,$nid,$database);
+// get new posts
+$sql = "SELECT posts. * , users.username, users.avatar, topics.topic_subject
+FROM  `posts` 
+JOIN users ON posts.post_by = users.id
+JOIN topics ON posts.post_topic = topics.topic_id
+ORDER BY  `post_date` DESC 
+LIMIT 0 , 5";
+$newposts = $database->get_results($sql);
+
+foreach ($newposts as $row)
+{	// decode the row
+	
+	if (empty($row['avatar'])) {$row['avatar'] = $site->settings['url'].'/images/default_avatar.png';}
+	                //$post_info['postid'] = $pid;
+					$post_info['postid1'] = $row['post_id'];
+					$post_info['path']= $site->settings['url'];
+					$post_info['postdate'] = date('d-m-Y', strtotime($row['post_date']));
+					$post_info['posttime'] = date('H:i', strtotime($row['post_date']));
+					$post_info['username'] = $row['username'];
+					$post_info['post_content'] = html_entity_decode(stripslashes($row['post_content']));
+					$post_info['post_subject'] = $subject; // will update when each post has a subject
+					$post_info['profilelink']= $row['username']; // later do a link
+					$post_info['onlinestatus'] = $online;
+					$post_info['avatar'] = $row['avatar'];
+					$post_info['subject'] = $row['topic_subject'];
+					$post_info['attachments'] = "";
+					$post_info['iplogged']='';
+					$post_info['signature'] = $row['sig'];
+	$template->load("templates/post.html");
+	$template->replace_vars($post_info);
+	$page['posts'].= $template->get_template();
+						}  
+	//print_r ($page);
+	//echo "page end <br>";
+	//die(" loop done");
+$pms="0";	
+
 
 $template->load("templates/page.html");
 $template->replace("css",$css);
-$template->replace("title", "Home");
 $template->replace("header", $header);
 $template->replace("include", $include);
+$template->replace("title", "Home");
 $template->replace("login",$login);
 $template->replace("footer", $footer);
 $template->replace("pms",$pms);
@@ -99,6 +90,7 @@ $template->replace ("path", $site->settings['url']);
 $template->replace("name",$name );
 $template->replace("vari",$users);
 $template->replace("stuff",$stuff);
+$template->replace("newposts",$page['posts']);
 $template->replace("reload",$rjs); // fix for ie 
 $template->replace("datetime", FORMAT_TIME);
 if($site->settings['showphp'] === false)
