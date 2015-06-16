@@ -4,10 +4,10 @@
  *
  */
 $config['database']['type'] = 'mysqli';
-$config['database']['database'] = 'eu_kbracing';
-//$config['database']['default_table_prefix'] = 'def_';
+$config['database']['database'] = 'yoursite';
+$config['database']['table_prefix'] = '';
 $config['database']['hostname'] = 'localhost';
-$config['database']['username'] = 'eu_kbracing';
+$config['database']['username'] = '1612';
 $config['database']['password'] = 'ahamay900';
 $config['database']['encoding'] = 'utf8';
 $config['database']['errors'] = "jim@noideersoftware.co.uk";
