@@ -7,4 +7,4 @@ use a html editor (drag & drop or otherwise) to edit the non dynamic content (te
 dynamic content will be supplied by a very simple php structure, obtained by very simple classes and functions.
 Let's keep it simple !
 
-:)
+Version 2 Release
