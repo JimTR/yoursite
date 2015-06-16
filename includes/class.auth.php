@@ -10,6 +10,7 @@
         public $user;
         public $expiryDate;
         public $nid;
+        //global $database;
         
         private $loggedIn;
 
@@ -25,6 +26,7 @@
             $this->expiryDate = $d->format("U"); 
             //$this->user       = new User();
             $this->currentip = getip();
+            
             
         }
 
@@ -48,11 +50,13 @@
         {
             $this->loggedIn = false;
 
-            $db = Database::getDatabase();
+            //$db = Database::getDatabase();
             $hashed_password = self::hashedPassword($password);
-            $row = $db->getRow("SELECT * FROM users WHERE username = " . $db->quote($username) . " AND password = " . $db->quote($hashed_password));
-
-            if($row === false)
+            $database = new db;
+            $row = $database->get_Row("SELECT * FROM users WHERE username = '" . $username . "' AND password = '" . $hashed_password."'");
+            //print_r ($row);
+              
+            if(!$row)
                 return false;
             
             $this->id       = $row['id'];
@@ -63,8 +67,18 @@
             $this->level = $row['level'];
             $this->postnum = $row['postnum'];
             $this->regdate = $row['regdate'];
+            $this->dob = $row['dob'];
+            $this->nick =  $row['nick'];
+            $this->priv = $row['b_priv'];
+            $this->sig = $row['sig'];
             // send a simple cookie
 			//setcookie("TestCookie",$value);
+			 //* $update = array( 'name' => 'Not bennett', 'email' => 'someotheremail@email.com' );
+			 //* $update_where = array( 'user_id' => 44, 'name' => 'Bennett' );
+			 //* $database->update( 'users_table', $update, $update_where, 1 );
+			 $update = array( 'currentip' => $this->currentip, 'lastseen' => time());
+			 $update_where = array( 'id' => $row['id']);
+			 $database->update( 'users', $update, $update_where, 1 );
 			setcookie("yse",$this->nid,$this->expiryDate,"/");
 			setcookie("userid",$this->id,$this->expiryDate,"/");
             $this->loggedIn = true;
@@ -103,7 +117,7 @@
 
         public function isAdmin()
         {
-            return ($this->user->level === 'admin');
+            return ($this->level === 'admin');
         }
 
         public function changeCurrentUsername($new_username)
@@ -253,25 +267,26 @@
 			if(!isset($_COOKIE['yse'])) 
 				return false;
 				
-            $db = Database::getDatabase();
+            
+            $database = new db;
 			$nid = $_COOKIE["yse"]; // get the user
-            // We SELECT * so we can load the full user record into the user DBObject later
-            $row = $db->getRow('SELECT * FROM users WHERE nid = ' . $db->quote($nid));
+            // We SELECT * so we can load the full user record into the user DBObject later (no longer used 20-10-14)
+            
+            $row = $database->get_Row('SELECT * FROM users WHERE nid = "' . $nid.'"');
             if($row === false)
                 return false;
-
-            $this->id       = $row['id'];
-            $this->nid      = $row['nid'];
-            $this->username = $row['username'];
-            $this->email = $row['email'];
-            $this->regip = $row['ip'];
-            $this->currentip = getip();
-            $this->lastseen = $row['lastseen'];
-            $this->level = $row['level'];
-            $this->postnum = $row['postnum'];
-            $this->regdate = $row['regdate'];
+            
+             foreach ($row as $key => $val) {
+				 if (!is_int($key)){
+					$this->$key = $val;
+					}
+				}
             setcookie("userid",$this->id,$this->expiryDate,"/");
             setcookie("yse",$this->nid,$this->expiryDate,'/');
+             $update = array( 'currentip' => $this->currentip, 'lastseen' => time()); // update last movement
+			 $update_where = array( 'id' => $row['id']);
+			 $database->update( 'users', $update, $update_where, 1 );
+			 $database->disconnect();
             //$_SESSION['userid'] = $row['id'];
             return true;
         }
@@ -282,7 +297,7 @@
             {
                 srand(time());
                 $a = md5(rand() . microtime());
-                setcookie('A', $a, $this->expiryDate, '/', Config::get('authDomain'));
+                //setcookie('A', $a, $this->expiryDate, '/', Config::get('authDomain'));
             }
         }
 
@@ -300,8 +315,8 @@
             $b = str_rot13($b);
             //echo "cookies at ".Config::get('authDomain')." Here ";
             //die();
-            setcookie('B', $b, $this->expiryDate, '/', Config::get('authDomain'));
-            setcookie('C', $c, $this->expiryDate, '/', Config::get('authDomain'));
+            //setcookie('B', $b, $this->expiryDate, '/', Config::get('authDomain'));
+            //setcookie('C', $c, $this->expiryDate, '/', Config::get('authDomain'));
         }
 
         private function clearCookies()

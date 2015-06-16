@@ -1,0 +1,21 @@
+<?php
+$l['reg_title'] = "&nbsp;";
+$l['reg_username'] = "Username";
+$l['reg_password'] = "Password";
+$l['reg_password_warn'] = "passwords are case sensitive";
+$l['reg_email'] = "Email";
+$l['reg_gender'] = "Gender";
+$l['reg_captcha_disc'] = "Captcha ";
+$l['reg_social'] = "<strong>Register via social networks !</strong>"; 
+$l['reg_social_ava'] = "The following social networks are availble";
+$l['reg_button'] = "Register";
+$l['reg_loc'] = "Your Location";
+$l['reg_required'] = "* Required";
+$l['reg_error_title'] = "<p>The following Errors occured</p>";
+$l['reg_ip_error'] ="<li>IP address has more than the allocated amount of users assigned to it</li>";
+$l['reg_password_length'] = "<li>Invalid Password, passwords must be longer than ".$site->settings['pwdlen']." chrs</li>";
+$l['reg_password_invalid'] = "<li>Invalid Password, passwords cannot contain your username</li>";
+$l['reg_email_invalid'] = "<li>There appears to be a problem with your email address, check & retry</li>";
+$l['reg_bad_captcha'] = "<li>incorrect captcha</li>";
+$l['reg_bad_username'] ="<li>You have entered a username that is already in use.</li>";
+//$l['reg_script'] = "<script>$(function() {$('#defaultReal').realperson();});</script>";

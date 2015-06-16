@@ -19,68 +19,50 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
- * updated 21-7-14 
+ * updated 29-9-2014 
  */
- $action = $_POST['action'];
  require 'includes/master.inc.php'; // do login or not
- 
- if(!empty($_POST['username']))
-    {
-        if($Auth->login($_POST['username'], $_POST['password']))
-        {
-            if(isset($_REQUEST['r']) && strlen($_REQUEST['r']) > 0)
-                //redirect($_REQUEST['r']);
-                die ("here we are");
-                //redirect(WEB_ROOT);
-            else
-                redirect();
-                echo "here we are (should be root) ".WEB_ROOT ;
-                die();
-        }
-        else
-            $Error->add('username', "We're sorry, you have entered an incorrect username and password. Please try again.");
-            echo $Error->alert;
-            //die ("Web Root = ".WEB_ROOT);
-            //redirect ('error.php?error=1');
-            //echo "web root =".WEB_ROOT. " invalid login";
-    }
-
+ @$action = $_POST['action'] | $_GET['action']; // allows the error in either format 
+if ($action === 0) {redirect ("index.php");} 
 if($Auth->loggedIn()) 
            {
-			   //redirect("page.html");
-			   //echo "logged in<br>";
-			   //print_r($Auth);
-			   $name = $Auth->username;
-			   //$_REQUEST[\'r\'] ;
-			    $login = '<a href="logout.php">logout link</a>';
-			    //redirect("index.php");
+			   
+			   $page['username'] = $Auth->username;
+			   $login = '<a href="logout.php">Log Out</a>';
+			   
 			   }
 			   
 	else
 				{
-					$name ="Guest";
-					$login = file_get_contents('templates/login.html') ;
+					$page['username'] ="Guest";
+					$login = '<a href="login.php">Login</a>' ;
 				}
-$header = file_get_contents('templates/header.html');
-$footer = file_get_contents ( 'templates/footer.tmpl');
-$include = file_get_contents ('templates/include.tmpl');
-$login = file_get_contents ('templates/login.html');
-$css = 'css/main.css';
-$css ="<style>".file_get_contents ($css)."</style>";
-$template = new Template;
-$template->load("templates/error.html");
-$template->replace("result"," Error Page");
-$template->replace("css",$css);
-$template->replace("title", "Site Error");
-$template->replace("header", $header);
-$template->replace("footer", $footer);
-$template->replace("include", $include);
-$template->replace ("path", $site->settings['url']);
-$template->replace("name",$name );
-//$template->replace("login",$login);
-$template->replace("vari",DOC_ROOT);
-$template->replace("stuff",$stuff);
-$template->replace("datetime", FORMAT_TIME);
+$template = new Template;				
+$page['header'] = $template->load('templates/header.html', COMMENT); // load subs
+$page['footer'] = $template->load('templates/footer.tmpl', COMMENT);
+$page['include'] = $template->load('templates/include.tmpl', COMMENT);
+$page['result'] = "Some Error was hit";
+//start vari's
+$page['path'] = $site->settings['url'];
+$page['datetime'] = FORMAT_TIME;
+$page['title'] = "Error";
+$page['login'] = $login;
+switch ($action) {
+	case 1:
+		$page['errorcode'] = "To Many connections from this IP, you need to wait until other connections from this IP clear";
+		break;
+	case 700:
+		$page['errorcode'] = "<p>You Can not access this page</p><p>Perhaps its an idea to login ?</p>";
+		$page['result'] = "You are a total fuck face !";
+		break;	
+	default:
+		$page['errorcode'] = "this is where the error lives";
+	}
+		
+
+// add an error case statement
+$template->load("templates/error.html", COMMENT);
+$template->replace_vars($page);
 if($site->settings['showphp'] === false)
 {
 $template->removephp();

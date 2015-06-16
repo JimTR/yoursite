@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!-- dynamic tab version 01-04-2015 -->
+<html>
+<head>
+<title>#title#</title>
+        #include# 
+<link rel="stylesheet" href="#path#/css/colorbox.css" />
+ <link href="#path#/css/jquery.datepick.css" rel="stylesheet">
+<script src="#path#/js/jquery.plugin.js"></script>
+<script src="#path#/js/jquery.datepick.js"></script>
+<script>
+$(function ($) {
+	//var test = new date();
+	//day = test.getDate();
+	//alert (day);
+        $('#inlineDatepicker').datepick({onSelect: showDate, commandsAsDateFormat: true, maxDate: '+1m +15d',minDate: new Date() });
+});
+
+function showDate(date) {
+	   var d ='you have selected '+ date;	
+	   alertify.alert(d);
+};
+ $(document).ready(
+            function() {
+                $(".iframe").colorbox({iframe:true, width:"60%", height:"60%", overlayClose: false, escKey:false});
+                $(".inline").colorbox({inline:true, width:"50%"});
+               //alert ('doc ready ! set the options ?');
+		var priv = "#priv#";	
+		var sex = "#sex#";
+		var tabs = "#tab#";
+		
+		$('#tabs').prop('checked', tabs);
+ 		 $("#priv option").each(function (a, b) {
+               if ($(this).val() == priv ) $(this).attr("selected", "selected");
+        });          
+        $("#sex option").each(function (a, b) {
+               if ($(this).val() == sex ) $(this).attr("selected", "selected");
+        }); 
+            
+            }
+            
+            );
+            
+</script>             
+</head>
+    #header#
+        #msg#
+                        
+                            <div class="col" style="float:left;width:90%;">
+                                <div class="cell panel" style="box-shadow:none;border:none;background:#2D3538;" >
+                                    <div class="cell tab-block top-nav" >
+                                                    <div class="tabs">
+                                                        <ul class="nav">
+                                                        #tabs#
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tab-content colorborder" style="min-height:600px;background:#2D3538;color:#999;">
+                                                          #tab_content#
+                                                    </div>
+        						</div>
+        
+        					  </div>	
+						#footer#
+						</div>
+
+
+
+    </body>
+</html>

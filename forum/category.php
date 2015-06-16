@@ -2,40 +2,114 @@
 //category.php
 define('DOC_ROOT', realpath(dirname(__FILE__) . '/../'));
 require DOC_ROOT.'/includes/master.inc.php'; // do login or not
+$time = microtime();
+$time = explode(' ', $time);
+$time = $time[1] + $time[0];
+$start = $time;
+$per_page = $settings['per_page'];
+if (isset($_GET['activetab'])) 
+{
+	// find out what tab to display
+	$activetab = intval($_GET['activetab']);
+	//echo $activetab;
+}		
+else {$activetab = 0;}
 
+$i = 0;
+$ul = 0;
+$tab= 0;
+//$per_page++;
+//die($per_page);
+    define ('AREA',2); // testing area grouping
     $getid = intval($_GET['id']); //stop injection 
     $template = new Template; // start the template workspace
-    $header = $template->load('templates/header.html');
-	$footer = $template->load(  $site->settings['url'].'/templates/footer.tmpl');
-	$include = $template->load( $site->settings['url'].'/templates/include.tmpl');
-	$users = $database->num_rows("select * from sessions");
-	
+    $page['header'] = $template->load($site->settings['url'].'/templates/header.html', COMMENT);
+	$page['footer'] = $template->load(  $site->settings['url'].'/templates/footer.tmpl', COMMENT);
+	$page['include'] = $template->load( $site->settings['url'].'/templates/include.tmpl', COMMENT);
+	$page['users'] = $database->num_rows("select * from sessions");
+	$page['page'] = 'pagination  will go here';
+	$page['poo'] = '';
+	$activetab = $_GET['activetab'];
     if ($getid === 0) {die ("get = ".$getid);}
 if($Auth->loggedIn()) 
            {
-			   
+			   $level = $Auth->level;
 			   $name = $Auth->username;
-			   $id = session_id();
 			   $nid = $Auth->nid;
-			    $login = '<li><a href="'.$site->settings['url'].'/user.php">Settings</a></li><li><a href="'.$site->settings['url'].'/logout.php">Logout</a></li>';
-			    
+			   if ($Auth->level === 'user') {
+				  				   
+			   $login = $template->load(DOC_ROOT.'/templates/member.html', COMMENT);
+		   }
+		   elseif ($Auth->level === 'admin') {
+			   $login = $template->load(DOC_ROOT.'/templates/admin.html', COMMENT) ;
+			   
+		   }
+			  
+			   
 			    
 			   }
 			   
 	else
 				{
 					$name ="Guest";
-					$login = $template->load( $site->settings['url'].'/templates/guest.html') ;
-					// add default colour from config
+					$login = $template->load( $site->settings['url'].'/templates/guest.html', COMMENT) ;
+					$nid = $nid = getnid();
+					$level ="guest"; 
 				}
-				
+
 	writeid ($id,$nid,$database);
 			
 	
-	
+	$page['login'] = $login;
 	$pmnew=0; // for later
-    	
+	// get the tabs
+	$groupsql ="SELECT * , permissions.*
+					FROM categories
+					LEFT JOIN
+				    permissions on permissions.pcat_id = cat_id	
+					WHERE categories.isgroup <> 0
+					AND categories.groupid = 0
+					AND categories.area = ".AREA."
+					order by disp_order asc";
+// now add the tabs in 
+$tabset = $database->num_rows($groupsql);
+		if ($tabset < $activetab) {$activetab = 0;}
+		$root = $database->get_results($groupsql);
+		$tabs = new Template;
+		foreach ($root as $row)
+				{
+					/*$priv = explode(",",$row[$level]);
+					if ($priv[0] === '0')
+	                 {
+						 goto noview;
+					} */
+					$tabs->load("templates/tab.html",false); //dont show this templates remarks  
+					$tab_entry['tab_id'] = $tab; 
+					$tab_entry['tab_name'] = $row['cat_name']; 
+					 
+					if ($ul == 0 && $activetab == @$tab) //sets active tab later it will remember now does it
+					{
+						$tab_entry['tab_class'] = "active";
+						$ul =1;
+						$tab_entry['tab_title'] = "Viewing";
+					 }         
+					else 
+					{
+						$tab_entry['tab_class'] = "";
+						$ul = 0;
+						$tab_entry['tab_title'] = "not viewing";
+					}	
+						$tabs->replace_vars($tab_entry);
+					    $page['tabs'].= $tabs->get_template();
+					    $tab++;
+					    noview:
+					
+				}   	
+				//echo $page['tab'];
+				//die();
+				
 //first select the category based on $_GET['cat_id']
+
 $sql = "SELECT
 			cat_id,
 			cat_name,
@@ -44,6 +118,7 @@ $sql = "SELECT
 			topics.topic_subject,
 			topics.topic_id,
 			posts.post_date,
+			permissions.*,
 			topics.topic_views,
 			(SELECT posts.post_date FROM posts WHERE posts.post_topic = topics.topic_id ORDER BY posts.post_date DESC limit 1) AS Latest_Action,
 			COUNT( posts.post_id ) AS totalp,
@@ -54,10 +129,13 @@ $sql = "SELECT
 		LEFT JOIN 
 			topics ON topics.topic_cat = cat_id
 		JOIN 
-			posts on topics.topic_id = posts.post_topic		
+			posts on topics.topic_id = posts.post_topic
+		JOIN
+		    permissions on permissions.pcat_id = cat_id				
 		WHERE
-			cat_id = " . mysql_real_escape_string($getid).
+			cat_id = " . mysqli_real_escape_string($database->link,$getid).
 			" 
+		AND area = ".AREA." 	
 		GROUP BY 
 			topics.topic_subject 
 		ORDER BY 
@@ -67,65 +145,113 @@ $sql = "SELECT
 
 	$result = $database->get_results($sql);
 	$toprow = $database->get_row($sql);
-	
-	
+	$rowstuff = $database->num_rows($sql);
+	//echo $rowstuff."<br>";
+	$priv = explode(",",$toprow[$level]);
 	// do a worker template for the navi 14-9-14 /new sql does the whole lot
-	$navi= '<a style="color:#FFFFFF" href="index.php">Forum</a><span class="icon icon-16 icon-angle-right"></span>'.$toprow[1];
-	$newthreads = '<button class="button" onclick= window.location.replace("create_topic.php?id='.$toprow[0].'")>New Thread</button>'; 
+	$page['navi']= ''.$toprow[1];
+	$page['title'].= " - ".$toprow[1];
+	$page['newthreads'] = '<button class="button" onclick= window.location.replace("create_topic.php?id='.$toprow[0].'")>New Thread</button>'; 
    
 
 if(!$result)
 {
-	echo 'The Forum could not be displayed, please try again later.' . mysql_error();
+	$page['rowd'] = '<tr><td>This Forum contains no threads, be the first to post one.</td></tr>'; 
+	$sql ='select * from categories where cat_id = '.mysqli_real_escape_string($database->link,$getid);
+	$result = $database->get_results($sql);
+	$toprow = $database->get_row($sql);
+	// do a worker template for the navi 14-9-14 /new sql does the whole lot ??
+	$page['navi']= '<a href="index.php?activetab='.$activetab.'">Community </a> >> '.$toprow[1];
+	$page['title'].= " ".$toprow[1];
+	$page['newthreads'] = '<button class="button" onclick= window.location.replace("create_topic.php?id='.$toprow[0].'")>New Thread</button>'; 
 }
  
 
 else
 {
 			//display category data
-		
+		$pageno++;
+		if ($rowstuff > $per_page)
+		{
+		$page['rowd'].= '<div id ="'.$pageno.'" class="cell pag">';
+		$page['poo'].= '<li class ="dummy" href="#p'.$pageno.'"><a href="#'.$pageno.'">'.$pageno.'</a></li>';
+		}
+		else
+		{
+			$page['rowd'].= '<div id ="'.$pageno.'" class="cell pag">';
+			$page['poo']="";
+		}	 
+		$subtemplate = new Template;
+		$pagegroup = 0;
+		$pg = 1;
 		foreach ($result as $row)
 		{
 				
-					//echo "got to here inloop ".$row['topic_subject']."<br>";
 					// lets get the stats
-					//print_r ($row);
-					$stats = $row['totalp'];
-					$replies = $row['topic_views'];
-					$username  = $row['Last_Username'];
-					$last_time =  time2str($row['Latest_Action']); 	
-					$rowd .= '<tr style ="border-bottom:1px solid #000000;border-top:1px solid transparent"><td width="1">
-					<span class="icon icon-32 icon-comment color-yellow float-left"></span></td><td><h3><a href="topic.php?id=' . $row['topic_id'] . '">'
-					 . $row['topic_subject'] . '</a><br /><h3></td>
-				    <td  style="text-align:center">'.$stats.'</td><td><center>'.$replies.'</center></td><td><center>'.$last_time.' By  '.$username.'</center></td></tr>'; 
-				
+					//run a template ! to do pagination
+					//run worker template to add pagination
+					$pagegroup++; // set the page thingy
+					//do function here to paginate within the $page array
+					$subtemplate->load("templates/testit.html",COMMENT);
+					
+				    //$pg = $pagegroup % $per_page; // check page length
+				    //echo $pg."<br>";
+				    if ($pg <> 0 ) { 
+						//$sub['id'] = $pageno;
+						$sub['activetab'] = $activetab;
+						$sub['topic_id'] = $row['topic_id'];
+						$sub['topic_subject'] = $row['topic_subject'];
+						$sub['stats'] = $row['totalp'];
+						$sub['replies'] = $row['topic_views'];
+					    $sub['username']  = $row['Last_Username'];
+					    $sub['last_time'] =  time2str($row['Latest_Action']);
+					    $subtemplate->replace_vars($sub);
+					    $page['rowd'] .= $subtemplate->get_template(); //add the row
+				    
+				    }
+				   else {
+					   $pageno++;
+					    $page['rowd'] .= '</div><div id ="'.$pageno.'" class ="cell hidden-tab pag">'; 
+					    $page['poo'].= '<li class="dummy" href = "#p'.$pageno.'"><a href="#'.$pageno.'">'.$pageno.'</a></li>';
+					   //$sub['id'] = $pageno;
+						$sub['activetab'] = $activetab;
+						$sub['topic_id'] = $row['topic_id'];
+						$sub['topic_subject'] = $row['topic_subject'];
+						$sub['stats'] = $row['totalp'];
+						$sub['replies'] = $row['topic_views'];
+					    $sub['username']  = $row['Last_Username'];
+					    $sub['last_time'] =  time2str($row['Latest_Action']);
+					    $subtemplate->replace_vars($sub);
+					    $page['rowd'] .= $subtemplate->get_template(); //add the row
+					   //$page['rowd'] .= "<div>next page</div>";
+					   //echo " in page ".$pageno."<br>";
+					   //add the sub template here
+				   }
+				   //$pagegroup++;
+				   $pg = $pagegroup % $per_page; // check page length
 			}
-		//echo $rowd;
-		//die();
+		$page['rowd'] .= "</div></div>";
 	}
  
 // do main template
 
-$template->load("templates/category.html");
-$template->replace("result","Forum");
-$template->replace("css",$css);
-$template->replace("error",$Error);
-$template->replace("title", "Forum");
-$template->replace("header", $header);
-$template->replace("login",$login);
-$template->replace("footer", $footer);
-$template->replace("include", $include);
-$template->replace ("path", $site->settings['url']);
-$template->replace("name",$name );
-$template->replace("vari",$users);
-$template->replace("navi",$navi);
-$template->replace("rowd",$rowd);
-$template->replace("newthread",0);
-$template->replace("newpost",0);
-$template->replace("newthreads",$newthreads);
-$template->replace("datetime", FORMAT_TIME);
-$template->replace("base",$base);
-$template->replace("pmnew",$pmnew);
+$template->load("templates/category.html", COMMENT);
+$page['query'] = $database->total_queries();
+	  
+	//echo 'There were '. $database->total_queries() . ' queries performed';
+     
+     if (@$Auth->level === 'admin')
+    { 
+		$linecount = filelength($_SERVER['SCRIPT_FILENAME']);
+     $test =page_stats($linecount,$page['query'],$start);
+     $page['adminstats']= "Page generated in ".$test['time']." seconds. &nbsp;
+     PHP ".$test['php']."%  &nbsp;SQL ".$test['sql']."% &nbsp; 
+     SQL Queries  ". $test['query'];
+    
+	}
+	else { $page['adminstats'] = ""; }
+	
+$template->replace_vars($page);
 
 if($site->settings['showphp'] === false)
 {

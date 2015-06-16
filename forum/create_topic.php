@@ -1,44 +1,33 @@
 <?php
 //create_topic.php
+// this no longer works ! sift the group
 define('DOC_ROOT', realpath(dirname(__FILE__) . '/../'));
+define('AREA',2); 
 require DOC_ROOT.'/includes/master.inc.php'; // required
-$getid = intval($_GET['id']);
+$time = microtime();
+$time = explode(' ', $time);
+$time = $time[1] + $time[0];
+$start = $time;
+@$getid = intval($_GET['id']);
 
 $template = new Template; 
 
-	$header = $template->load('templates/header.html');
-	$footer = $template->load($site->settings['url'].'/templates/footer.tmpl');
-	$include = $template->load( $site->settings['url'].'/templates/include.tmpl');
-	$css = $site->settings['url'].'/css/aqua.css';
-	$editor_opts = "<script>CKEDITOR.replace( 'editor1', {uiColor: '#067AC5',removePlugins: 'elementspath',toolbar: [
+	$page['header'] = $template->load($site->settings['url'].'/templates/header.html', COMMENT);
+	$page['footer'] = $template->load($site->settings['url'].'/templates/footer.tmpl', COMMENT);
+	$page['include'] = $template->load( $site->settings['url'].'/templates/include.tmpl', COMMENT);
+	$page['css'] = $site->settings['url'].'/css/aqua.css';
+	$page['editor_opts'] = "<script>CKEDITOR.replace( 'editor1', {uiColor: '#067AC5',removePlugins: 'elementspath',toolbar: [
 					[ 'Bold', 'Italic','Underline', 'Strike', 'Subscript', 'Superscript', 'RemoveFormat', '-', 'NumberedList', 'BulletedList' ],
 					[ 'FontSize', 'TextColor', 'Scayt' ], ['JustifyLeft', 'JustifyCenter', 'JustifyRight' ], [ 'Blockquote' , 'Link', 'Image','Smiley','oembed','allMedias'], ['codesnippet'] 
 				]
 			});</script>"; 
-    $css ="<style>".file_get_contents ($css)."</style>";
+    @$css ="<style>".file_get_contents ($css)."</style>";
     
-    if (!$_GET['id']){$navi= '<a style="color:#FFFFFF" href="index.php">Forum->New Thread</a>';}
-    else { $navi = "add the full nav";}
-    $base = $site->settings['url'].'/css/'.$basecolour;
-    $users = $database->num_rows("select * from sessions");
-$template->load("templates/create_thread.html");    	
-$template->replace("css",$css);
-$template->replace("editor_opts",$editor_opts);
-$template->replace("error",$Error);
-$template->replace("title", "Create Thread");
-$template->replace("header", $header);
-$template->replace("login",$login);
-$template->replace("footer", $footer);
-$template->replace("include", $include);
-$template->replace ("path", $site->settings['url']);
-$template->replace("name",$name );
-$template->replace("vari",$users);
-$template->replace("pmnew",0);
-$template->replace("rowd",$rowd);
-$template->replace("newthread",$newthread);
-$template->replace("newpost",$newpost);
-$template->replace("datetime", FORMAT_TIME);
-$template->replace("base",$base);
+    if (!@$_GET['id']){$page['navi']= '<a style="color:#FFFFFF" href="index.php">Forum->New Thread</a>';}
+    else { $page['navi'] = "add the full nav";}
+    $page['base'] = $site->settings['url'].'/css/'.$basecolour;
+    $page['users'] = $database->num_rows("select * from sessions");
+
 if($site->settings['showphp'] === false)
 {
 $template->removephp();
@@ -47,23 +36,30 @@ $template->removephp();
 if($Auth->loggedIn()) 
            {
 			   
-			   $name = $Auth->username;
-			   $id = session_id();
+			     $name = $Auth->username;
 			   $nid = $Auth->nid;
-			   $login = '<li><a href="'.$site->settings['url'].'/user.php">Settings</a></li><li><a href="'.$site->settings['url'].'/logout.php">Logout</a></li>';
-			   $basecolour = "aqua";
-			   
+			   if ($Auth->level === 'user') {
+				  				   
+			   $login = $template->load(DOC_ROOT.'/templates/member.html', COMMENT);
+		   }
+		   elseif ($Auth->level === 'admin') {
+			   $login = $template->load(DOC_ROOT.'/templates/admin.html', COMMENT) ;
+		   }
+			  
+			   $page['attach'] = "user".$Auth->id.".txt";
+			   $page['login'] = $login;
+			   //echo $page['attach'];			   
 			    if($_SERVER['REQUEST_METHOD'] != 'POST')
 	{	
 		//the form hasn't been posted yet, display it
 		//retrieve the categories from the database for use in the dropdown if required
 		if ($getid)
 			{
-				$sql= "SELECT cat_id, cat_name, cat_description FROM categories where cat_id  ='".$getid."'";
+				$sql= "SELECT cat_id, cat_name, cat_description FROM categories where cat_id  ='".$getid."' and area = ".AREA; // not working ?
 			}
 			else
 			{
-				$sql = "SELECT cat_id, cat_name, cat_description FROM categories where isgroup = '0'";
+				$sql = "SELECT cat_id, cat_name, cat_description FROM categories where isgroup = '0' and area =".AREA;
 			}
 			
 		$result = $database->query($sql);
@@ -93,24 +89,41 @@ if($Auth->loggedIn())
 			{
 		       
 				if (!$getid){
-					$navi= '<a style="color:#FFFFFF" href="index.php">Forum->New Thread</a>';
-    				$catlist= '<br />
-					Forum: <select name="topic_cat">';
+					$page['navi']= '<a style="color:#FFFFFF" href="index.php">Forum->New Thread</a>';
+    				$page['catlist']= '<br />
+					<label>Area:</label> <select name="topic_cat">';
 					$cat = $database->get_results($sql);
 					foreach ($cat as $row)
 					{
-						$catlist .= '<option value="' . $row['cat_id'] . '">' . $row['cat_name'] . '</option>';
+						$page['catlist'] .= '<option value="' . $row['cat_id'] . '">' . $row['cat_name'] . '</option>';
 						//print_r($row);
 						//die();
 					}
-				$catlist.= '</select><br />';}	
+				$page['catlist'].= '</select>';}	
 					else {
 						$cat = $database->get_results($sql);
 						foreach ($cat as $row){}
-						$navi = '<a style="color:#FFFFFF" href="index.php">Forum-></a><a style="color:#FFFFFF" href="category.php?id='.$row['cat_id'].'">'. $row['cat_name'] .'-></a>New Thread';
-					$catlist = '<input type= "hidden" name= "topic_cat" value ="'.$getid.'">';}
-					$template->replace("catlist",$catlist);
-					$template->replace("navi",$navi);
+					$page['navi'] = '<a style="color:#FFFFFF" href="index.php">Forum-></a><a style="color:#FFFFFF" href="category.php?id='.$row['cat_id'].'">'. $row['cat_name'] .'-></a>New Thread';
+					$page['catlist'] = '<input type= "hidden" name= "topic_cat" value ="'.$getid.'">';}
+					$template->load("templates/create_thread.html", COMMENT);   
+						$page['query'] = $database->total_queries();
+	                    $template->replace_vars($page);
+	                    $linecount = filelength($_SERVER['SCRIPT_FILENAME']);
+                        $test =page_stats($linecount,$page['query'],$start);
+    $adminstats= "Page generated in ".$test['time']." seconds. &nbsp;
+     PHP ".$test['php']."% SQL ".$test['sql']."% 
+     SQL Queries  ". $test['query']; 
+      
+     if (@$Auth->level === 'admin')
+    { 
+		$template->replace("adminstats", $adminstats);
+	}
+	else { $template->replace("adminstats", ""); }	    
+     $template->replace("adminstats", $adminstats);    
+					$template->replace("title", "Create Thread");
+					$template->replace("newthread",$newthread);
+					$template->replace("newpost",$newpost);
+					$template->replace("datetime", FORMAT_TIME);
 					$template->publish();
 					
 								 
@@ -136,7 +149,7 @@ if($Auth->loggedIn())
 			//insert the topic into the topics table first, then we'll save the post into the posts table
 			//die ("ready to insert all ok");
 			$topicip = getip();
-			//die ($topicip);
+			//add the area dummo 
 			$sql = "INSERT INTO 
 						topics(topic_subject,
 							   topic_date,
@@ -144,9 +157,9 @@ if($Auth->loggedIn())
 							   topic_by,
 							   topic_ip
 							   )
-				   VALUES('" . mysql_real_escape_string($_POST['topic_subject']) . "',
+				   VALUES('" . mysqli_real_escape_string($database->link,$_POST['topic_subject']) . "',
 							   NOW(),
-							   " . mysql_real_escape_string($_POST['topic_cat']) . ",
+							   " . mysqli_real_escape_string($database->link,$_POST['topic_cat']) . ",
 							   " .$Auth->id . ",
 							   '" .$topicip."'
 							   )";
@@ -169,16 +182,20 @@ if($Auth->loggedIn())
 				$topicid = $database->lastid();
 				//die ("topic id = ".$topicid);
 				$ip = getip();
-								
+				$content = $database->escape($_POST['post_content']);
+				$time_stamp = time();
+				//die ("content = ".$time_stamp);			
 				$sql = "INSERT INTO
 							posts(post_content,
 								  post_date,
+								  post_stamp,
 								  post_topic,
 								  post_by,
 								  post_ip)
 						VALUES
-							('" . mysql_real_escape_string($_POST['post_content']) . "',
+							('" . $content . "',
 								  NOW(),
+								  " . $time_stamp .", 
 								  " . $topicid . ",
 								  " . $Auth->id . ",
 								  '" . $ip ."'
@@ -194,10 +211,23 @@ if($Auth->loggedIn())
 					die();
 					$result = $database->query($sql);
 				}
+				 
+				 //$post_id = $database->lastid();
+				//		 
+							
 				else
 				{
+					// this code adds the field data
+					$post_id = $database->lastid();
+					$sql = "INSERT INTO
+							post_fields_data (post_id)
+						VALUES
+						 ('".$post_id."')";
+				    $result= $database->query($sql);
+				    
 					$sql = "COMMIT;";
 					$result = $database->query($sql);
+					
 					
 					//after a lot of work, the query succeeded!
 					// redirect to the topic
@@ -213,10 +243,12 @@ if($Auth->loggedIn())
 	else
 				{
 					$name ="Guest";
-					$login = file_get_contents( $site->settings['url'].'/templates/guest.html') ;
-					$basecolour = "aqua";
-					// add default colour from config
-					echo 'Sorry, you have to be <a href="/login.php">signed in</a> to create a topic.';
+					//$login = file_get_contents( $site->settings['url'].'/templates/guest.html') ;
+					
+					//echo 'Sorry, you have to be <a href="/login.php">signed in</a> to create a topic.';
+					//echo 'should call error.php';
+					redirect ("index.php");
+					
 				}
 				
 	writeid ($id,$nid,$database);

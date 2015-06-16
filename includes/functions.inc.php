@@ -23,12 +23,19 @@ global $database;
         return $db->affectedRows();
     }
 
-    function printr($var)
+    function printr($var,$return)
     {
-        $output = print_r($var, true);
+        $output = print_r($var, $return);
         $output = str_replace("\n", "<br>", $output);
         $output = str_replace(' ', '&nbsp;', $output);
-        echo "<div style='font-family:courier;'>$output</div>";
+        if ($return === 0){
+        echo "<div style='font-family:courier;'>$output</div>";}
+        if ($return === 1) {
+			
+			return $output;
+		}
+		
+			
     }
 
     // Formats a given number of seconds into proper mm:ss format
@@ -815,35 +822,13 @@ function getnid ()
 	}
 function writeid ($id, $nid,$database)
 	{
+		          global $site;
 				  $ip = getip();
-				  //print_r($_SERVER);
-				  //die();
-			   $checku['id'] = $id;
-			   
-		if ($database->exists("sessions","id",$checku))
-		{
-			//$host = substr($_SERVER['SCRIPT_URI'], 0, -1);
-			$location = 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-			$datas['nid'] = $nid;
-			$datas['ip'] = $ip;
-			$datas['location'] = $location;
-			$datas['useragent'] = $_SERVER['HTTP_USER_AGENT'];
-			$database->update("sessions",$datas,$checku);
-						
-			}
-		else
-		{
-			// work out what to do
-			$location = 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'];
-			$datas['id'] = $id;
-			$datas['nid'] = $nid;
-			$datas['ip'] = $ip;
-			$datas['location'] = $location;
-			$datas['useragent'] = $_SERVER['HTTP_USER_AGENT'];
-			$database->insert ("sessions",$datas);
-				$reload = true;	
-			    return $reload;
-		}
+				  // ban this IP if it connects more than config value (default = 2)
+				  // workout who to ban 
+				  $iprows = $database->num_rows("select * from sessions where ip like '%".$ip."%'");
+				  if ($iprows > 2) { redirect( $site->settings['url']."/error.php?action=1");}
+				  		
 	}
 	function distroy_session($nid,$database)
 		{
@@ -858,7 +843,8 @@ function log_to ($file,$info)
 		// log stuff
 		//die("info = ".$info." file = ".$file); 
 		if (!strrpos ($info , "\r\n" )){ $info .="\r\n";}
-		file_put_contents($file, $info, FILE_APPEND | LOCK_EX); 
+		file_put_contents($file, $info, FILE_APPEND );
+		chmod($file, 0666); 
 	}
 function getip()
 	{
@@ -873,3 +859,139 @@ function getip()
 			return "Unknown";  
 		 
 	}
+function page_stats($lines,$queries,$start)
+	{
+		//return php & sql as % of usage
+		$percent = ($lines / 100);
+		$return['sql'] = round ($queries / $percent,2);
+		$return['php'] = round(100 - $return['sql'],2);
+		$time = microtime();
+		$time = explode(' ', $time);
+		$time = $time[1] + $time[0];
+		$finish = $time;
+        $return['time'] = round(($finish - $start), 4);
+		$return['query'] = $queries;
+		return $return;
+	}
+		
+function filelength($file)
+	{
+		/* returns the number of lines in a given file
+		 * the file name must be fully qualified
+		 * 
+		 */
+			$linecount = 0;
+			$handle = fopen($file, "r");
+			while(!feof($handle)){
+				$line = fgets($handle);
+				$linecount++;
+				}
+
+			fclose($handle);
+			return $linecount;
+}
+
+function writeini ($settings,$file,$header,$name)
+	{
+		/* write settings or lang file
+		 * $ettings  Type array  - data to write 
+		 * $file Type string - file to write to
+		 * $header Type string - file identifier
+		 * $name Type string - array key name
+		 * if $name is blank the key wil be ini
+		 * example writeini ($settings,"main.ini","main ini file version v1","ini"); 
+		 */  
+		 
+		if(!isset($name)) {$name ="ini";} 
+		$writevar ="<?php
+/*********************************\\n". 
+$header.
+"\n\*********************************/\n";
+	foreach ($settings as $key => $val) {
+      $writevar .=  "\$".$name."['" . $key . "'] = \"".$val."\";\r\n";
+    }
+    $writevar .= "?>";
+	file_put_contents ($filename , $writevar,LOCK_EX);
+}
+
+function romanNumerals($num) 
+{
+    $n = intval($num);
+    $res = '';
+ 
+    /*** roman_numerals array  ***/
+    $roman_numerals = array(
+                'M'  => 1000,
+                'CM' => 900,
+                'D'  => 500,
+                'CD' => 400,
+                'C'  => 100,
+                'XC' => 90,
+                'L'  => 50,
+                'XL' => 40,
+                'X'  => 10,
+                'IX' => 9,
+                'V'  => 5,
+                'IV' => 4,
+                'I'  => 1);
+ 
+    foreach ($roman_numerals as $roman => $number) 
+    {
+        /*** divide to get  matches ***/
+        $matches = intval($n / $number);
+ 
+        /*** assign the roman char * $matches ***/
+        $res .= str_repeat($roman, $matches);
+ 
+        /*** substract from the number ***/
+        $n = $n % $number;
+    }
+ 
+    /*** return the res ***/
+    return $res;
+    }
+	
+function tzlist($tz1)
+{
+	/* function returns an option list containing valid time zones
+	 * but only the option section the rest of the form must be made elsewhere
+	 * defaults the time zone to utc if no time zone is supplied
+	 */ 
+	if (is_null($tz1)){$tz1 = 416;} 
+	
+    $tzlist = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
+    
+	foreach ($tzlist as $key => $tzitem)
+		{
+			if ($key == $tz1) {
+				$tz .= '<option selected="selected" value="'.$key.'">'.$tzitem.'</option>';
+			}
+			else{
+			$tz .= '<option value="'.$key.'">'.$tzitem.'</option>';
+			}
+		}
+	  
+	  return $tz;
+  }
+  
+function return_tz($tz1)
+{
+	/*this function returns the set time zone name from a value
+	 * used to get the server current timezone
+	 * if no value is supplied defaults to utc
+	 * returns the timezone name to be used with PHP -> date_default_timezone_set
+	 * to set the current server timezone
+	 */ 
+	 
+	if (is_null($tz1)){$tz1 = 416;} 
+	
+	$tzlist = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
+	  
+	foreach ($tzlist as $key => $tzitem)
+		{
+			if ($key === $tz1-1) {
+				break;
+				}
+		}
+		return $tzitem;
+}

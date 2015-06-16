@@ -1,0 +1,87 @@
+Landing module
+  INDEX PAGE (index.php)
+  
+  file to edit/ create templates/page.html
+  
+        #users# =  online users count
+	#header# = load header (sub template - not required) - located at templates/header.html
+	#footer# = load footer (sub template - not required) - located at templates/footer.tmpl
+	#include# = load include (sub template - not required) - located at templates/include.tmpl
+	
+	header, footer & include were designed to allow their contents to be accessed by all modules & pages,
+	but you can code your header, footer & includes in every module templates(s) or pages. Rather the using the sub templates
+	 
+	#login# = load user menu uses a sub template - located at templates/guest.html, templates/member.html or templates/admin.html depends on login state  - REQUIRED
+	#datetime# = date & time
+	#title# = page title in browser tab/window
+	#path# = home url - make your internal links absolute with this (used in header.html & include.tmpl)
+	#pms# = current private messages (currently not implemented always displays 0)
+	#copy_year# = current year
+	#start_year# = start year (the installation year, when you installed the software. Perhaps this should be a config item ?
+	#newposts# = the last 5 posts from the forum module uses a sub template (templates/post.html - REQUIRED)
+	#adminstats# = admin stats sql queries, page gen time etc  visible to admins only.
+  
+  
+  ADMIN PAGE (admin.php)
+  
+  file to edit/create templates/admincp.html
+  the default html/jquery expects this to open in a pop up if you do not use pop ups this file must contain your header & footer code 
+  
+    #php# = returns the version of PHP running
+	#postsize# = server maximum post size
+    #upsize# = server max file upload size
+    #uol# = online users count
+    #mods# = number of modules installed;
+    #os# =  server OS
+    #load# = current server load (linux server only) returns N/A on a windows server
+    #dateformat# = date & time
+    #sql# = software version of the connected SQL server (mysqli support only)
+    #stat# = is your site swiched on or off ? (read from the settings file) and returns either the hex code for green or red, used for styling your element
+    #df# = total disk space used
+    #ds# = total number of files 
+    #ver# = version of yoursite software
+    #dbs# = database size
+    #dbs1# = database free space
+    #pt# = total folders 
+    
+ Forum Module
+ 
+   INDEX PAGE (forum/index.php) 
+     	
+  file(s) to edit create /forum/templates/tabindex.html (tabbed style) or index.html (traditional style)
+  NOTE FOR TABS TO WORK YOU MUST LOAD SOME JQUERY CODE AND CCS CLASSES.  if you are unsure on which code/classes to load ASK ! 
+  however there are many jquery plugins you can use for tabbing.
+  the active class name must be called 'active'. should this also be a config option ? 
+  
+        #users# =  online users count
+	#header# = load header (sub template - not required) - located at forum/templates/header.html
+	#footer# = load footer (sub template - not required) - located at forum/templates/footer.tmpl
+	#include# = load include (sub template - not required) - located at forum/templates/include.tmpl
+	
+	header, footer & include were designed to allow their contents to be accessed by all modules & pages,
+	but you can code your header, footer & includes in every module templates(s) or pages. Rather the using the sub templates
+	each. NOTE the above templates are loaded relativly so you can have a totally different look to each module 
+	
+	#path# = home url - make your internal links absolute with this (used in header.html & include.tmpl)
+	#login# = load user menu uses a sub template - located at templates/guest.html, templates/member.html or templates/admin.html depends on login state  - REQUIRED
+	#copy_year# = current year
+	#start_year# = start year (the installation year, when you first installed the software. Perhaps this should be a config item ?  
+	#tab# = returns the tabs (uses a sub template - REQUIRED) located at forum/templates/tabs.html (tab version only)
+	#active# = returns the css class identifier for the active tab or blank for a non active tab (tab version only)
+	#rowd# = returns each forum data as a row (sub template - REQUIRED) located at forum/templates/forum_row.html (both versions)
+	
+   TOPIC PAGE (forum/topic.php)
+	file(s) to edit topic.html, post.html, button.html, pagebutton.html
+	#users# =  online users count
+	#header# = load header (sub template - not required) - located at forum/templates/header.html
+	#footer# = load footer (sub template - not required) - located at forum/templates/footer.tmpl
+	#include# = load include (sub template - not required) - located at forum/templates/include.tmpl
+	<button codes - these only show if permissions allow used in post.html>
+	#quote# = quote button (requires button.html) 
+	#edit# = edit button (requires button.html)
+	#reply# = reply button (requires button.html)
+	#delete# = delete button (requires button.html)
+        #www# = www button (requires button.html)
+	#user# = user profile button (requires button.html)
+  	
+	 

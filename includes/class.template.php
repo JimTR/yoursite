@@ -26,14 +26,20 @@ class Template {
 
    public $template;
 
-   function load($filepath) {
-
-      $this->template = file_get_contents($filepath);
+   function load($filepath, $set = true) {
+      //$die ("set = ".$set); 
+      $filecontents = file_get_contents($filepath);
+      $file_name = basename($filepath);
+      if ($set == 1 ) 
+             {$this->template = add_comments ($file_name,$filecontents);}
+      else 
+          {$this->template = $filecontents;}
       return $this->template; 
    }
 
    function replace($var, $content) {
 		// replaces a single variable
+		// perhaps use <!--name--> rather than #name# ?
       $this->template = str_replace("#$var#", $content, $this->template);
 
    }
@@ -46,6 +52,7 @@ class Template {
    
    function removephp() {
 	   // remove php if required
+	   // early disable plugin code
 	   do {
 		   
 	   $start = stripos($this->template, "<?");// tag start
@@ -76,8 +83,10 @@ class Template {
 	} 
 	
 		function get_template() {
-		/* returns a template main use is for sub templates
-		 * this function must be called AFTER the variables have been replaced
+		/* returns a template, main use is for sub templates
+		 * this function must be called AFTER the sub template variables have been replaced.
+		 * and before the major template is published or had it variables replaced
+		 * it used to add repetitive data (in a sub template) to a major template
 		 */ 
 		$sub_template = $this->template ;
 		return $sub_template;
@@ -93,7 +102,42 @@ class Template {
 			 $this->template = str_replace("#$k#", $v, $this->template);
 		 } 
 	 }
+	 
 }
-
+	function code_hook($hook_name) {
+		/* run plugin code
+		* spool through the plugins looking for the hook 
+		* then add the code as an include in html
+		* code_hook should be called before remove_php
+		 or should this be in a pre parse in another class ?
+		 * plugin hook now defined as #plugin_$hook_name#
+		 * then run it from function $hook_name_run
+		 */   
+	}
+	
+	function add_comments ($template_name,$filecontents) {
+		// adds comments to the begining and end of each template
+		// this does sort of point at each template should have a unique name 
+		// so it can be debuged for html errors, perhaps add the module name so templates can have the same name but appear in a different module ? 
+		$filecontents =  "<!-- start ".$template_name." -->".$filecontents ."<!-- end ".$template_name." -->";
+		return $filecontents;
+	}  
+	
+	function remove_comments() {
+		// remove all file comments
+			//echo "hit it";
+			//die("hit do");	
+		do {
+			$start = stripos($this->template, "<!--");
+			
+				 if ($start <> 0) {
+					$end = stripos($this->template, "-->");// tag end
+					$chr = $end-$start;
+					$getrid= substr($this->template, $start, $chr+3);// full string to replace
+					$this->template = str_replace($getrid,"",$this->template);
+				}
+		}
+		while ($start > 0);
+	}
 ?>
 

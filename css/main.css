@@ -35,6 +35,17 @@ a:hover, a:active {
 	margin: auto;
 }
 
+
+#trow1 {
+	background: #fdfdfd;
+	color: #333;
+	padding: 13px;
+	border: 1px solid #e5e5e5;	
+	text-decoration: none;
+	font-size: 14px;
+        text-shadow: 1px 1px 0px #fff;
+}
+
 .logo {
 	float: left;
 	margin-top:0px;
@@ -710,7 +721,7 @@ blockquote {
         -khtml-border-radius: 2px;
 	margin: 0;
 	background: #fff;
-	padding: 5px;
+	padding: 10px;
 	color: #000000;
 }
 blockquote p {

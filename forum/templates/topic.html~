@@ -1,0 +1,126 @@
+<!--
+   topic.html
+   
+   Copyright 2014 Jim Richardson <jim@noideersoftware.co.uk>
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+   
+	Update 23/12/14 15:19    
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+	    <title>#title#</title>
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
+	    <link rel="stylesheet" href="#path#/css/colorbox.css" />   
+	    <link rel="stylesheet" href="#path#/css/alertify.core.css"> 
+	    <link rel="stylesheet" href="#path#/css/alertify.default.css" id="toggleCSS">
+	    <script src="#path#/js/ckeditor.js"></script>
+       <script src="#path#/js/jquery.colorbox.js"></script>
+       <script src="#path#/js/alertify.min.js" type="text/javascript"></script>	
+       <script src="#path#/js/1.js"></script> 
+       <link rel="stylesheet" type="text/css" media="all" href="#path#/cascade/assets/css/cascade/development/build-full.css">
+       <link rel="stylesheet" type="text/css" media="all" href="#path#/cascade/assets/css/site.css">
+      </head>
+<body>
+#header#
+    <div class="pagination nav nav1 float-right" style="padding:1%;">
+          <div class="float-left" style="text-align:middle;margin-top:5px;margin-right:5px;"></div> #poo#    
+          </div>                    
+  <div class="panel cell">
+  
+      <div class="header background-black color-white">
+          <div class="float-left" style="width:100%;"> #navi#</div>
+           
+      </div>  
+      <div> 
+          #posts#
+          <!-- <a class='iframeAnchor button' href="templates/editorx.html">Outside Webpage</a> -->
+          <div class="pagination nav nav1 float-right" style="padding:1%;">
+          <div class="float-left" style="text-align:middle;margin-top:5px;margin-right:5px;">Page</div> #poo#    
+          </div>
+          <div>
+          #footer#</div>
+      </div>
+      <br>
+      <div>
+         <div style="display:none;">
+         #editor#
+         <div id="message" title="zero" fred="0">in the div function call</div>
+         </div>
+         
+         
+      </div>
+      </div>                         
+
+            
+        
+ <script>
+      $(document).ready(
+            function() {
+                //var msg = $('#message').html();
+                //var msg = $('#message').html();
+                //alert(msg);
+                $(".iframe").colorbox({iframe:true, width:"85%",height:"460px", overlayClose: false, escKey:false});
+                $(".iframeAnchor").colorbox({width:"85%", height:"51%", iframe:true,overlayClose: false, escKey:false, scrolling: false,
+                onLoad: function() {$('#cboxClose').remove();}, onClosed: function() {closeup();}});
+                $(".webpage").colorbox({iframe:true,width:"95%",height:"95%"});
+                $(".ippage").colorbox({iframe:true,width:"25%",height:"22%", scrolling:false });
+                $(".nav1 a").click(function(event) {
+        event.preventDefault();
+        $(this).parent().addClass("active-item");
+        $(this).parent().siblings().removeClass("active-item");
+        var tab = $(this).attr("href");
+        //alert (tab);
+        $(".pag").not(tab).addClass("hidden-tab");
+        $(tab).removeClass("hidden-tab");
+        console.log (tab);
+        $(tab).fadeIn();
+        window.location.href = "#top";
+        //$('.lower').html(buttons);
+    });
+  
+
+});
+
+function closeup() 
+{
+var msg = $('#message').html();
+//$('#message').attr('fred','someshit');
+var msg2 = $('#message').attr("fred");
+if (msg2 === "0" ){
+//alert (msg2);
+alertify.set({
+				delay : 1300
+							});
+alertify.error(msg);
+}
+else{
+alertify.set({
+				delay : 1300
+							});
+alertify.success(msg);
+timeoutID = window.setTimeout(slowAlert, 1300);
+}
+}
+function slowAlert()
+{window.location.reload();}            
+</script>                 
+
+</body>
+</html>

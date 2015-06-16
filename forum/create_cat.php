@@ -3,10 +3,13 @@
 
 define('DOC_ROOT', realpath(dirname(__FILE__) . '/../'));
 require DOC_ROOT.'/includes/master.inc.php'; // required
+define('AREA','2');
 if ($_POST['action'] == 'Quit') { redirect ('index.php');} // hit the quit button see template
+$template = new Template;
+
 if($Auth->loggedIn()) 
            {
-			   
+			   //die("auth done logged in");
 			   $name = $Auth->username;
 			   $id = session_id();
 			   $nid = $Auth->nid;
@@ -17,20 +20,22 @@ if($Auth->loggedIn())
 			   
 	else
 				{
+					
 					$name ="Guest";
 					$login = $template->load( $site->settings['url'].'/templates/guest.html') ;
 					$page['basecolour'] = "aqua";
+					redirect ("index.php");
+					die("auth done guest ");
 					// add default colour from config
 				}
 				
 	writeid ($id,$nid,$database); 
-	$template = new Template;
-
-$page['header'] = $template->load('templates/header.html');
-$page['footer'] = $template->load($site->settings['url'].'/templates/footer.tmpl');
-$page['include'] = $template->load( $site->settings['url'].'/templates/include.tmpl');
-$page['base'] =  $site->settings['url'].'/css/'.$basecolour;
-$page['navi'] = '<a style="color:#FFFFFF" href="index.php">Forum->New Category</a>';
+	
+$page['header'] = $template->load('templates/header.html', COMMENT);
+$page['footer'] = $template->load($site->settings['url'].'/templates/footer.tmpl', COMMENT);
+$page['include'] = $template->load( $site->settings['url'].'/templates/include.tmpl', COMMENT);
+@$page['base'] =  $site->settings['url'].'/css/'.$basecolour;
+$page['navi'] = '<a style="color:#FFFFFF" href="index.php">Shop->New Category</a>';
 $page['title'] = "Create Category";
 $page['path'] = $site->settings['url'];
 $page['login'] = $login;
@@ -40,12 +45,13 @@ $page['cats'] = $database->num_rows("select * from categories");
 $page['topics'] = $database->num_rows("select * from topics");
 $page['posts'] = $database->num_rows("select * from posts");
 $page['groups'] = $database->num_rows("SELECT * FROM categories where isgroup = 1");
-$template->load ("templates/create_cat.html");
+$template->load ("templates/create_cat.html", COMMENT);
 
 
 if( $Auth->level <> 'admin' )
 {
 	//the user is not an admin
+	die ("hit a none admin");
 	redirect ("index.php");
 		
 }
@@ -58,7 +64,7 @@ else
 	{
 		//the form hasn't been posted yet, display it
 		
-		  $sql = "SELECT cat_id, cat_name, cat_description FROM categories where isgroup = 1";
+		  $sql = "SELECT cat_id, cat_name, cat_description FROM categories where isgroup = 1 and area =".AREA ;
 		 
 		$result = $database->query($sql);
 		
@@ -83,16 +89,17 @@ else
 	else
 	{
 		//the form has been posted, so save it
-		$sql = "INSERT INTO categories(cat_name, cat_description , isgroup, groupid)
-		   VALUES('" . mysql_real_escape_string($_POST['cat_name']) . "',
-				 '" . mysql_real_escape_string($_POST['cat_description']) ."',
-				 '".mysql_real_escape_string($_POST['isgroup'])."',
-				 '".mysql_real_escape_string($_POST['groupid'])."')";
+		$sql = "INSERT INTO categories(cat_name, cat_description , isgroup, groupid,area)
+		   VALUES('".$database->escape($_POST['cat_name']) . "',
+				 '".$database->escape($_POST['cat_description']) ."',
+				 '".$database->escape($_POST['isgroup'])."',
+				 '".$database->escape($_POST['groupid'])."',
+				 '".$database->escape(AREA)."')";
 		$result = $database->query($sql);
 		if(!$result)
 		{
 			//something went wrong, display the error
-			echo 'Error' . mysql_error();
+			echo 'Error' . mysqli_error();
 		}
 		else
 		{

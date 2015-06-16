@@ -1,14 +1,27 @@
 <!--
-   forum_row.html mk2
+   forum_row.html
    
    Copyright 2014 Jim Richardson <jim@noideersoftware.co.uk>
    
+
 -->
-<div class="trow1">
-<tr style="border-bottom:1px solid black"> 
-<td width="1"><span class="icon icon-32 icon-comment color-yellow float-left"></span></td> 
-<td width="30%"><h3><a onclick = window.location.assign("http://localhost/yoursite/forum/category.php?id=#cat_id#")>#cat_name#</a></h3><div style="margin-left:2%">#cat_description#</div></td>
-<td><center>#threads# topics</center></td>
-<td><center>#posts# posts</center></td><td><center>#last_user#</center></td>
+
+
+<table>
+<tr style="border-bottom:1px solid black;background:#2D3538;color:#999;">
+<td style="width:3%;" style="float:left;"><a href="" class="tip3"><span style="min-width:280px;margin-top:-20px;">
+<div style="margin-top:7px;">
+<p class="icon icon-32 icon-comment color-green" style="float:left;margin-left:4%;"><label style="font-size:14px;color:#fff;">Unread</label></p>
+<p class="icon icon-32 icon-comment color-yellow" style="float:left;margin-left:20%;"><label style="font-size:14px;color:#fff;">Read</label></p>
+<p class="icon icon-32 icon-comment color-red" style="float:left;margin-left:16%;"><label style="font-size:14px;color:#fff;">Locked</label></p>
+ </div>
+</span><div class="icon icon-32 icon-comment color-green" style="float:left;background:#2D3538;max-width:100%;"></div></a></td> 
+<td style="width:50%"><h3><a href="category.php?id=#cat_id##tab#">#cat_name#</a></h3>#cat_description#</td>
+<td style="width:10%">#threads# Topics</td>
+<td style="width:10%">#posts# Replies</td>
+<td>Latest #last_user#</td>
 </tr>
-</div>
+</table>
+
+
+

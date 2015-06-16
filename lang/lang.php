@@ -1,7 +1,10 @@
 <?php
 
 $l['nav_usercp'] = "User Control Panel";
-$l['nav_profile'] = "Edit Profile";
+$l['nick_name'] = "Nick Name";
+$l['nav_forum'] = "Forum";
+$l['nav_profile'] = "Profile";
+$l['nav_pm'] = "Private Messages";
 $l['nav_options'] = "Edit Options";
 $l['nav_email'] = "Change Email Address";
 $l['nav_password'] = "Change Password";
@@ -23,6 +26,12 @@ $l['already_uploaded_avatar'] = "You are currently using an uploaded avatar. If 
 $l['na_deleted'] = "N/A - Been Deleted";
 $l['user_cp'] = "User Control Panel";
 $l['user_cp_welcome'] = "This is your user control panel. You can access your profile, subscriptions, and private messaging all from here.<br />The main page has information on your account.";
+$l['profile_emailaddress'] = "Email Address";
+$l['profile_gender'] = "Gender";
+$l['profile_location']= "Location";
+$l['profile_bio'] = "Enter a few short details about yourself, your life story etc.";
+$l['profile_skype'] = "Skype ID";
+$l['profile_steam'] = "Steam ID";
 $l['account_summary'] = "Your Account Summary";
 $l['username'] = "Username:";
 $l['user_id'] = "User ID:";

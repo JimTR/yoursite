@@ -1,0 +1,83 @@
+<!--
+   topic.html
+   
+   Copyright 2014 Jim Richardson <jim@noideersoftware.co.uk>
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
+   
+	Update 23/12/14 15:19    
+-->
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+ "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+	    <title>#title#</title>#include#
+	    <link rel="stylesheet" href="#path#/css/colorbox.css" />    
+	    <script src="#path#/js/ckeditor.js"></script>
+	    <script src="#path#/js/editor.js" /></script>  
+       <script src="#path#/js/jquery.colorbox.js"></script> 
+             
+   	</head>
+<body>
+#header#
+                        
+  <div class="panel cell">
+      <div class="header background-black color-white">
+           #navi#
+      </div>  
+      <div> 
+          #posts#
+      </div>
+      <div class="pagination lower" style="float:right;padding:1.0%;">
+                                                        <ul class="nav1 nav" style="padding-right:10px;">
+                                                            #poo#
+                                                        </ul>
+                                                           
+                                                  </div><div>#footer#</div>
+      <div style="">
+         #editor#
+         
+      </div>
+      </div>                         
+     
+       <script>
+      $(document).ready(
+            function() {
+                $(".iframe").colorbox({iframe:true, width:"85%", height:"85%", overlayClose: false, escKey:false});
+                $(".nav1 a").click(function(event) {
+        event.preventDefault();
+        $(this).parent().addClass("active-item");
+        $(this).parent().siblings().removeClass("active-item");
+        var tab = $(this).attr("href");
+        alert (tab);
+        $(".pag").not(tab).addClass("hidden-tab");
+        $(tab).removeClass("hidden-tab");
+        console.log (tab);
+        $(tab).fadeIn();
+        window.location.href = "#top";
+        //$('.lower').html(buttons);
+    });
+  
+
+});
+            
+</script>                 
+        </div>
+
+
+</body>
+</html>

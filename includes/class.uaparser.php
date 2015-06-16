@@ -15,13 +15,13 @@
  * @link       http://user-agent-string.info/download/UASparser
  */
 
-namespace UAS;
+
 
 /**
  * User Agent String Parser Class.
  * @package UASparser
  */
-class Parser
+class Parser1
 {
     /**
      * How often to update the UAS database.

@@ -8,7 +8,7 @@
 	-webkit-border-radius: 15px;
 	-moz-border-radius: 15px;
 	border-radius: 15px;
-	background-color: #187A7A;
+	background-color: #067AC5;
 	font-size: 0.75em;
 }
 .ticker {
@@ -17,13 +17,13 @@
 	display: block;
 	position: relative;
 	overflow: hidden;
-	background-color: #187A7A;
+	background-color: #067AC5;
 }
 .ticker-title {
 	padding-top: 9px;
 	color: #990000;
 	font-weight: bold;
-	background-color: #187A7A;
+	background-color: #067AC5;
 	text-transform: uppercase;
 }
 .ticker-content {
@@ -32,7 +32,7 @@
 	position: absolute;
 	color: #FFFFFF;
 	font-weight: bold;
-	background-color: #187A7A;
+	background-color: #067AC5;
 	overflow: hidden;
 	white-space: nowrap;
 	line-height: 1.2em;
@@ -52,7 +52,7 @@
 	padding-top: 9px;
 	position: absolute;
 	top: 0px;
-	background-color: #187A7A;
+	background-color: #067AC5;
 	display: block;
 	width: 1000px;
 	height: 23px; 

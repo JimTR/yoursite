@@ -1,0 +1,109 @@
+<?php
+$paypal="Some Shit Theme";
+?>
+<html>
+<head>
+<title>{$lang->newthread_in}</title>
+{$headerinclude}
+<script type="text/javascript" src="jscripts/post.js?ver=1400"></script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+
+		//Hide div w/id extra
+	   jQuery("#extra").css("display","none");
+           
+		// Add onclick handler to checkbox w/id checkme
+	   jQuery("#checkme").click(function(){
+
+		// If checked
+		if (jQuery("#checkme").is(":checked"))
+		{
+			//show the hidden div
+                        jQuery("#extra1").hide("fast");
+			jQuery("#extra").show("fast");
+		}
+		else
+		{
+			//otherwise, hide it
+			jQuery("#extra").hide("fast");
+                        jQuery("#extra1").show("fast");
+		}
+	  });
+
+	});
+</script>	 
+
+</head>
+<body>
+{$header}
+{$thread_errors}
+<div><center><h1>Theme Order</h1></center></div>
+ 
+<div style="float:left;margin-top:1px;clear:both;width:100%;padding-left:4%;" class="msgblock">
+<form action="newthread.php?fid={$fid}&amp;processed=1" method="post" enctype="multipart/form-data" name="input">
+<input type="hidden" name="my_post_key" value="{$mybb->post_code}" />
+<div style="float:left;margin-top:10px;clear:both;">{$loginbox}</div>
+<div style="float:left;clear:left;">
+<div class="msgblock" width="20%" style="float:left;padding-top:1px;">Please add the web site you want us to work on<br><strong>Website </strong>&nbsp{$tfinput['con_website']}
+</div>
+<div class="msgblock" width="20%" style="float:left;clear:left;padding-top:8px;">Please add a vaild Email address<br><strong>Email &nbsp&nbsp&nbsp&nbsp </strong>{$tfinput['con_email']}</div>
+</div>
+<div style="float:left;margin-left:100px;margin-top:-10px;" width="80%">
+<div class="msgblock" style="float:left;padding-top:2px;width:50%;"><b>Choose a Style </b>&nbsp {$tfinput['con_websitetype']}
+<br><b>Choose Budget </b>&nbsp{$tfinput['con_payb']}
+
+</div>
+<div class="msgblock" width="50%" style="float:left;padding-top:12px;margin-left:20px;align:top;"><b>Support for </b></div><div style="float:left;padding-top:2px;padding-left:14px;">{$tfinput['con_rl']}
+<br>
+<br>Professional Install&nbsp<input type="checkbox" name="extra" value="soccer" id="checkme" />
+</div>
+</div>
+
+<div class="msgblock"  style="clear:left;float:left;padding-top:22px;"><strong>Additional Comments</strong></div>
+
+<div class="msgblock" style="width:40%;padding-left:25px;float:left;clear:left" >
+<textarea name="message" id="message" placeholder="Additional Comments" name="message" class="forms2" rows="10" cols="8" tabindex="2">{$message}</textarea>
+</div>
+<div id="extra" class="msgblock"  style="float:left;margin-left:60px;margin-top:-12px;width:50%;">
+<b>We need some extra info </b><br>
+<div><b>Install a Framework&nbsp&nbspmyBB&nbsp&nbsp {$tfinput['con_frame']}&nbsp&nbspphpBB&nbsp&nbsp{$tfinput['con_phpbb']}</b><br><b> We will install the latest version of the selected framework</b><br><br></div>
+<div style="float:right;"><b>(S)FTP Password<br> {$tfinput['sftpass']}</div>
+<div style="float:left;">(S)FTP Address <br> {$tfinput['stfp']}</div>
+<div style="float:left;">Admin Account <br> {$tfinput['admin']}</div>
+<div style="float:right;">Admin Password <br> {$tfinput['adminp']}<br></b></div>
+</div>
+<div id="extra1" class="msgblock"  style="float:left;margin-left:60px;margin-top:-12px;width:50%;">
+<h2><center>Standard Guff</center> </h2>
+<div>Thank you for ordering a theme from AVAstyles.com, you are not charged for this order at this point in time, but when the theme is produced a final price will be given to you (along with indications of costs through out the design process). If you have any questions during this time please add a 'status update' to the completed order form </div>
+</div>
+<div style="clear:both;padding:10px;">
+{$captcha}
+</div>
+</div>
+
+
+<div style="text-align:center;width:100%;clear:both;"><input type="submit" class="button" name="submit" value="Order Now" tabindex="4" accesskey="s" /> </div>
+                                    	
+<input type="hidden" name="action" value="do_newthread" />
+<input type="hidden" name="posthash" value="{$posthash}" />
+
+<input type="hidden" name="attachmentaid" value="" />
+<input type="hidden" name="attachmentact" value="" />
+<input type="hidden" name="quoted_ids" value="{$quoted_ids}" />
+<input type="hidden" name="tid" value="{$tid}" />
+</form>
+<div style="padding:10px;"><center>
+<script src="paypal-button.min.js?merchant=jim.richardson06@btinternet.com" 
+    data-button="buynow" 
+    data-name="{$paypal}" 
+    data-quantity="1" 
+    data-amount="10.00" 
+    data-currency="GBP" 
+    data-shipping="0.00" 
+    data-tax="0.00" 
+    data-callback="http://www.avastyles.com" 
+    data-env="sandbox"
+></script></center></div>
+{$footer}
+</body>
+</html>
