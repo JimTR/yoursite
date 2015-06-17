@@ -38,16 +38,17 @@ else {$stat="red";}
 $postsize = (int)(str_replace('M', '', ini_get('post_max_size')) * 1024 * 1024);
 $upsize = (int)(str_replace('M', '', ini_get('upload_max_filesize')) * 1024 * 1024);
 $load = sys_getloadavg();
-$df = getDirectorySize(rtrim($_SERVER['DOCUMENT_ROOT'],"/").dirname($_SERVER['PHP_SELF']));
 $pt = $_SERVER['DOCUMENT_ROOT'];
+$df = $pt.dirname($_SERVER['PHP_SELF']);
+$df = getDirectorySize($df);
 $template =  new Template;
 $name = $Auth->username;
 $nid = $Auth->nid;
-$page['login'] = $template->load('templates/admin.html', COMMENT);
-$page['header'] = $template->load('templates/header.html',COMMENT);
-$page['include'] = $template->load('templates/include.tmpl',COMMENT);
+$page['header'] = $template->load($site->settings['template_path'].'/header.html', COMMENT); // load header
+	$page['footer'] = $template->load($site->settings['template_path'].'/footer.tmpl', COMMENT);
+	$page['include'] = $template->load($site->settings['template_path'].'/include.tmpl', COMMENT);
+	$page['login'] = $login;
 $page['astat'] = $template->load('templates/admin/stat.html',COMMENT);
-$page['footer'] = $template->load ('templates/footer.tmpl', COMMENT);
 $page['adminstats'] = ""; //do we need this ??
 $page['datetime'] = FORMAT_TIME;
 $page['path'] = $site->settings['url'];
@@ -79,6 +80,7 @@ if (isset ($_GET['action'])){
 switch ($_GET['action']) {
     case "turnstatus":
         if ($settings['siteclosed'] == 0){
+			
 		$settings['siteclosed'] = 1;} 
 		else {$settings['siteclosed'] = 0;}
 		$writevar ="<?php
@@ -90,15 +92,14 @@ SETTINGS v1.01
     }
     $writevar .= "?>";
 	file_put_contents ($filename , $writevar,LOCK_EX);
-	//echo $settings['siteclosed'];
-	  
+	
 	
         break;
     case "datetime":
-        echo "i equals 1";
+        //echo "i equals 1";
                 break;
     case 2:
-        echo "i equals 2";
+        //echo "i equals 2";
         break;
 	}
 	unset ($_GET['action']);
