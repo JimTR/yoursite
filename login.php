@@ -63,16 +63,16 @@ if ($_SERVER['HTTPS'])
 	if (@!$_COOKIE['redirect']) {setcookie('redirect',$job, time() + (60 * 5),'/');} // make sure we go back
 	$template = new Template;
 	$name ="Guest";
-	$login = $template->load('templates/guest.html', COMMENT) ;
-    $page['header'] = $template->load($site->settings['url'].'/templates/header.html', COMMENT);
-	$page['footer'] = $template->load($site->settings['url'].'/templates/footer.tmpl', COMMENT);
-	$page['include'] = $template->load($site->settings['url'].'/templates/include.tmpl', COMMENT);
+	$login = $template->load($site->settings['template_path'].'//guest.html', COMMENT) ;
+    $page['header'] = $template->load($site->settings['template_path'].'/header.html', COMMENT);
+	$page['footer'] = $template->load($site->settings['template_path'].'/footer.tmpl', COMMENT);
+	$page['include'] = $template->load($site->settings['template_path'].'/include.tmpl', COMMENT);
 	$page['login'] = $login;
 	$page['query'] = $database->total_queries();
 	$page['path'] = $site->settings['url'];
 	$page['error'] ="";
 	  
-	$template->load($site->settings['url'].'/templates/login.html', COMMENT);
+	$template->load($site->settings['template_path'].'/login.html', COMMENT);
 	$template->replace_vars($page);
 	$template->replace("css",$css);
 	$template->replace("title", "Login");

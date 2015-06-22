@@ -1,7 +1,7 @@
 <head>
 	#include#
 	<title>Tab Editor</title>
-	<script src="../js/ckeditor.js"></script>
+	<script src="/js/ckeditor.js"></script>
 </head>
 #header#
 <div style="background:#2D3538;overflow:hidden;">

@@ -1125,7 +1125,7 @@ input,textarea,select,table {
 
 .pagination a:hover,.pagination a:focus,.hovered-button,.button:hover {
     background-image:url('../../../img/alpha-10.png');
-    _background:#eee;
+    background:#eee;
 }
 
 .files .tree a {

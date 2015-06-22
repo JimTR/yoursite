@@ -1,31 +1,6 @@
   <!-- Start editorx -->
-  <html style="height:100%;">
- <head> 
-<title>YourSite Editor X</title>
-<!-- start include.tmpl -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta http-equiv="Content-Script-Type" content="text/javascript">
-<link rel="stylesheet" href="../css/alertify.core.css">
-<link rel="stylesheet" href="../css/alertify.default.css" id="toggleCSS">
-<script src="../cascade/assets/js/app.js"></script> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
- <script src="../js/alertify.min.js" type="text/javascript"></script>	
-<!-- <script  type="text/javascryoursite2/ipt" src="http://localhost/yoursite2/jquery.ui.datepicker.js"></script>
-<script src="http://localhost/yoursite2/js/jquery.colorbox.js"></script> --> 
- <script src="../js/ckeditor.js"></script>
-<script src="../js/editor.js" /></script>  
-<script src="../js/3.js"></script>   
-<link rel="stylesheet" type="text/css" media="all" href="../cascade/assets/css/cascade/development/build-full.css">
-<link rel="stylesheet" type="text/css" media="all" href="../cascade/assets/css/site.css">
-        <!--[if lt IE 8]><link rel="stylesheet" href="assets/css/cascade/production/icons-ie7.min.css"><![endif]
-                  [if lt IE 9]><script src="assets/js/shim/iehtmlshiv.js"></script><![endif]-->
-              
-       
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        
-<!-- end include.tmpl -->
-	     	   
-  </head><body style="background:#2D3538;min-height:70%;">
+      	   
+  <body style="background:#2D3538;min-height:70%;">
         <div style="background:#2D3538;min-height:70%;overflow:hidden;">
         <div class="header collapse-trigger">
               <span>
@@ -74,14 +49,14 @@
 				     <button class="button" onclick="windowclose()" />Close</button>  
 		      </div>		
         </div>
-	  			<script src="../js/editor.js" /></script>  
+	  			<!--<script src="../js/editor.js" /></script>-->  
 					  <!-- end editor -->
 					  <br>
 </body>
  <script>
      $(document).ready(
             function() {
-                 //alert("test");
+                 alert("test");
                  var editor = CKEDITOR.instances.editor1;
          CKEDITOR.replace('editor1',
   {  
@@ -104,14 +79,15 @@
                  //input.val('new stuff')
                  pcatid= parent.$('#cat_id').val();
                  //alert(pcatid);
-                //alert ("p topic = "+ptopic); 
+                alert ("p topic = "+ptopic); 
                  cat.val(pcatid);
                  topic.val(ptopic);
-                 var quote = parent.$('#editor3').val();
+                 //var quote = parent.$('#editor3').val();
+                 var quote = "this is a quote";
                  quote = input.val()+quote;
                
                  //editor.insertHtml(quote);
-                 //alert (editor.val());
+                 alert (editor.val());
                    input.val(quote);
                   
                    var file = $('#attachbtn').attr('file-id');

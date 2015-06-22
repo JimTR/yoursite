@@ -1,7 +1,7 @@
 <!--ips template -->
 <head>
-<link rel="stylesheet" type="text/css" media="all" href="#path#/themes/dark/css/build-full.css">
-<link rel="stylesheet" type="text/css" media="all" href="#path#/themes/dark/css/site.css">
+<link rel="stylesheet" type="text/css" media="all" href="#path#/theme/dark/css/build-full.css">
+<link rel="stylesheet" type="text/css" media="all" href="#path#/theme/dark/css/site.css">
 </head>
 <body style="background-color:#fff;background-image:none;">
 <div class="header collapse-trigger">

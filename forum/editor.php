@@ -7,7 +7,8 @@
  define('DOC_ROOT', realpath(dirname(__FILE__) . '/../'));
  require DOC_ROOT.'/includes/master.inc.php'; // do login or not
  $template = new Template;
- $template->load('templates/editorx.html');
+ //die ($site->settings['template_path']);
+ $template->load($site->settings['template_path'].'forum/editorx.html');
  $page['file'] = "./user".$Auth->id.".txt";
  $template->replace_vars($page);
  $template->publish();  

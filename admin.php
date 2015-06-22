@@ -33,8 +33,12 @@ $sql = '
 limit 1';
  $astats = $database->get_row($sql); 
 $dbsize = getdbsize();
-if ($settings['siteclosed'] == 1) { $stat = "#6FAF47"; } 
-else {$stat="red";} 
+if ($settings['siteclosed'] == 1) { 
+	$stat = "#6FAF47"; 
+	} 
+else {
+	$stat="#FF0000";
+	} 
 $postsize = (int)(str_replace('M', '', ini_get('post_max_size')) * 1024 * 1024);
 $upsize = (int)(str_replace('M', '', ini_get('upload_max_filesize')) * 1024 * 1024);
 $load = sys_getloadavg();
@@ -44,7 +48,8 @@ $df = getDirectorySize($df);
 $template =  new Template;
 $name = $Auth->username;
 $nid = $Auth->nid;
-$page['header'] = $template->load($site->settings['template_path'].'/header.html', COMMENT); // load header
+$login = $template->load($site->settings['template_path'].'/admin.html', COMMENT) ;
+    $page['header'] = $template->load($site->settings['template_path'].'/header.html', COMMENT); // load header
 	$page['footer'] = $template->load($site->settings['template_path'].'/footer.tmpl', COMMENT);
 	$page['include'] = $template->load($site->settings['template_path'].'/include.tmpl', COMMENT);
 	$page['login'] = $login;

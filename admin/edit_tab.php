@@ -14,9 +14,9 @@
      $template = new Template;
      $select_file = DOC_ROOT.'/admin/templates/edit_tab_select.html'; // set the html file
      $html_file = DOC_ROOT.'/admin/templates/edit_tab.html'; // set the html file
-     $page['header'] = $template->load($site->settings['url'].'/templates/header.html', COMMENT); // load header
-	 $page['footer'] = $template->load($site->settings['url'].'/templates/footer.tmpl', COMMENT); // load footer
-	 $page['include'] = $template->load($site->settings['url'].'/templates/include.tmpl', COMMENT); // load includes
+     $page['header'] = $template->load($site->settings['template_path'].'header.html', COMMENT); // load header
+	 $page['footer'] = $template->load($site->settings['template_path'].'footer.tmpl', COMMENT); // load footer
+	 $page['include'] = $template->load($site->settings['template_path'].'include.tmpl', COMMENT); // load includes
 	 $page['title'] = 'Tab Editor';
      if($Auth->loggedIn()) 
         {

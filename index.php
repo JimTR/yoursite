@@ -28,7 +28,7 @@ $i = 0;
 $ul = 0;
 $activetab = 0;
 $id = session_id();
-//printr($Auth);
+//printr($page);
 //die();
 if($Auth->loggedIn()) 
            {
@@ -36,19 +36,20 @@ if($Auth->loggedIn())
 			   $name = $Auth->username;
 			   $level = $Auth->level;
 			   $nid = $Auth->nid;
+			   
 			   if ($Auth->level === 'user') {
 				  				   
-			   $login = $template->load(DOC_ROOT.'/templates/member.html', COMMENT);
+			   $login = $template->load($site->settings['template_path'].'member.html', COMMENT);
 		   }
 		   elseif ($Auth->level === 'admin') {
-			   $login = $template->load(DOC_ROOT.'/templates/admin.html', COMMENT) ;
+			   $login = $template->load($site->settings['template_path'].'admin.html', COMMENT) ;
 		   }
 		   }
 						   
 	else
 				{
 					$name ="Guest";
-					$login = $template->load('templates/guest.html', COMMENT) ;
+					$login = $template->load($site->settings['template_path'].'guest.html', COMMENT) ;
 					$level = 'guest';
 					
 				}
@@ -66,14 +67,19 @@ $groupsql ="SELECT * , permissions.*
 					
   
     $page['users'] = $database->num_rows("select * from sessions"); // online users count
-	$page['header'] = $template->load($site->settings['template_path'].'/header.html', COMMENT); // load header
-	$page['footer'] = $template->load($site->settings['template_path'].'/footer.tmpl', COMMENT);
-	$page['include'] = $template->load($site->settings['template_path'].'/include.tmpl', COMMENT);
+	$page['header'] = $template->load($site->settings['template_path'].'header.html', COMMENT); // load header
+	//$hd = $site->settings['template_path'].'header.html';
+	$page['footer'] = $template->load($site->settings['template_path'].'footer.tmpl', COMMENT);
+	$page['include'] = $template->load($site->settings['template_path'].'include.tmpl', COMMENT);
+	$page['logo'] = $site->settings['url'].$site->settings['logo'];
+	$page['sitename'] = $site->settings['sitename'];
+	$page['address'] = $site->settings['address'];
 	$page['login'] = $login;
 	$page['email'] = $Auth->loc;
 	$page['path'] = $site->settings['url'];
 	$page['datetime'] = FORMAT_TIME;
 	$page['title'] .= " - Home";
+	
 	if ($settings['forumtabs'] == true)
     {
 		$tabset = $database->num_rows($groupsql);
@@ -87,7 +93,7 @@ $groupsql ="SELECT * , permissions.*
 	                 {
 						 goto noview;
 					} 
-					$tabs->load("templates/tab.html",false); //dont show this templates remarks  
+					$tabs->load($site->settings['template_path'].'/tab.html',false); //dont show this templates remarks  
 					$tab_entry['tab_id'] = $row['cat_id']; 
 					$tab_entry['tab_name'] = $row['cat_name']; 
 					$tab_entry['tab_title'] = $row['cat_tooltip'];
@@ -108,7 +114,7 @@ $groupsql ="SELECT * , permissions.*
 					$tabs->replace_vars($tab_entry);
 					$page['tabs'].= $tabs->get_template(); // add the tab in
 					//now add the content !
-					$tabs->load("templates/tab_desc.html",false); // load the description template
+					$tabs->load($site->settings['template_path'].'/tab_desc.html',false); // load the description template
 					$tabs->replace("content",$row['cat_description']);
 					
 						if  ($tab_entry['tab_class'] = "active")
@@ -123,6 +129,9 @@ $groupsql ="SELECT * , permissions.*
 					$tabs->replace("id",$row['cat_id']);
 					$tabs->replace("path",$page['path']);
 					$tabs->replace("title",	$row['cat_name']);
+					//$tabs->replace("sitename",$site->settings['sitename']);
+					//$tabs->replace("logo"
+					$tabs->replace_vars($page);	    
 					$page['tab_content'] .=$tabs->get_template();
 					$tab++;
 					noview:
@@ -130,8 +139,8 @@ $groupsql ="SELECT * , permissions.*
 	
 }
 
-//$template->load("templates/index.html", COMMENT);
-$template->load($site->settings['template_path'].'/index.html', COMMENT); // load header
+
+$template->load($site->settings['template_path'].'index.html', COMMENT); // load header
 $template->replace("css",$css);
 $template->replace("pms",$pms);
 if($site->settings['showphp'] === false)
@@ -140,7 +149,7 @@ if($site->settings['showphp'] === false)
 	}
       $page['query'] = $database->total_queries();
 	  
-	//echo 'There were '. $database->total_queries() . ' queries performed';
+	
      
      if ($Auth->level === 'admin')
     { 
@@ -153,14 +162,11 @@ if($site->settings['showphp'] === false)
     
 	}
 	else { $page['adminstats'] = ""; }
-	//print_r($page);
-	//echo $page['datetime'];
+	
 $template->replace_vars($page);	    
-//$output = $template->get_template();
-//$file="test.txt";
-//file_put_contents($file, $output);
+
 $template->replace("xx",FORMAT_TIME);
-//print_r ($page);
+
 $template->publish();
 
 ?>

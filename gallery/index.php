@@ -36,17 +36,17 @@ if($Auth->loggedIn())
 			   $nid = $Auth->nid;
 			   
 			   if ($Auth->level === 'user') {
-				  	$login = $template->load(DOC_ROOT.'/templates/member.html', COMMENT);
+				  	$login = $template->load($site->settings['template_path'].'/member.html', COMMENT);
 				}
 				elseif ($Auth->level === 'admin') {
-					$login = $template->load(DOC_ROOT.'/templates/admin.html', COMMENT) ;
+					$login = $template->load($site->settings['template_path'].'/admin.html', COMMENT) ;
 				}
 		   }
 						   
 else
 		{
 			$name ="Guest";
-			$login = $template->load(DOC_ROOT.'/templates/guest.html', COMMENT) ;
+			$login = $template->load($site->settings['template_path'].'//guest.html', COMMENT) ;
 			$level = 'guest';
 		}
 				
@@ -84,7 +84,7 @@ else
 	                 {
 						 goto noview;
 					} 
-					$tabs->load(DOC_ROOT.'/templates/tab.html',false); //dont show this template's remarks  
+					$tabs->load($site->settings['template_path'].'/tab.html',false); //dont show this template's remarks  
 					$tab_entry['tab_id'] = $row['cat_id']; 
 					$tab_entry['tab_name'] = $row['cat_name']; 
 					$tab_entry['tab_title'] = $row['cat_tooltip'];
@@ -105,12 +105,13 @@ else
 					$tabs->replace_vars($tab_entry);
 					$page['tabs'].= $tabs->get_template(); // add the tab in
 					//now add the content !
-					$tabs->load(DOC_ROOT.'/templates/tab_desc.html',false); // load the description template todo set it to device
+					$tabs->load($site->settings['template_path'].'/tab_desc.html',false); // load the description template todo set it to device
 					$tabs->replace("content",$row['cat_description']);
 					$tabs->replace("class",$class);	
 					$tabs->replace("id",$row['cat_id']);
 					$tabs->replace("path",$page['path']);
 					$tabs->replace("title",	$row['cat_name']);
+					$tabs->replace_vars($page);	    
 					$page['tab_content'] .= $tabs->get_template();
 					$tab++;
 					noview:

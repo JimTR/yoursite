@@ -12,7 +12,7 @@
                            <ul class="nav" id="menu" style="width:20%;padding:20%;">
                                     <li id= "home" class="active "><a href="#path#/index.php">Home</a></li>
                                    
-                                    <!--<li><a href="#path#/shop/index.php">Shop</a></li>-->                                
+                                    <li><a href="#path#/shop/index.php">Shop</a></li>                                
                                     <li><a href="#path#/forum/index.php">Community</a></li>
                                     <li id = "gallery" ><a href="#path#/gallery/index.php">Gallery</a></li>
                                     #login# 

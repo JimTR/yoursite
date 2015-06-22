@@ -20,13 +20,13 @@ if($Auth->loggedIn())
                //$user_fields = $database->get_row ($sql);
 			   if ($Auth->level === 'user') {
 			   $page['warn'] = $name;   				   
-			   $login = $template->load(DOC_ROOT.'/templates/member.html', COMMENT);
+			   $login = $template->load($site->settings['template_path'].'member.html', COMMENT);
 		   }
 				elseif ($Auth->level === 'admin') {
-			   $login = $template->load(DOC_ROOT.'/templates/admin.html', COMMENT) ;
+			   $login = $template->load($site->settings['template_path'].'admin.html', COMMENT) ;
 		   }
 			   $page['basecolour'] = "aqua";
-			   $editor = $template->load('templates/editor.html'); //load the editor for all logged in switch it off with permissions
+			   $editor = $template->load($site->settings['template_path'].'forum/editor.html'); //load the editor for all logged in switch it off with permissions
 			   $page['warn'] = $name;
 			   
 			    
@@ -35,7 +35,7 @@ if($Auth->loggedIn())
 else
 				{
 					$name ="Guest";
-					$login = $template->load( $site->settings['url'].'/templates/guest.html') ;
+					$login = $template->load( $site->settings['template_path'].'guest.html') ;
 					$page['basecolour'] = "aqua";
 					$editor = ''; /// set the editor off 
 					$page['warn'] = "";
@@ -48,9 +48,10 @@ else
 	$page['attach'] = DOC_ROOT."/forum/user".$Auth->id.".txt";
 	$page['css'] ="<style>".file_get_contents ($css)."</style>";
     $page['base'] = $site->settings['url'].'/css/'.$page['basecolour'];
-    $page['header'] = $template->load("templates/header.html", COMMENT);
-	$page['include'] = $template->load($site->settings['url'].'/templates/include.tmpl', COMMENT);
-	$page['footer'] = $template->load ($site->settings['url'].'/templates/footer.tmpl', COMMENT);
+    $page['header'] = $template->load($site->settings['template_path'].'header.html', COMMENT);
+	$page['include'] = $template->load($site->settings['template_path'].'include.tmpl', COMMENT);
+	$page['footer'] = $template->load ($site->settings['template_path'].'footer.tmpl', COMMENT);
+	//die($page['include']);
 	$page['file'] = "user".$Auth->id.".txt";
 	$page['vari'] = $database->num_rows("select * from sessions");	
 	$page['login'] = $login;
@@ -62,7 +63,8 @@ else
 	$page['pmnew'] = 0;
 	$page['path'] = $site->settings['url'];
 	
-
+//print_r($page);
+//die();
 // start code 
 $sql = "SELECT
 			topic_id,
@@ -140,7 +142,8 @@ else
 					ON
 						posts.post_by = users.id
 					WHERE
-						posts.post_topic = " . mysqli_real_escape_string($database->link,$getid);
+						posts.post_topic = " . mysqli_real_escape_string($database->link,$getid).
+						" order by posts.post_stamp ASC";
 						
 			//die ($posts_sql);			
 			$posts_result = $database->query($posts_sql);
@@ -210,7 +213,7 @@ else
 					 * now do the priv stuff as an if type statement
 					 * load the template per button this should be a function
 					 * select * FROM sessions WHERE `updated_on` < (UNIX_TIMESTAMP() - 600)
-					 */ 
+					 */  
 					
 					$post_info['home'] = setbutton("Home","index.php",true);
 					if (!empty($posts_row['url'])){ $post_info['www'] = setbutton ("www", $posts_row['url'],true, "webpage"); }
@@ -229,7 +232,7 @@ else
 					//$template->publish;
 					//print_r ($post_info);
 					//die();					
-					$template->load('templates/post.html', COMMENT);
+					$template->load($site->settings['template_path'].'forum/post.html', COMMENT);
 					$template->replace_vars($post_info);
 					$page['posts'].= $template->get_template(); // add the posts
 					$pg = $pid % 5; // check page length
@@ -263,7 +266,8 @@ else
 			}
 			 
 			    $page['cat_id'] = $row['cat_id'];
-				$template->load("templates/topic.html",COMMENT);
+				$template->load($site->settings['template_path'].'forum/topic.html',COMMENT);
+				//die('loaded');
 				$page['query'] = $database->total_queries();
 				//$page['navi'] .= "</div>";
 	$template->replace_vars($page);

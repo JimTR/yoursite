@@ -62,6 +62,9 @@
 	$page['start_year'] = START_YEAR;
 	$page['title'] = $site->settings['sitename'];
 	$page['msg'] = '';
+	$page['logo'] = $site->settings['url'].$site->settings['logo'];
+	$page['sitename'] = $site->settings['sitename'];
+	$page['address'] = $site->settings['address'];
     const SALT = 'insert some random text here';
     $database = new db();
     $detect = new Mobile_Detect;

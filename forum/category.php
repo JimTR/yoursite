@@ -23,9 +23,9 @@ $tab= 0;
     define ('AREA',2); // testing area grouping
     $getid = intval($_GET['id']); //stop injection 
     $template = new Template; // start the template workspace
-    $page['header'] = $template->load($site->settings['url'].'/templates/header.html', COMMENT);
-	$page['footer'] = $template->load(  $site->settings['url'].'/templates/footer.tmpl', COMMENT);
-	$page['include'] = $template->load( $site->settings['url'].'/templates/include.tmpl', COMMENT);
+    $page['header'] = $template->load($site->settings['template_path'].'header.html', COMMENT);
+	$page['footer'] = $template->load(  $site->settings['template_path'].'footer.tmpl', COMMENT);
+	$page['include'] = $template->load( $site->settings['template_path'].'include.tmpl', COMMENT);
 	$page['users'] = $database->num_rows("select * from sessions");
 	$page['page'] = 'pagination  will go here';
 	$page['poo'] = '';

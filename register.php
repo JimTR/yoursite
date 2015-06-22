@@ -126,9 +126,9 @@ if ($Error <> "")
 		
 	}
 // put the page together	
-$page['header'] = $template->load(DOC_ROOT.'/templates/header.html', COMMENT);
-$page['footer'] = $template->load(DOC_ROOT.'/templates/footer.tmpl', COMMENT);
-$page['include'] = $template->load(DOC_ROOT.'/templates/include.tmpl',COMMENT);
+$page['header'] = $template->load($site->settings['template_path'].'/header.html', COMMENT);
+$page['footer'] = $template->load($site->settings['template_path'].'/footer.tmpl', COMMENT);
+$page['include'] = $template->load($site->settings['template_path'].'/include.tmpl',COMMENT);
 $page['title'] .=" - Register";
 $page['css'] = $template->load ('css/yuiapp.css');
 $page['css'] ="<style>".$page['css']."</style>";
@@ -136,8 +136,8 @@ $page['stuff'] = "register page";
 $page['email'] = $_POST['email'];
 $page['pwdlen']  = $site->settings['pwdlen'];
 $page['username'] = $_POST['username'];
-$page['login'] = $template->load(DOC_ROOT.'/templates/guest.html', COMMENT) ;
-$template->load("templates/register.html");
+$page['login'] = $template->load($site->settings['template_path'].'/guest.html', COMMENT) ;
+$template->load($site->settings['template_path'].'/register.html');
 $template->replace_vars($page);
 $template->replace("password",$_POST['password']);
 $template->replace("result"," register");
