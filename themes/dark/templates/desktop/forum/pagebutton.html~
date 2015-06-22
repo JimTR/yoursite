@@ -1,3 +1,0 @@
-<!-- button sub template -->
-					<button class="button" value="#loctext#" onclick='window.location.replace("#location#");' >#loctext#</button> 
-				
