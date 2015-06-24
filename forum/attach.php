@@ -1,5 +1,5 @@
 <?php
-// attach.php V1 
+// attach.php V1.1 
 define('DOC_ROOT', realpath(dirname(__FILE__) . '/../'));
 require DOC_ROOT.'/includes/master.inc.php'; // get all the stuff required
 $dirname = "attachments/user".$Auth->id;
@@ -10,7 +10,7 @@ if(!file_exists ($dirname )) {
 	mkdir($dirname, 0777);
 	}
 //printr($_POST);
-
+//die ('running');
 //echo $_FILES['attach']['name'];
 //$files = filelength($filename); 
 $handle = fopen($filename, "r");
@@ -110,8 +110,9 @@ elseif ($i >= 2) {
 	//echo "we are full";
 	$page['attrib'] = "disabled";
 }
-$page['include'] = $template->load($site->settings['url'].'/templates/include.tmpl', COMMENT);
-$template->load("templates/attach.html");
+
+$page['include'] = $template->load($site->settings['template_path'].'include.tmpl', COMMENT);
+$template->load($site->settings['template_path'].'forum/attach.html',COMMENT);
 $page['total'] = $i;
 $template->replace_vars($page);
 $template->publish();

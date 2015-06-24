@@ -25,7 +25,7 @@
     #cboxContent{margin-top:20px;background:transparent;}
         .cboxIframe{background:transparent;}
         #cboxError{padding:50px; border:1px solid #ccc;}
-        #cboxLoadedContent{border:1px solid #E2D701;}
+        #cboxLoadedContent{border:1px solid #F58220;}
         #cboxTitle{position:absolute; top:-20px; left:0; color:#ccc;}
         #cboxCurrent{position:absolute; top:-20px; right:0px; color:#ccc;}
         #cboxLoadingGraphic{background:url(images/loading.gif) no-repeat center center;}

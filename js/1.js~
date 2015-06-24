@@ -96,7 +96,7 @@ var data = '';
 		case "create_cat.php":
 		case "editpost.php":
 			url = url.replace(current_file, "index.php");
-			//alert (url);
+			alert (url);
 			break;	 
 		}
 		

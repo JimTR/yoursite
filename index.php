@@ -73,7 +73,6 @@ $groupsql ="SELECT * , permissions.*
 	$page['include'] = $template->load($site->settings['template_path'].'include.tmpl', COMMENT);
 	$page['logo'] = $site->settings['url'].$site->settings['logo'];
 	$page['sitename'] = $site->settings['sitename'];
-	$page['address'] = $site->settings['address'];
 	$page['login'] = $login;
 	$page['email'] = $Auth->loc;
 	$page['path'] = $site->settings['url'];

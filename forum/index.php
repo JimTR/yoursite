@@ -88,7 +88,6 @@ if($Auth->loggedIn())
 	$page['footer'] = $template->load($site->settings['template_path'].'/footer.tmpl', COMMENT);
 	$page['include'] = $template->load($site->settings['template_path'].'/include.tmpl', COMMENT);
 	$page['login'] = $login;
-	$page['login'] = $login;
 	$page['datetime'] = FORMAT_TIME;
 	$page['path'] = $site->settings['url'];
 	$page['title'] .= " - Forums";

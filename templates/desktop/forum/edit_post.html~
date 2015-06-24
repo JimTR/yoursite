@@ -39,27 +39,21 @@ jQuery(document).ready(function(){
 </head>
 <body>
 #header#
-</div>
-</div>
-</div>
-        <div id="bd">
-            <div id="yui-main">
-                <div class="yui-b"><div class="yui-g">
-                    
+                           
 
                     <!-- Basic block -->
-                   <div class="col">
-                                <div class="cell panel">
-                                    <div class="body">
+                    <br>
+                   <div class="col colorborder" style= "float:left;width:85%;" >
+                                      <div class="body">
                                         <div class="cell">
                                             <div class="col">
-				<table>
+				<table style="height:200px;">
 				
-<tr><td width="50%">
+<tr style="background:#2D3538;"><td width="50%">
                                          <form method="post" action="editpost.php" id="input1">
 
 								<br style ="clear:both">
-				<div style="margin-left:2%;"> <textarea  cols="30" rows="30" class="ckeditor" name="post_content" id= "editor1" />#edit_text#</textarea>
+				<div style="margin-left:2%;height:200px;"> <textarea  cols="20" rows="10" class="ckeditor" name="post_content" id= "editor1" name="editor1" />#edit_text#</textarea>
 				<input type="hidden" name="id" value = "#id#" > 
 				<input type="hidden" name="returnid" value = "#returnid#" > 
 				#editor_opts#
@@ -71,7 +65,6 @@ jQuery(document).ready(function(){
                                         <button class="button" type="submit" id="input1">Apply Changes</button> 
 				                            <button class="button" onclick = "window.history.go(-1)">Go Back</button>
                                           </div> 
-
 
 </td>
 
@@ -85,8 +78,8 @@ jQuery(document).ready(function(){
                     </div>
                 
                 </div></div>
-            </div>
-           
+            
+           <br style="clear:both"><br>
             #footer#
             
         </div>

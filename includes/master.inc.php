@@ -64,7 +64,10 @@
 	$page['msg'] = '';
 	$page['logo'] = $site->settings['url'].$site->settings['logo'];
 	$page['sitename'] = $site->settings['sitename'];
-	$page['address'] = $site->settings['address'];
+	if ($site->settings['use_address'] == "1"){
+	$page['address'] = build_address($site->settings);
+}
+else {$page['address'] ='';}
     const SALT = 'insert some random text here';
     $database = new db();
     $detect = new Mobile_Detect;
@@ -72,6 +75,7 @@
     $isTablet = $detect->isTablet();
     $page['device'] = ($isMobile ? ($isTablet ? 'tablet' : 'mobile') : 'desktop');
     $site->settings['template_path'] = DOC_ROOT.'/templates/'.$page['device'].'/'; // set the templates for the device
+    $site->settings['theme_path'] = DOC_ROOT.'/themes/'.$site->settings['theme_path'].$page['device'].'/'; //set the css path 
  
     // Fix magic quotes
     if(get_magic_quotes_gpc())

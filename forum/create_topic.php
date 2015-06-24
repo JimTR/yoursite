@@ -12,9 +12,9 @@ $start = $time;
 
 $template = new Template; 
 
-	$page['header'] = $template->load($site->settings['url'].'/templates/header.html', COMMENT);
-	$page['footer'] = $template->load($site->settings['url'].'/templates/footer.tmpl', COMMENT);
-	$page['include'] = $template->load( $site->settings['url'].'/templates/include.tmpl', COMMENT);
+	$page['header'] = $template->load($site->settings['template_path'].'header.html', COMMENT);
+	$page['footer'] = $template->load($site->settings['template_path'].'footer.tmpl', COMMENT);
+	$page['include'] = $template->load( $site->settings['template_path'].'include.tmpl', COMMENT);
 	$page['css'] = $site->settings['url'].'/css/aqua.css';
 	$page['editor_opts'] = "<script>CKEDITOR.replace( 'editor1', {uiColor: '#067AC5',removePlugins: 'elementspath',toolbar: [
 					[ 'Bold', 'Italic','Underline', 'Strike', 'Subscript', 'Superscript', 'RemoveFormat', '-', 'NumberedList', 'BulletedList' ],

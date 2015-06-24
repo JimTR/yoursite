@@ -995,3 +995,15 @@ function return_tz($tz1)
 		}
 		return $tzitem;
 }
+
+function build_address ($settings)
+{
+	// builds the address block
+	//print_r($settings);
+	//die ('got to function');
+	$address_block = $settings['address_street'].'<br>';
+	$address_block .= $settings['address_city'].'<br>';
+	$address_block .= $settings['address_postcode'].'<br>';
+	$address_block .= 'Tel '.$settings['address_phone'];
+	return $address_block;
+}
