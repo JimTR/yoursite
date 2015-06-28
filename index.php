@@ -9,6 +9,8 @@
  
 require 'includes/master.inc.php'; // do login and stuff
 //ini_set("zlib.output_compression", "On");
+//print_r($page);
+//die();
 define ("AREA",0);
 define ("FORUM",1);
 $time = microtime();
@@ -37,19 +39,20 @@ if($Auth->loggedIn())
 			   $level = $Auth->level;
 			   $nid = $Auth->nid;
 			   
+			   
 			   if ($Auth->level === 'user') {
 				  				   
-			   $login = $template->load($site->settings['template_path'].'member.html', COMMENT);
+			   $login = $template->load($page['template_path'].'member.html', COMMENT);
 		   }
 		   elseif ($Auth->level === 'admin') {
-			   $login = $template->load($site->settings['template_path'].'admin.html', COMMENT) ;
+			   $login = $template->load($page['template_path'].'admin.html', COMMENT) ;
 		   }
 		   }
 						   
 	else
 				{
 					$name ="Guest";
-					$login = $template->load($site->settings['template_path'].'guest.html', COMMENT) ;
+					$login = $template->load($page['template_path'].'guest.html', COMMENT) ;
 					$level = 'guest';
 					
 				}
@@ -67,10 +70,10 @@ $groupsql ="SELECT * , permissions.*
 					
   
     $page['users'] = $database->num_rows("select * from sessions"); // online users count
-	$page['header'] = $template->load($site->settings['template_path'].'header.html', COMMENT); // load header
+	$page['header'] = $template->load($page['template_path'].'header.html', COMMENT); // load header
 	//$hd = $site->settings['template_path'].'header.html';
-	$page['footer'] = $template->load($site->settings['template_path'].'footer.tmpl', COMMENT);
-	$page['include'] = $template->load($site->settings['template_path'].'include.tmpl', COMMENT);
+	$page['footer'] = $template->load($page['template_path'].'footer.tmpl', COMMENT);
+	$page['include'] = $template->load($page['template_path'].'include.tmpl', COMMENT);
 	$page['logo'] = $site->settings['url'].$site->settings['logo'];
 	$page['sitename'] = $site->settings['sitename'];
 	$page['login'] = $login;
@@ -78,6 +81,39 @@ $groupsql ="SELECT * , permissions.*
 	$page['path'] = $site->settings['url'];
 	$page['datetime'] = FORMAT_TIME;
 	$page['title'] .= " - Home";
+	$sql = "SELECT posts. * , users.username, users.avatar, topics.topic_subject
+FROM  `posts` 
+JOIN users ON posts.post_by = users.id
+JOIN topics ON posts.post_topic = topics.topic_id
+JOIN categories ON topics.topic_cat = categories.cat_id 
+where categories.area = ".FORUM."
+ORDER BY  `post_date` DESC 
+LIMIT 0 , 5";
+$newposts = $database->get_results($sql);
+
+foreach ($newposts as $row)
+{	// decode the row
+	
+	if (empty($row['avatar'])) {$row['avatar'] = $site->settings['url'].'/images/default_avatar.png';}
+	                //$post_info['postid'] = $pid;
+					$post_info['postid1'] = $row['post_id'];
+					$post_info['path']= $site->settings['url'];
+					$post_info['postdate'] = date('d-m-Y', strtotime($row['post_date']));
+					$post_info['posttime'] = date('H:i', strtotime($row['post_date']));
+					$post_info['username'] = $row['username'];
+					$post_info['post_content'] = html_entity_decode(stripslashes($row['post_content']));
+					$post_info['post_subject'] = $subject; // will update when each post has a subject
+					$post_info['profilelink']= $row['username']; // later do a link
+					$post_info['onlinestatus'] = $online;
+					$post_info['avatar'] = $row['avatar'];
+					$post_info['subject'] = $row['topic_subject'];
+					$post_info['attachments'] = "";
+					$post_info['iplogged']='';
+					$post_info['signature'] = $row['sig'];
+	$template->load($page['template_path']."post.html", COMMENT);
+	$template->replace_vars($post_info);
+	$page['newposts'].= $template->get_template();
+					}  
 	
 	if ($settings['forumtabs'] == true)
     {
@@ -92,7 +128,7 @@ $groupsql ="SELECT * , permissions.*
 	                 {
 						 goto noview;
 					} 
-					$tabs->load($site->settings['template_path'].'/tab.html',false); //dont show this templates remarks  
+					$tabs->load($page['template_path'].'/tab.html',false); //dont show this templates remarks  
 					$tab_entry['tab_id'] = $row['cat_id']; 
 					$tab_entry['tab_name'] = $row['cat_name']; 
 					$tab_entry['tab_title'] = $row['cat_tooltip'];
@@ -113,7 +149,7 @@ $groupsql ="SELECT * , permissions.*
 					$tabs->replace_vars($tab_entry);
 					$page['tabs'].= $tabs->get_template(); // add the tab in
 					//now add the content !
-					$tabs->load($site->settings['template_path'].'/tab_desc.html',false); // load the description template
+					$tabs->load($page['template_path'].'/tab_desc.html',false); // load the description template
 					$tabs->replace("content",$row['cat_description']);
 					
 						if  ($tab_entry['tab_class'] = "active")
@@ -139,7 +175,7 @@ $groupsql ="SELECT * , permissions.*
 }
 
 
-$template->load($site->settings['template_path'].'index.html', COMMENT); // load header
+$template->load($page['template_path'].'index.html', COMMENT); // load header
 $template->replace("css",$css);
 $template->replace("pms",$pms);
 if($site->settings['showphp'] === false)
