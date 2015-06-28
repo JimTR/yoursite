@@ -18,23 +18,28 @@ if (isset($_POST['nid'])) {
 	unset ($_POST['nid']);
 	//printr($_POST);
 	$database->update( 'users', $_POST, $where, 1 );
+	
 	$sql = "select * from users where nid = '".$_POST['nid']."'";
 	$page['msg'] = 'Job Done';
-	
-}
+	}
 
 if($Auth->loggedIn()) 
            {
-			   
+			   if($_POST){  
+					$page['theme_path'] =  DOC_ROOT.'/themes/'.$_POST['theme'].'/templates/'.$page['udevice'].'/';  
+				}
+			if($page['template_path']<>$page['theme_path']) 
+				{$page['template_path']=$page['theme_path'];
+					}
 			   $name = $Auth->username;
 			   $nid = $Auth->nid;
 			   
 			   if ($Auth->level === 'user') {
 				  				   
-			   $login = $template->load(DOC_ROOT.'/templates/member.html', COMMENT);
+			   $login = $template->load($page['template_path'].'member.html', COMMENT);
 		   }
 		   elseif ($Auth->level === 'admin') {
-			   $login = $template->load(DOC_ROOT.'/templates/admin.html', COMMENT) ;
+			   $login = $template->load($page['template_path'].'admin.html', COMMENT) ;
 		   }
 			  
 			   
@@ -44,7 +49,7 @@ if($Auth->loggedIn())
 	else
 				{
 					
-					redirect($site->settings['url']."/index.php"); 
+					redirect($page['template_path'].'index.php'); 
 				}
 				
 
@@ -53,9 +58,9 @@ $sql = "select * from users where nid = '".$nid."'";
 $result = $database->get_row ($sql);
 //printr($result);
 $page['users'] = $database->num_rows('select * from sessions');
-$page['header'] = $template->load($site->settings['template_path'].'/header.html', COMMENT); // load header
-	$page['footer'] = $template->load($site->settings['template_path'].'/footer.tmpl', COMMENT);
-	$page['include'] = $template->load($site->settings['template_path'].'/include.tmpl', COMMENT);
+$page['header'] = $template->load($page['template_path'].'header.html', COMMENT); // load header
+	$page['footer'] = $template->load($page['template_path'].'footer.tmpl', COMMENT);
+	$page['include'] = $template->load($page['template_path'].'include.tmpl', COMMENT);
 	$page['login'] = $login;
 $page['login'] = $login;
 $page['path'] = $site->settings['url'];
@@ -80,13 +85,32 @@ $page['posts'] = $result['posts'];
 $page['threads'] = $result['threads'];
 $page['steamid'] = $result['steamid'];
 $page['skypeid'] = $result['skypeid'];
+ $dir = "themes";
+$curdir = getcwd();
+// Open a known directory, and proceed to read its contents
+chdir ($dir);
+$dirs = array_filter(glob('*'), 'is_dir');
+//print_r( $dirs);
+
+chdir($curdir);
+//$page['theme'] = '<select>';
+foreach ($dirs as $v) {
+   // echo "Current value of \$dirs: $v.<br>";
+    if ($result['theme'] === $v) {
+    $page['theme'] .= '<option value="'.$v.'" selected>'.$v.'</option>';
+}
+else {$page['theme'] .= '<option value="'.$v.'">'.$v.'</option>';}
+}
+
+//$page['theme'] .= '</select>';
+//print_r ($page['theme']);
+//die();
 $page['editor_opts'] = "<script>CKEDITOR.replace( 'editor1', {uiColor: '#F58220',removePlugins: 'elementspath',toolbar: [
 					[ 'Bold', 'Italic','Underline', 'Strike', 'Subscript', 'Superscript', 'RemoveFormat'],
 					[ 'FontSize', 'TextColor'], ['JustifyLeft', 'JustifyCenter', 'JustifyRight' ], [ 'Link', 'Image'], ['codesnippet'] 
 				],
 				   
-				    
-					
+				    	
 					resize_dir: 'both',
 					resize_minWidth: 200,
 					resize_minHeight: 65,
@@ -94,7 +118,7 @@ $page['editor_opts'] = "<script>CKEDITOR.replace( 'editor1', {uiColor: '#F58220'
 					resize_maxHeight: 100,
 					resize_enabled : false
 			});</script>"; 
-$template->load("templates/user.html");
+$template->load($page['template_path'].'user.html');
 $page['query'] = $database->total_queries();
      if (@$Auth->level === 'admin')
     { 
