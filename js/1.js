@@ -97,7 +97,11 @@ var data = '';
 		case "editpost.php":
 			url = url.replace(current_file, "index.php");
 			//alert (url);
-			break;	 
+			break;	
+		case "edit_tab.php":
+			cut_url = url.split('/').pop();
+			alert(url);
+			url = 'admin.php';	 
 		}
 		
                
