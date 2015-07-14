@@ -1,6 +1,0 @@
-<div class="#class#" id="#id#">
-     <!--<img style ="max-width:2%;float:left;" src = "#logo#" /> -->
-     <h3>#sitename# - #title#</h3>
-     <hr>
-	#content#
-</div>
