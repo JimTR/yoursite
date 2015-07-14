@@ -68,14 +68,21 @@
 	$page['address'] = build_address($site->settings);
 }
 else {$page['address'] ='';}
+
     const SALT = 'insert some random text here';
     $database = new db();
     $detect = new Mobile_Detect;
     $isMobile = $detect->isMobile();
     $isTablet = $detect->isTablet();
+    
     $page['device'] = ($isMobile ? ($isTablet ? 'tablet' : 'mobile') : 'desktop');
-    $site->settings['template_path'] = DOC_ROOT.'/templates/'.$page['device'].'/'; // set the templates for the device
-    $site->settings['theme_path'] = DOC_ROOT.'/themes/'.$site->settings['theme_path'].$page['device'].'/'; //set the css path 
+    $page['udevice']=$page['device'];
+    //$site->settings['template_path'] = DOC_ROOT.'/templates/'.$page['device'].'/'; // set the templates for the device
+    $page['theme_path'] =  DOC_ROOT.'/themes/'.$site->settings['theme_path'].'/'; //set the css path bug ! 
+    $page['css_path'] =  $page['path'].'/themes/'.$site->settings['theme_path'].'/'; //set the css path bug ! 
+    $page['template_path'] = $page['theme_path'].'/templates/'.$page['udevice'].'/'; // set the templates for the device
+    if ($site->settings['show_device'] <> "1"){$page['device'] = "";}
+	 else {$page['device'] = '('.$page['device'].')';}
  
     // Fix magic quotes
     if(get_magic_quotes_gpc())
@@ -88,8 +95,22 @@ else {$page['address'] ='';}
 
 
     $Auth = Auth ::getAuth();
-    
+    if($Auth->loggedIn()) 
+           {
+			 if($Auth->theme){  
+					$page['theme_path'] =  DOC_ROOT.'/themes/'.$Auth->theme.'/templates/'.$page['udevice'].'/'; 
+					$page['css_path'] =  $page['path'].'/themes/'.$Auth->theme.'/'; //set the css path bug !  
+				}
+			if($page['template_path']<>$page['theme_path']) 
+				{$page['template_path']=$page['theme_path'];
+					}
+}
+if($site->settings['siteclosed'] === "0" & $Auth->level <>'admin') {
+	redirect($site->settings['siteclosed_url']);
 	
+}
+
+
       if($site->settings['session'] === "1") //we need to understand the session
       { 
 		 //check that db events are switched on here
