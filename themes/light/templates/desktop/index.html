@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <!-- dynamic tab version 01-04-2015 -->
 <html>
+
 <head>
 <title>#title#</title>
         #include# 
-<link rel="stylesheet" href="#path#/css/colorbox.css" />
- <script  type="text/javascript" src="#path#/js/jssor.js"></script>
- <script  type="text/javascript" src="#path#/js/jssor.slider.js"></script>
+<!-- <script type="text/javascript" src="#path#/js/jssor.js"></script>
+ <script type="text/javascript" src="#path#/js/jssor.slider.js"></script>-->
  <script type="text/javascript">
  $(document).ready(function($){
   setInterval('updateServerClock()', 1000);
@@ -18,8 +18,8 @@
     #header#
         #msg# 
                         
-                            <div class="col" style="float:left;width:90%;">
-                                <div class="cell panel" style="box-shadow:none;border:none;background:#2D3538;" >
+                            <div class="col" style="float:left;width:100%;">
+                                <div class="cell panel" style="box-shadow:none;border:none;" >
                                 <!--<div id="sclock" class="clock">#datetime#</div> --> 	
                                     <div class="cell tab-block top-nav" >
                                                     <div class="tabs">
@@ -28,13 +28,12 @@
                                                         </ul>
                                                     </div>
                                                     
-                                                    <div class="tab-content colorborder" style="min-height:600px;background:#2D3538;color:#999;">
+                                                    <div class="tab-content colorborder" style="min-height:600px;">
                                                      
                                                           #tab_content#
                                                     </div>
-        						</div>
-                                              
-        					  </div>	
+        						
+                                              	
 						#footer#
 						</div>
 <script>
@@ -44,7 +43,7 @@
                
             });
 </script>
-<script type="text/javascript" src="#path#/js/slider.js"></script>
+<!--<script async type="text/javascript" src="#path#/js/slider.js"></script>-->
 
     </body>
 </html>

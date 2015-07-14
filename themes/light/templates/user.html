@@ -46,20 +46,22 @@ function showDate(date) {
 </head>
 #header#
 </div></div> 
- <div class="col" style="float:left;width:85%;">
-                                <div class="cell">
-                                              <div class="col">
+ <div class="col">
+                                <div class="cell panel">
+                                    <div class="body">
+                                        <div class="cell">
+                                            <div class="col">
                                                 <div class="cell tab-block top-nav">
                                                     <div class="tabs">
                                                         <ul class="nav">
                                                             <li class="active"><a href="#profile">#nav_profile#</a></li>
-                                                            <li><a href="#forums">#nav_forum#</a></li>
+                                                            <li><a href="#forum">#nav_forum#</a></li>
                                                             <li><a href="#comms">Communication</a></li> 
                                                             <li><a href="#pms">#nav_pm#</a></li>
                                                         </ul>
                                                     </div>
 
-<div class="tab-content colorborder" style="min-height:500px;background:transparent;color:#999;">
+<div class="tab-content" style="min-height:500px">
 <div class="cell" id="profile">
                             
                               <form action="user.php" method="post">
@@ -69,10 +71,10 @@ function showDate(date) {
 <div class="col" style="width:50%;">
 
 <div class="col width-4of4">
-		<div class="cell" style="float:left;"><label style="min-width:74px">#nick_name#</label><input type ="text" name="nick" class="text background-white" value="#nick#"></div>
+		<div class="cell" style="float:left;"><label style="min-width:74px">#nick_name#</label><input type ="text" name="nick" class="text" value="#nick#"></div>
 		<div class= "cell" style="float:left;"><label>if filled in all your posts will assume this name</label></div>
 	
- 	<div class="cell" style="float:left;clear:both;"><label style="min-width:74px">#profile_gender#</label><select style="width:158px;" id ="sex" name="sex" class="text background-white" value="#sex#">
+ 	<div class="cell" style="float:left;clear:both;"><label style="min-width:74px">#profile_gender#</label><select style="width:158px;" id ="sex" name="sex" class="text" value="#sex#">
  	    <option value="0">Undisclosed</option>
  	     <option value="1">Male</option>
           <option value ="2">Female</option>
@@ -80,23 +82,23 @@ function showDate(date) {
           </select>
  	</div>
  	
- 	<div class="cell" style="float:left;clear:both;"><label style="min-width:74px">#profile_location#</label><input type ="text" name="loc" class="text background-white" value="#loc#"></div>
+ 	<div class="cell" style="float:left;clear:both;"><label style="min-width:74px">#profile_location#</label><input type ="text" name="loc" class="text" value="#loc#"></div>
  	<div class= "cell" style="float:left;"><label>Where in the world do you live ?</label></div>
 	
-	<div class="cell" style="float:left;clear:both;"><label style="min-width:74px">Home Page</label><input type ="text" size="60" name="url" class="text background-white" value="#url#"></div>
-	<div class="cell" style="float:left;clear:both;"><label style="min-width:74px">Bio</label><textarea class="background-white"  cols="62" rows="5" name="bio" class="text" value="#bio#">#bio#</textarea></div>
+	<div class="cell" style="float:left;clear:both;"><label style="min-width:74px">Home Page</label><input type ="text" size="60" name="url" class="text" value="#url#"></div>
+	<div class="cell" style="float:left;clear:both;"><label style="min-width:74px">Bio</label><textarea  cols="62" rows="5" name="bio" class="text" value="#bio#">#bio#</textarea></div>
 	<div class= "cell" style="float:left;width:21%;"><label>#profile_bio#</label></div>
 </div>
 
 </div>
 <div style="float:left;width:50%"><div class="cell" style="float:left;width:15%;"><label>#birthday#</label></div> 
-<div id="inlineDatepicker" style="width:80%;float:left;margin-top:0%;background:transparent;"></div>
+<div id="inlineDatepicker" style="width:80%;float:left;margin-top:1%;"></div>
 
        <div class="cell" style="clear:left;float:left;text-align:center;width:100%;"></div>  
 
 <div class ="col width-4of4">
 	<div class="cell" style="float:left;"><label style="min-width:68px">#birthdayprivacy#</label></div>
-         <div class="cell" style="float:left;"><select id="priv" style="width:100%" class="background-white" name="b_priv">
+         <div class="cell" style="float:left;"><select id="priv" style="width:100%" name="b_priv">
           <option value="0">Hide</option>
           <option value ="1">Age Only</option>
           <option value="2">Day/Month</option>
@@ -115,25 +117,25 @@ There are 20 posts you have not read
 </div>
 </div>
 </div>
-<div id="forums" class="cell hidden-tab">
+<div id="forum" class="cell hidden-tab">
 <div style="float:left;width:50%;">
       	
-        <div class="cell" style="float:left;clear:both;"><label style="min-width:120px">Posts Per Page</label></div>
-        <div class="cell" style="float:left;"><input type="text"  name="posts" value="#posts#" class="background-white"></div>
+         <div class="cell" style="float:left;clear:both;"><label style="min-width:120px">Posts Per Page</label></div>
+        <div class="cell" style="float:left;"><input type="text"  name="posts" value="#posts#" ></div>
         <div class="cell" style="float:left;clear:both;margin-top:0%;"><label style="min-width:120px">Threads Per Page</label></div>
-        <div class="cell" style="float:left;margin-top:0%;"><input type="text"  name = "threads" class="background-white" value="#threads#" ></div>
+        <div class="cell" style="float:left;margin-top:0%;"><input type="text"  name = "threads" value="#threads#" ></div>
         <div class="cell" style="float:left;clear:both;width:100%;margin-top:-1%;">
-         <label style="min-width:19.5%">Show Avatars</label>
+         <label style="min-width:16.5%">Show Avatars</label>
          <input type="checkbox" style="margin-top:0px;" name="show_ava" value="True" id="poo"><br>
-         <label style="min-width:19.5%">Show Signatures</label>
+         <label style="min-width:16.5%">Show Signatures</label>
          <input type="checkbox" name="usig" value="True" id="usig"><br>
-         <label style="min-width:19.5%">Show Forums in tabs</label>
+         <label style="min-width:16.5%">Show Forums in tabs</label>
          <input type="checkbox" name="tabs" value="True" id="tabs"></div>
 </div>
 <div style="float:left;width:50%;">         
          <div class="cell" style="float:left;margin-top:10px;"><label style="min-width:120px">Signature</label></div>
-        <div class="cell" style="float:left;margin-top:10px;width:95%;"><textarea cols="40" class="ckeditor" name="sig" id="editor1" data-sample="1" >#sig#</textarea>#editor_opts#</div>
-        <div class="cell" style="float:left;clear:both;margin-top:10px;"><label>Avatar</label></div>
+        <div class="cell" style="float:left;margin-top:10px;"><textarea cols="40" class="ckeditor" name="sig" id="editor1" data-sample="1" >#sig#</textarea>#editor_opts#</div>
+        <div class="cell" style="float:left;clear:both;margin-top:10px;"><label style="min-width:120px">Avatar</label></div>
         <div class="cell" style="float:left;margin-top:1%;"><a onclick="closebox()"><img src ="#avatar#" style ="max-width:150px;max-height:150px;border-radius: 5px;" id = "avatardisp"></a>
         <input type="hidden" value="#avatar#" name="avatar" id="avatar" />
         </div>
@@ -145,11 +147,11 @@ There are 20 posts you have not read
 </div>
 <div id="comms" class="cell hidden-tab" style="width:50%;">
 <div class="cell" style="float:left;clear:both;"><label style="min-width:120px">#profile_emailaddress#</label></div>
-        <div class="cell" style="float:left;width:70%"><input class="background-white" style="width:50%;" type="text"  name="email" value="#myemail#" ></div>
+        <div class="cell" style="float:left;width:70%"><input style="width:50%;" type="text"  name="email" value="#myemail#" ></div>
         <div class="cell" style="float:left;clear:both;"><label style="min-width:120px">#profile_steam#</label></div>
-        <div class="cell" style="float:left;width:70%"><input class="background-white" style="width:50%;" type="text"  name="steamid" value="#steamid#" ></div>
+        <div class="cell" style="float:left;width:70%"><input style="width:50%;" type="text"  name="steamid" value="#steamid#" ></div>
         <div class="cell" style="float:left;clear:both;"><label style="min-width:120px">#profile_skype#</label></div>
-        <div class="cell" style="float:left;width:70%"><input class="background-white" style="width:50%;" type="text"  name="skypeid" value="#skypeid#" ></div>
+        <div class="cell" style="float:left;width:70%"><input style="width:50%;" type="text"  name="skypeid" value="#skypeid#" ></div>
         <!--
         <div class="cell" style="float:left;clear:both;"><label style="min-width:120px">Facebook ID</label></div>
         <div class="cell" style="float:left;width:70%"><input style="width:50%;" type="text"  name="facebook" value="#facebook#" ></div>
@@ -162,12 +164,13 @@ There are 20 posts you have not read
 </div>
 
 
- 
- <div class="col width-fill">
-<div class="cell" style="text-align:center;margin-left:50%;" >
+ <div class="col">
+ <div class="col width-fill"></div>
+<div class="col width-fill">
+<div class="cell" style="text-align:center" >
 <input type="hidden" name="action" value="do_options" />
 <button type="submit" class="button" id="regsubmit">#update_options#</button>
-</div> 
+</div></div> 
 </form> 
 <div style='display:none'>
 			<div id='inline_content' style='padding:10px; background:#fff;'>
@@ -252,8 +255,6 @@ var message = '<p style="text-align:center;"><strong>Change Your Avatar</strong>
 </script>
 		</div>
 </div>
-</div>
-</div>
-</div>
+
 #footer#
 

@@ -1,0 +1,641 @@
+/*!
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ *
+ *               CASCADE FRAMEWORK 1.0
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ *
+ *
+ * Copyright 2013, John Slegers
+ * Released under the MIT license
+ * http://jslegers.github.com/cascadeframework/license.html
+ *
+ *
+ * This means you can use Cascade Framework for any project,
+ * whether commercial or not.
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ *
+ * 
+ * Cascade Framework also contains the following goodies,
+ * which all have the same or similar 'permissive licenses :
+ *
+ *
+ * Includes polyfills by Joshua Bell
+ * http://www.calormen.com/polyfill/
+ * Released in public domain
+ *
+ *
+ * Includes Google ExplorerCanvas
+ * https://code.google.com/p/explorercanvas/
+ * Released under the Apache 2.0 license
+ *
+ *
+ * Includes Google Prettify
+ * https://code.google.com/p/google-code-prettify/
+ * Released under the Apache 2.0 license
+ *
+ *
+ * Includes Yepnope
+ * http://yepnopejs.com/
+ * Released under the WTFPL license
+ *
+ *
+ * Includes Modernizr
+ * http://modernizr.com/
+ * Released under the MIT license
+ *
+ *
+ * Includes lodash
+ * http://lodash.com/
+ * Released under the MIT license
+ *
+ *
+ * Includes jQuery
+ * http://jquery.com/
+ * Released under the MIT license
+ *
+ *
+ * Includes jQuery Easing plugin
+ * http://gsgd.co.uk/sandbox/jquery/easing/
+ * Released under the BSD license
+ *
+ *
+ * Includes jQuery Flot plugin
+ * http://www.flotcharts.org/
+ * Released under the MIT license
+ *
+ *
+ * Includes the Font Awesome webfont
+ * http://fortawesome.github.com/Font-Awesome/
+ * Released under the SIL Open Font License
+ *
+ *
+ *
+ *
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ *
+ * Cascade Framework was inspired by many articles and projects
+ * 
+ * Especially these authors are worth mentioning :
+ *             
+ *             Nicolle Sullivan
+ *             Jonathan Snook
+ *             Chris Coyier
+ *             Eric Meyer
+ *             Nicolas Gallagher
+ *             Paul Irish
+ *             Mark Otto
+ *             Jacob Thornton
+ *
+ *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * Date: 2013-03-15
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+*/
+
+
+
+.body {
+/* background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAIklEQVQIW2NsrWk9U91SbcLAwMAAYjPCGDBBsACyICO6FgC3PhSpAPoSjwAAAABJRU5ErkJggg==) repeat; */
+}
+
+.logo {
+    background:url('../img/cascade icons/logo-small-bg.png');
+}
+
+.logo:hover {
+    background:url('../img/cascade icons/logo-small-bg-selected.png');
+}
+
+.powered-by {
+    background:url('../img/cascade icons/powered-by.png');
+    width:150px;
+    height:56px;
+    display:block;
+}
+
+.leuven {
+    width:48%;
+    max-width: 400px !important;
+    float: right;
+}
+
+.narrow .site-header,.narrow .site-body {
+    -webkit-border-top-left-radius:8px;
+    -moz-border-radius-topleft:8px;
+    border-top-left-radius:8px;
+    -webkit-border-top-right-radius:8px;
+    -moz-border-radius-topright:8px;
+    border-top-right-radius:8px;
+}
+
+.narrow .site-center .site-body {
+    -webkit-border-bottom-left-radius:8px;
+    -moz-border-radius-bottomleft:8px;
+    border-bottom-left-radius:8px;
+    -webkit-border-bottom-right-radius:8px;
+    -moz-border-radius-bottomright:8px;
+    border-bottom-right-radius:8px;
+}
+
+.template-header h2 {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+#sociallogos {
+    float:right;
+    width:130px;
+}
+
+#sociallogos a:hover {
+    text-decoration: none;
+}
+
+.sitemenutags {
+    float:right;
+    _width:145px;
+}
+
+.sitemenutags .nav li {
+    border:0;
+    margin:0;
+}
+
+.sitemenutags .nav a:hover {
+    color:#536d86;
+    background:#abbfcb;
+}
+
+.centered-content .content {
+    width:75%;
+}
+
+.centered-content input {
+    width:95%;
+    _width:55px;
+}
+
+.centered-content label {
+    float: right;
+}
+
+@media (max-width:979px) {
+    .leuven {
+        margin: 0 auto;
+        float: none !important;
+        width: 100%;
+    }
+
+    .template-header {
+        text-align: center;
+    }
+
+    .template-header h2 {
+        display: inline-block;
+    }
+
+    .sitemenutags {
+        float:left;
+    }
+
+    .sitemenu {
+        display:block;
+        clear:both;
+    }
+
+    .centered-content .content {
+        width: 100%;
+    }
+
+    .centered-content label {
+        float: left;
+    }
+}
+
+.sitemenu-responsive {
+    display:none !important;
+}
+
+.sitemenu-responsive .left {
+    position: absolute;
+    background: #2d3538;
+    overflow: hidden;
+    width:100%;
+}
+
+.sitemenu-responsive .icon-align-justify {
+    margin:0 !important;
+}
+
+.site-header,.sitemenu-responsive,.sitemenu-responsive .left {
+	z-index:900;	
+}
+
+@media (max-width:580px) {
+    .col.sitemenu {
+        display:none !important;
+    }
+
+    .sitemenu-responsive {
+        display:block !important;
+    }
+
+    .sitemenu-responsive .collapse-trigger a {
+        padding: 4px 6px 0;
+    }
+
+    .sitemenutags {
+        position: absolute;
+        right: 0;
+    }
+}
+a.tip2 {
+  position: relative;
+  text-decoration: none;
+  background: rgba(0,0,0,.8);
+}
+a.tip2 span {display: none;
+background: red;}
+a.tip2:hover span {
+  display: block;
+  position: absolute; 
+  padding: .5em;
+  content: attr(title);
+  min-width: 120px;
+  text-align: center;
+  width: auto;
+  height: auto;
+  white-space: nowrap;
+  top: -32px;
+  background: red;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px;    
+  color: #fff;
+  font-size: .86em;
+  z-index: 9999;
+}
+a.tip2:hover span:after {
+  position: absolute;
+  display: block;
+  content: "";  
+  border-color: red transparent transparent transparent;
+  border-style: solid;
+  border-width: 10px;
+  height:0;
+  width:0;
+  position:absolute;
+  bottom: -16px;
+  left:1em;
+}
+
+a.tip3 {
+  position: relative;
+  text-decoration: none;
+  background: rgba(0,0,0,.8);
+}
+a.tip3 span {display: none;
+background: #000000;}
+a.tip3:hover span {
+  display: block;
+  position: absolute; 
+  padding: .5em;
+  content: attr(title);
+  min-width: 120px;
+  text-align: center;
+  width: auto;
+  height: auto;
+  white-space: nowrap;
+  top: -32px;
+  background: #000000;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px;    
+  color: #fff;
+  font-size: .86em;
+  z-index: 9999;
+}
+a.tip3:hover span:after {
+  position: absolute;
+  display: block;
+  content: "";  
+  border-color: rgba(0,0,0,.8) transparent transparent transparent;
+  border-style: solid;
+  border-width: 10px;
+  height:0;
+  width:0;
+  position:absolute;
+  bottom: -16px;
+  left:1em;
+}
+
+
+table input {
+    width:auto;
+}
+
+.colorborder {
+
+}
+
+.post_body {
+float:left;
+width: 100%;
+word-wrap: break-word;
+padding: 2%;
+/*color: #999;*/
+}
+.shop_text {
+float:left;
+padding-left:2%;
+max-width:47%;
+min-width:47%;
+word-wrap: break-word;
+}
+.shop_img {
+float:left;
+padding-left:2%;
+clear:none;
+}
+
+.post_display {
+width: 85%;
+float: left;
+color: #999;
+border: 1px solid #E2D700;
+border-radius: 1em;
+}
+.button {
+    background:#E5E5E5;
+    display:block;
+    color:#333 !important;
+    font-family:arial;
+    font-size:13px;
+    font-weight:bold;
+    padding:2px 6px;
+    text-decoration:none;
+    
+}
+
+.button:hover {
+    background: #000000;    
+    color:#fff5ee !important;
+    text-decoration: none;
+    border:1px solid #999;
+}
+
+.button:active {
+    position:relative;
+    top:1px;
+}
+
+.button a:link {
+	font: 11px/1.6 Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif;
+	text-decoration: none;
+}
+
+.button  a:active a:hover {
+        text-decoration: none;
+}
+.validation {
+	color:#F8102A;
+	font-weight:500;
+}
+/* Real Person jQuery plugin styles v2.0.0. */
+.realperson-challenge {
+	display: block;
+	color: #000;
+        float:right !important;
+        margin-right:22% !important;
+}
+.realperson-text {
+	font-family: "Courier New",monospace;
+	font-size: 6px;
+	font-weight: bold;
+	letter-spacing: -1px;
+	line-height: 3px;
+        color:green;
+        margin-right:29%; 
+}
+.realperson-regen {
+	padding-top: 4px;
+	font-size: 12px;
+	text-align: center;
+	cursor: pointer;
+        color:#999; 
+}
+.realperson-disabled {
+	opacity: 0.5;
+	filter: Alpha(Opacity=50);
+}
+.realperson-disabled .realperson-regen {
+	cursor: default;
+}
+.text, select {
+	background:#fff;
+}
+.error { 
+         border:2px solid #fbb; 
+         background-color:#fdd;
+	 list-style:none;
+	 padding:4px;
+	 margin: 0 0 0 0;
+           
+ }
+.error li {
+		padding:4px;
+                color:#333;
+                margin-left:2%; 
+}
+.error_outer {
+		background:#fdd;
+		border-radius:5px;
+                margin-top:10px; 
+                padding:1%;
+}
+.error p {
+		color:#333;
+		margin-left:1%;
+		margin-top:0.5%;
+}
+
+
+  blockquote {
+    position: relative;
+    max-width: 60%;
+    height: auto;
+    margin-top:3%;	   
+    padding: 4.5%;
+    border: none !important;
+   background: -webkit-linear-gradient(90deg, #969572 5%, #FFF6D1 100%);
+    background: -moz-linear-gradient(90deg, #969572 5%, #FFF6D1 100%);
+    background: -ms-linear-gradient(90deg, #969572 5%, #FFF6D1 100%);
+    background: linear-gradient(180deg, #FFF6D1 5%, #969572 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFF6D1', endColorstr='#969572');
+    -webkit-border-radius: 22px;
+    -moz-border-radius: 22px;
+    border-radius: 22px;
+}
+  blockquote:before {
+      border-width: 14px;
+	border-color: #ff5d12;
+	top: 10px;
+}
+  blockquote:after {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: 13%;
+    border-style: solid;
+    border-width: 0 15px 30px;
+    border-color: #fff6d1 transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+}
+
+blockquote p {
+	color:#000;
+        font-size:100%;
+}
+
+  .blockquote1 {
+    position: relative;
+    max-width: 100%;
+    height: auto;
+    margin-top:3%;	   
+    padding: 1.5%;
+background:green;
+    /*border: 1px solid; 
+    background: -webkit-linear-gradient(90deg, #963000 5%, #FF5D12 100%);
+    background: -moz-linear-gradient(90deg, #963000 5%, #FF5D12 100%);
+    background: -ms-linear-gradient(90deg, #963000 5%, #FF5D12 100%);
+    background: linear-gradient(180deg, #FF5D12 5%, #963000 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF5D12', endColorstr='#963000');
+*/
+    -webkit-border-radius: 22px;
+    -moz-border-radius: 22px;
+    border-radius: 22px;
+}
+  .blockquote1:before {
+      border-width: 14px;
+	border-color: #ff5d12;
+	top: 10px;
+}
+  .blockquote1:after {
+    content: "";
+    position: absolute;
+    top: -30px;
+    left: 13%;
+    border-style: solid;
+    border-width: 0 15px 30px;
+    border-color: #ff5d12 transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+}
+
+.blockquote1 p {
+	color:#fff;
+        font-size:100%;
+}
+
+pre {
+	padding:2%;
+	font-weight:bold;
+}
+
+.clock{
+	float:right;
+	margin-right:4%;
+	margin-top:1%;
+	font-weight:bold;
+	color:#999;
+}
+
+.main-logo{
+	padding-left:2%;
+	max-width:30%;
+	float:left;
+	clear:right;
+}
+
+.address-block{
+	padding-right:4%;
+	font-size:18px;
+	margin-top:1%;
+	float:right;
+	text-align:center;
+	font-weight:bold;
+	clear:right;
+	color:#999;
+}
+
+.parts-panel{
+    background: url("/images/ohlins_image.png") no-repeat;
+    margin:auto;
+    height: 600px;
+      width:98%; 	  
+    border: none;
+    border-radius:15px;
+    
+    background-size:cover;
+}
+.grad-top{
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#86aecc+0,d4e4ef+75 */
+color:#333;
+background: #86aecc; /* Old browsers */
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzg2YWVjYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9Ijc1JSIgc3RvcC1jb2xvcj0iI2Q0ZTRlZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+background: -moz-linear-gradient(top,  #86aecc 0%, #d4e4ef 75%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#86aecc), color-stop(75%,#d4e4ef)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #86aecc 0%,#d4e4ef 75%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #86aecc 0%,#d4e4ef 75%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #86aecc 0%,#d4e4ef 75%); /* IE10+ */
+background: linear-gradient(to bottom,  #86aecc 0%,#d4e4ef 75%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#86aecc', endColorstr='#d4e4ef',GradientType=0 ); /* IE6-8 */
+}
+/* popup_box DIV-Styles*/
+.popup_box { 
+	display:none; /* Hide the DIV */
+	
+	background:#FFFFFF;  
+	
+	z-index:100; /* Layering ( on-top of others), if you have lots of layers: I just maximized, you can change it yourself */
+	/*margin-left: 15px;  
+	
+	/* additional features, can be omitted */
+	border:2px solid #ff0000;  	
+	padding:15px;  
+	font-size:15px;  
+	-moz-box-shadow: 0 0 5px #ff0000;
+	-webkit-box-shadow: 0 0 5px #ff0000;
+	box-shadow: 0 0 5px #ff0000;
+	text-align:center;
+}
+
+#container {
+	background: transparent; /*Sample*/
+	width:100%;
+	height:100%;
+	z-index:1;
+}
+
+a{  
+cursor: pointer;  
+text-decoration:none;  
+} 
+
+/* This is for the positioning of the Close Link */
+#popupBoxClose {
+	font-size:20px;  
+	line-height:15px;  
+	right:5px;  
+	top:5px;  
+	position:absolute;  
+	color:#6fa5e2;  
+	font-weight:500;  	
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>#title#</title>
+        #include# 
+<link rel="stylesheet" href="#path#/css/colorbox.css" />
+</head>
+    #header#
+        #msg#
+                            <div class="col">
+                                <div class="cell panel">
+                                    <div class="body">
+                                        <div class="cell">
+                                            <div class="col">
+                                                <div class="cell tab-block top-nav">
+                                                    <div class="tabs">
+                                                        <ul class="nav">
+                                                            <li class="active"><a href="#tabcontent1">Latest News</a></li>
+                                                            <li><a href="#tabcontent2">Forum Posts</a></li>
+                                                            
+                                                            
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tab-content" style="min-height:600px">
+                                                        <div class="cell" id="tabcontent1">
+                                                             <h3>News</h3><hr />
+                                                             <p>The Yoursite framework now has it's own web site <a href="http://yoursite.noideersoftware.co.uk" target="_blank">click here</a> to look at yoursite development </p>
+                                                             <p>NoIdeer will now concentrate on support for desktop packages, web based packages and operating systems rather than just the Yoursite package 
+                                                              so the community subjects have been edited to reflect the changes. <u><b>If you need support for the Yoursite framework</b></u> please follow the link above  
+                                                              so please take some time to review the new community areas</p>                        					
+                                                        </div>
+                                                        <div class="cell hidden-tab" id="tabcontent2" style="max-width:100%;">
+                                                            <h3>Latest Forum Posts</h3>#newposts#
+                                                        </div>
+                                                       <div class="cell hidden-tab" id="mail">
+                                                            
+                                                       </div> 
+                                                        <div id="shopoffer" class="cell hidden-tab">
+                                                                 <h3>The Store is not configured</h3><hr />
+                                                       </div> 
+                                                    </div>
+                                               
+                                         
+       
+       
+
+        
+        </div>
+        <div class="site-footer">
+            <!-- <div class="site-center">
+                <div class="cell">
+                  
+                    <a href="index.html" class="powered-by"></a>
+                </div> -->
+            </div> 
+        </div>
+#footer#
+</div>
+<script>
+      $(document).ready(
+            function() {
+                $(".iframe").colorbox({iframe:true, width:"85%", height:"85%", overlayClose: false, escKey:false});
+               
+            });
+</script>             
+  
+    </body>
+</html>

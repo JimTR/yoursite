@@ -23,16 +23,36 @@
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
  "http://www.w3.org/TR/html4/strict.dtd">
-<html style= "background:#2D3538;;">
+<html>
 <head>
-    <title>#title#</title>
-    #include#
+    <title>#title#</title>#include#
+   <!-- <meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+    
+    <script src="#path#/js/ckeditor.js"></script>
+<!-- 
+add the editor $ here
+<script type="text/javascript">
+$(document).ready(function(){
+
+});
+</script> 
+-->
+
 </head>
 <body>
 #header#
+<div class="site-center">
+                    
+                    
+                    
+                </div>
+            </div>
+        </div>
        
-                            <div class="col" style="width:85%">
-                                <div class="cell colorborder">
+        </div>
+        
+                            <div class="col">
+                                <div class="cell panel">
                                     <div class="body">
                                         <div class="cell">
                                             <div class="col">
@@ -44,25 +64,25 @@
                     <!-- Basic block -->
                     
                                                    
-				<table style="background-color:transparent;">
+				<table>
 				<thead> 
                                     <tr><td colspan="8">Create a Category </td></tr>
 				</thead>
 			            <tr><td width="50%">Details</td><td>Permissions</td></tr>
                                 <tr >
                                           <form method="post" action="" id="input">
-			<td><table style="background-color:transparent;"><tr>
+			<td><table><tr>
 			<td width="10%">Category name:</td>
 			<td width="40%"> <input type="text" name="cat_name" id= "cat_name" class="text" style="border:1px solid #CCC;width:30%" />
 			</td>
 			</tr>
-				<tr><td style="vertical-align:top;">Category description</td><td><textarea class ="text" rows="4" cols="50" name="cat_description" /></textarea></td></tr>
+				<tr><td style="vertical-align:top">Category description</td><td><textarea rows="4" cols="50" name="cat_description" /></textarea></td></tr>
 				<tr><td>Group:</td><td>#catlist#</td></tr>
 				<tr><td>Is Group ?</td><td><input type="checkbox" name="isgroup" value="1" id= "isgroup"></td></tr>
 				<!-- <tr><td>Is Link ?</td><td><input type="checkbox" name="islink" value="1" id= "islink"></td></tr> -->
 				</table></td>	
                         <td style="text-align:left;width:50%" valign="top">
-				<table style="background-color:transparent;"><tr style ="border-bottom:1px solid #000"><td>Group</td>
+				<table><tr style ="border-bottom:1px solid #000"><td>Group</td>
 					<td style="text-align:center">Can Read</td><td style="text-align:center">Can Post</td>
 					<td style="text-align:center">Can Reply</td>
 					<td style="text-align:center">Can Moderate</td>	

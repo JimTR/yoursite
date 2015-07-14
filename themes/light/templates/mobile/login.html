@@ -14,12 +14,12 @@
 <body>
 #header#
 
-     <div class="col bordercolor" style="width:85%;color:#999;background:#2D3538;" >
-                                <div class="cell panel colorborder" style="color:#999;background:#2D3538;border:none;box-shadow:none;" >
+     <div class="col bordercolor" style="width:100%;color:#999;" >
+                                <div class="cell panel colorborder" style="color:#999;border:none;box-shadow:none;" >
                                        <div class="cell">
                                             <div class="col">
-                                            <img style ="max-width:6%;float:left;" src = "#path#/images/logo.png" />
-                                                             <h3>Login</h3><hr />
+                                            
+                                                             <h3>#sitename# Login</h3><hr />
                             <!--<h3 style="text-align:left">Login</h3> -->
                             <form action="<?PHP echo $_SERVER['PHP_SELF']; ?>" method="post" id="input">
                                 <div class="column left" style="width:50%;float:left;">
@@ -44,6 +44,9 @@
                         </div>
                         #error#
 
+	
+#footer#
+</div></div>
 	<script>
 			
 		$('#input').submit(function() {
@@ -88,9 +91,7 @@ alertify.alert(message);
 	
 		});
 	</script>
-	</div>
-	</div>
-#footer#
+	
 
 </body>
 

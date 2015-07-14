@@ -1,0 +1,28 @@
+ 
+    <body>
+        
+            
+                <div class="site-header">
+                    
+                    
+                    <div class="col width-fill sitemenu">
+                        <div class="col width-fill mobile-width-fill ">
+                            <div class="cell ">
+                                <ul class="nav ">
+                                    <li class="active "><a href="#path#/index.php">Home</a></li>
+                                    <li><a href="#path#/forum/index.php">Community place</a></li>
+                                    <!--<li><a href="#path#/shop">Shop</a></li>
+                                    <li><a href="#path#/downloads">Downloads</a></li>
+                                    <li><a href="#path#/support">Support & Help</a></li> --> 
+                                </ul>
+                               <ul class="nav" style="float:right;">#login#</ul>
+                            </div>
+                        </div>
+                    </div>
+                
+            
+            	<div class="site-header">
+               	 <!--<img style ="padding-left:2%;" src =  "http://lightsoundstudiosuk.co.uk/images/fd/logo.png" />-->
+                	<img style ="padding-left:2%" src = "#path#/images/jimmy 2.png" />
+					</div>
+				</div>

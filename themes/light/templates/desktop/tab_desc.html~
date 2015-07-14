@@ -1,0 +1,6 @@
+<div class="#class#" id="#id#">
+     
+     <h3>#title#</h3>
+     <hr>
+	#content#
+</div>

@@ -39,13 +39,11 @@
       </head>
 <body>
 #header#
-    <div class="pagination nav nav1 float-right" style="padding:1%;">
-          <div class="float-left" style="text-align:middle;margin-top:5px;margin-right:5px;"></div> #poo#    
-          </div>                    
+                  
   <div class="panel cell">
   
       <div class="header background-black color-white">
-          <div class="float-left" style="width:100%;"> #navi#</div>
+          <div class="float-left" style="width:100%;padding:0.5%"> #navi#</div>
            
       </div>  
       <div> 
@@ -77,7 +75,7 @@
                 //var msg = $('#message').html();
                 //alert(msg);
                 $(".iframe").colorbox({iframe:true, width:"85%",height:"460px", overlayClose: false, escKey:false});
-                $(".iframeAnchor").colorbox({width:"85%", height:"51%", iframe:true,overlayClose: false, escKey:false, scrolling: false,
+                $(".iframeAnchor").colorbox({width:"85%", height:"490px", iframe:true,overlayClose: false, escKey:false, scrolling: true,
                 onLoad: function() {$('#cboxClose').remove();}, onClosed: function() {closeup();}});
                 $(".webpage").colorbox({iframe:true,width:"95%",height:"95%"});
                 $(".ippage").colorbox({iframe:true,width:"25%",height:"22%", scrolling:false });

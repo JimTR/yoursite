@@ -14,8 +14,9 @@
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="generator" content="Bluefish 2.2.6" />
 	<title>#title#</title>
-     #include#
-    
+    #css# 
+    #include#
+    <link type="text/css" rel="stylesheet" href="#path#/css/jquery.realperson.css">
 <style>
 label { display: inline-block; width: 20%; }
 .realperson-challenge 
@@ -32,25 +33,23 @@ margin-right:31%;
 
 <body>
 #header#
-  
-                                <div class="cell colorborder" style="width:86%;float:left;">
+  <div class="col">
+                                <div class="cell panel">
                                       <div class="cell">
-                                            
-                                                   
-																	<img style ="max-width:6%;float:left;" src = "#path#/images/logo.png" />
-                                                   <h3>Registration</h3> 
-                                                   <hr />
+                                            <div class="col">
 #error#
-<form action="register.php" method="post" id="input">
+<div style="width:100%;">
+
+<form action="register.php" method="post" id="input1">
         <input type="hidden" name="r" value="<?PHP echo $_SERVER['HTTP_REFERER']; ?>" id="r">
-        <div style="padding-left:2%;margin-top:1%;" class="cell">
+        <div style="padding-left:2%;margin-top:1%;" class="cell panel">
         <h2 style="text-align:center;">#reg_title#</h2>
         
         <!-- div time -->
-        <div style="width:60%;float:left;">
+        <div style="width:50%;float:left;">
         <!-- <p><label>Username:</label> <input style ="width:50%" type="text" name="username" value="#username#" id="username" /></p> -->
-        <p><label style="min-width:4%">#reg_username#</label>
-        <input type="text" name="username" class="text" id="username" size="35" value = "#username#" style = "width:30%;display:inline">
+        <p><label style="min-width:74px">#reg_username#</label>
+        <input type="text" name="username" id="username" size="35" value = "#username#" style = "width:30%;display:inline">
         <label style="vertical-align:middle;"><span class="validation" style="font-size:20px;">*</span></label>
         </p>    
         <p>
@@ -59,7 +58,7 @@ margin-right:31%;
         <label> <span class="validation" style="font-size:20px;">*</span></label>
         </p> 
         
-        <p><label style="min-width:74px;">#reg_email#</label> <input class ="text" type="text" name="email" value="#email#" id="email" class="text" style = "width:30%;display:inline">
+        <p><label style="min-width:74px;">#reg_email#</label> <input type="text" name="email" value="#email#" id="email" class="text" style = "width:30%;display:inline">
 				<label style="vertical-align:middle;"><span class="validation" style="font-size:20px;">*</span></label>        
         </p>
         <p><label style="min-width:74px">#reg_gender#</label> <select style = "width:31%;display:inline" id ="sex" name="sex" class="text" value="#sex#">
@@ -69,17 +68,17 @@ margin-right:31%;
             <option value="3">Other</option>
           </select>
  	      </p>
- 	       <p >
-         <label style="min-width:74px;">#reg_loc#</label>
-         <input type ="text" name="loc" class="text" value="" style = "width:30%;display:inline;">
+ 	       <p>
+         <label style="min-width:74px">#reg_loc#</label>
+         <input type ="text" name="loc" class="text" value="" style = "width:30%;display:inline">
  	      </p>
         <p>
-            <label style="min-width:74px;float:left;">#reg_captcha_disc#</label>
-            <input type="text" id="defaultReal" name="defaultReal" style = "width:30%;display:inline;float:left;">
+            <label style="min-width:74px;">#reg_captcha_disc#</label>
+            <input type="text" id="defaultReal" name="defaultReal" style = "width:30%;display:inline">
        </p>
       
         </div>
-        <div style="width:40%;float:left;">
+        <div style="width:50%;float:left;">
          <div style="padding-left:2%;">
          	<p>#reg_social#</p>
          	<p>#reg_social_ava#</p>
@@ -88,70 +87,14 @@ margin-right:31%;
         
         <div style="width:100%;clear:both;margin-top:10%;margin-bottom:2%;"> 
         <div><label> <span class="validation" style="font-size:14px;">#reg_required#</span></label></div>
-        <p style="width:100%;text-align:center;"><button type="submit" id = "input" style="margin-left:46%;">#reg_button#</button></p>
-        
+        <p style="width:100%;text-align:center;"><button type="submit" id = "input1" style="margin-left:46%;">#reg_button#</button></p>
+        <div>
     </form> </div> </div></div>
 <script>$(function() {$('#defaultReal').realperson();});</script>   
 <br>
-
 #footer#
-<script>
-			
-		$('#input').submit(function() {
-			title= $('#username').val().length ;
-
-			
-if (title === 0)
-{
-message = 'You must supply a user name';
-alertify.alert(message);
-			return false;
-}
-
-	title= $('#password').val().length ;
-			
-if (title === 0 )
-{
-message = 'You must supply a Password';
-alertify.alert(message);
-			return false;
-}
-if (title < #pwdlen#)
-{
-message = 'Your password is too short';
-alertify.alert(message);
-			return false;
-}
-	title =$('#email').val().length;
-	if (title === 0)
-{
-message = 'You must supply an email address';
-alertify.alert(message);
-			return false;
-}
-	
-		});
-		$('#password').onblur(function() {
-			title= jQuery('#username').val().length ;
-			
-if (title === 0)
-{
-message = 'You must supply a user name and password>';
-alertify.alert(message);
-			return false;
-}
-
-	title= $('#password').val().length ;
-			
-if (title === 0)
-{
-message = '<div style="font-size:20px;color:red;">Error</div>You must supply a Password<br />';
-alertify.alert(message);
-			return false;
-}
-	
-		});
-	</script>
-
+</div>
+</div>
 </body>
+
 </html>

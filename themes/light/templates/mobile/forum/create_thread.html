@@ -1,38 +1,62 @@
 <!--
    create topic.html
-  
+   
+   Copyright 2014 Jim Richardson <jim@noideersoftware.co.uk>
+   
+   This program is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 2 of the License, or
+   (at your option) any later version.
+   
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+   MA 02110-1301, USA.
    
 	Update 03/01/15 19:56    
 -->
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
  "http://www.w3.org/TR/html4/strict.dtd">
-<html style="overflow:hidden;background:#2D3538;" >
+<html style="overflow:hidden;">
 <head>
     <title>#title#</title>#include#
     <script src="#path#/js/ckeditor.js"></script>
+
 </head>
 <body>
 #header#
-                     
-                        <div class="col" style="width:85%;float:left;">
-                        <div class="panel" style="background:#2D3538;">
-                               <div class="cell">
-                                               
+</div>
+
+      
+                    
+
+                    <!-- Basic block -->
+                    <div>  
+                     <div class="panel cell">
+                        <div class="col">
+                                <div class="cell panel">
+                                    <div class="body">
+                                        <div class="cell">
+                                            <div class="col">    
                    
                                               
                             
-				<table style="background:#2D3538;padding:1%;" class="colorborder">
+				<table>
 				<thead> 
                                     <tr>
-                                        <td colspan="2"><h6 style="text-align:center;color:#999">Create a Thread</h6> </td></tr></thead>
+                                        <td colspan="2"><h6 style="text-align:center;">Create a Thread</h6> </td></tr></thead>
 <tr><td width="50%">
 
                                          <form method="post" action="create_topic.php" id="input1">
 
-					<div style="float:left;padding:2%;width:50%;color:#999;">
-					<label>Subject:</label> <input class="text" type="text" name="topic_subject" id="subject" style="border:1px solid #CCC;width:30%;padding:2px;width:70%" /> </div>
-					<div style="float:left;padding:0.5%;color:#999;">#catlist#</div>
+					<div style="float:left;padding:2%;width:50%"><label>Subject:</label> <input class="text" type="text" name="topic_subject" id="subject" style="border:1px solid #CCC;width:30%;padding:2px;width:70%" /> </div>
+					<div style="float:left;padding:0.5%;">#catlist#</div>
 				<br style ="clear:both">
 				<div style="margin-left:2%;"> <textarea  cols="30" class="ckeditor" name="post_content" id= "editor1" /></textarea>
 				#editor_opts#</div>
@@ -41,10 +65,7 @@
 				
 					<div style="padding-left:2%;float:left;">
 					                           
-                                        <button class="button" type="submit" id="input1">Create Thread</button>
-                                        <button file-id="#attach#" id="attachbtn" type="button" class="button" onclick= "Alert()">Attach </button>
-                                        <button class="button" id="test" type="button" onclick = "window.history.back(-1)">Quit</button>
-                                        </div> 
+                                        <button class="button" type="submit" id="input1">Create Thread</button></div> 
 
 				        
 
@@ -54,7 +75,7 @@
 <td style="padding-top:4%;vertical-align:top;">
 <h6>Subscribe to this thread</h6>
 <div class= "col width-4of4"> 
-<table style="background:#2D3538;color:#999;">
+<table>
 <tr>
 <td style="width:50%;">Instant Email - receive an email if a new reply is made to this thread</td>
 <td><input type="radio" name="sex" value="male"></td>
@@ -76,7 +97,7 @@
                                         
        
 <div> <h6 style="margin-top:1%;">Attachments</h6> </div>
-<div id = "attach" style="padding-left:2%;padding-top:1%;color:#999;">None</div>
+<div id = "attach" style="padding-left:2%;padding-top:1%;">None</div>
 
 </td>
                                      
@@ -87,13 +108,18 @@
                                                                           
                             </table>                    
                       
-             
+   <div style="float:left;margin-left:7.5%;margin-top:-3%;">
+<button file-id="#attach#" id="attachbtn" class="button" onclick= "Alert()">Attach </button></div>
+
+<div style="float:left; margin-left:11.5%;margin-top:-3%;">
+<button class="button" id="test" onclick = "window.history.back(-1)">Quit</button>
+    
+           </div>
+</div></div>
+           </div>
+            #footer#
             
-</body>
-</div>
-</div>
-</div>     
-#footer#   
+</body>        
 <script>
 			
 		$('#input1').submit(function() {

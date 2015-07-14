@@ -1,0 +1,55 @@
+<head>
+	#include#
+	<title>Tab Editor</title>
+	<script src="#path#/js/ckeditor.js"></script> 
+	</head>
+#header#
+               <div class="col" style="float:left;width:100%;">
+                 <div class="col" style="float:left;width:100%;">
+                          <div class="cell panel" style="box-shadow:none;border:none;" >
+<!-- <div style="overflow:hidden;max-height:700px;min-height:600px;margin-bottom:10px;" id="editbox"> -->
+	<!-- add the editor -->
+	<div style="width:96%;padding:2%;text-align:center;max-height:700px;min-height:600px;margin-bottom:10px;" id="editbox">
+	 <form method="POST">
+            <textarea class="ckeditor"  name="reply-content" id="editor1" >#cat_description#</textarea>
+            <input type ="hidden" name = "cat_id" value = "#cat_id#" id= "cat_id">
+            <input type ="hidden" name = "save" id="save" value="save">
+     </form>
+#footer#
+</div></div></div>	
+	
+
+<script>
+     $(document).ready(
+            function() {
+                 //alert("test");
+                 var editor = CKEDITOR.instances.editor1;
+         CKEDITOR.replace('editor1',
+  {  
+    on:
+    {
+      instanceReady: function(ev)
+      {
+        setTimeout(resizeEditor1($("#editbox").height()), 300);
+      }
+    }
+    ,uiColor: '#2D3538'
+  });
+             
+
+});
+
+   function resizeEditor1(defaultHeight) {
+
+  //var defaultHeight = 600;
+  //alert ($('#editbox').css('min-height'));
+  var newHeight = window.innerHeight-120;
+  // var newHeight = $('#editbox').css('height');
+  var height = defaultHeight > newHeight ? defaultHeight: newHeight;
+  if (height > defaultHeight) {height = defaultHeight;}
+  //alert ('going to resize to '+ height); 
+  CKEDITOR.instances.editor1.resize('100%',height);
+  //alert('resize done');
+  }
+</script>       
+

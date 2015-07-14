@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>#title#</title>
+        #include# 
+<!--<link rel="stylesheet" href="#path#/css/colorbox.css" />-->
+</head>
+	<body>
+    	  #header#
+        #msg#boo
+				<div class="col" style="float:left;width:100%;">   
+				 <div class="cell panel" style="box-shadow:none;border:none;" >          
+                                   <div class="cell tab-block top-nav" >
+                                       <div class="tabs">
+                                           <ul class="nav">
+                                               <li class="active"><a href="#tabcontent1">General</a></li>
+                                               <li><a href="#tabcontent2">User Control</a> </li>
+                                               <li><a href= "tabcontent7">Area Control</a></li> 
+                                               <li><a href="#tabcontent3">Modules</a> </li> 
+                                               <li><a href="#tabcontent4">Plugins</a></li>
+                                               <li><a href="#tabcontent5">Styling</a></li> 
+                                               <li><a href="#tabcontent6">Maintainence</a></li>
+                                           </ul>
+                                     </div>
+                                     <div class="tab-content" style="min-height:600px;">
+                                          <div class="cell" id="tabcontent1">
+                                        		<!-- tab 1 -->
+                                             <div class="cell width-4of4" style="float:left;max-width:16%;min-height:80%;">
+                                       		#astat#
+                     		            </div>
+                     <div class="cell width-3of4" style="padding:0%;float:left;width:20%;">
+                     <h6 style="text-align:center;padding-top: 0%; ">Site Status</h6><br>
+                      <div><span style="float:left"><a href = "admin.php?action=turnstatus" title = "turn the site on or off" >On/Off Line</a></span><span style="float:left;color:#stat#;margin-left:9%;" class="icon icon-16 icon-circle"></span>
+                      <span style="text-align:center;float:right;">This closes the site completely</span>
+                      </div> 
+                      <div><a href ="admin.php?action=olu">Off line URL</a><span style="float:right;color:green">closed.html</span></div>
+                      <div style = "margin-bottom: 0px;"><a href="admin.php?action=datetime">Date & Time</a><span style="float:right;color:green;">#date_format#</span></div>
+                                         
+                   </div>  
+                                                        </div>
+                                                        
+                                                       <div class="cell hidden-tab" id="tabcontent2">
+                                                                <h3>User Control</h3>
+                                                                <hr style="color:#999;" />
+                                                       </div>
+                                                       <div class="cell hidden-tab" id="tabcontent3">
+                                                       <img style ="max-width:6%;float:left;" src = "#path#/images/logo.png" />
+                                                                <h3 style="margin-left:6%;">Modules</h3>
+                                                                <hr style="color:#999;" />
+                                                       </div>
+                                                                                                                                
+                                                        <div class="cell hidden-tab" id="tabcontent4">
+                                                               <img style ="max-width:6%;float:left;" src = "#path#/images/logo.png" />
+                                                                <h3 style="margin-left:6%;">Screen Shots</h3>
+                                                                <hr style="color:#999;" />
+            														</div>
+            
+																	    <div class="cell hidden-tab" id="tabcontent5" style="max-width:100%;">
+                                                             <img style ="max-width:6%;float:left;" src = "#path#/images/logo.png" />
+                                                            <h3>Styling</h3>
+                                                      </div>
+                                                      <div class="cell hidden-tab" id="tabcontent6" style="max-width:100%;">
+                                                             <img style ="max-width:6%;float:left;" src = "#path#/images/logo.png" />
+                                                            <h3>Maintainance</h3>
+                                                      </div>
+                                                </div>
+        							
+        							
+#footer#
+</div></div>
+<script>
+      $(document).ready(
+            function() {
+                $(".iframe").colorbox({iframe:true, width:"85%", height:"85%", overlayClose: false, escKey:false});
+               
+            });
+</script>             
+  
+    </body>
+</html>

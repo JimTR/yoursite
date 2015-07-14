@@ -4,37 +4,65 @@
 <title>#title#</title>
         #include# 
 <link rel="stylesheet" href="#path#/css/colorbox.css" />
- <script  type="text/javascript" src="#path#/js/jssor.js"></script>
- <script  type="text/javascript" src="#path#/js/jssor.slider.js"></script>  
-  
 </head>
     #header#
         #msg#
-                        
-                            <div class="col" style="float:left;width:90%;">
-                                <div class="cell panel" style="box-shadow:none;border:none;background:#2D3538;" >
-                                    <div class="cell tab-block top-nav" >
+                            <div class="col">
+                                <div class="cell panel">
+                                    <div class="body">
+                                        <div class="cell">
+                                            <div class="col">
+                                                <div class="cell tab-block top-nav">
                                                     <div class="tabs">
                                                         <ul class="nav">
-                                                        #tabs#
+                                                            <li class="active"><a href="#tabcontent1">Latest News</a></li>
+                                                            <li><a href="#tabcontent2">Forum Posts</a></li>
+                                                            <li><a href="#mail">Web Mail</a></li>
+                                                            
                                                         </ul>
                                                     </div>
-                                                    <div class="tab-content colorborder" style="min-height:600px;background:#2D3538;color:#999;">
-                                                          #tab_content#
+                                                    <div class="tab-content" style="min-height:600px">
+                                                        <div class="cell" id="tabcontent1">
+                                                             <h3>News</h3><hr />
+                                                             <p>The Yoursite framework now has it's own web site <a href="http://yoursite.noideersoftware.co.uk" target="_blank">click here</a> to look at yoursite development </p>
+                                                             <p>NoIdeer will now concentrate on support for desktop packages, web based packages and operating systems rather than just the Yoursite package 
+                                                              so the community subjects have been edited to reflect the changes. <u><b>If you need support for the Yoursite framework</b></u> please follow the link above  
+                                                              so please take some time to review the new community areas</p>                        					
+                                                        </div>
+                                                        <div class="cell hidden-tab" id="tabcontent2" style="max-width:100%;">
+                                                            <h3>Latest Forum Posts</h3>#newposts#
+                                                        </div>
+                                                       <div class="cell hidden-tab" id="mail">
+                                                            <iframe src="./webmail/" style="width: 100%; height: 600px; border:0px solid #fff;"></iframe>
+                                                       </div> 
+                                                        <div id="shopoffer" class="cell hidden-tab">
+                                                                 <h3>The Store is not configured</h3><hr />
+                                                       </div> 
                                                     </div>
-        						</div>
+                                               
+                                         
+       
+       
+
         
-        					  </div>	
-						#footer#
-						</div>
+        </div>
+        <div class="site-footer">
+            <!-- <div class="site-center">
+                <div class="cell">
+                  
+                    <a href="index.html" class="powered-by"></a>
+                </div> -->
+            </div> 
+        </div>
+#footer#
+</div>
 <script>
       $(document).ready(
             function() {
                 $(".iframe").colorbox({iframe:true, width:"85%", height:"85%", overlayClose: false, escKey:false});
                
             });
-</script>
-<script type="text/javascript" src="#path#/js/slider.js"></script>
-
+</script>             
+  
     </body>
 </html>

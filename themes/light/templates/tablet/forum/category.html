@@ -1,6 +1,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
  "http://www.w3.org/TR/html4/strict.dtd">
-<html style="background:#2D3538;">
+<html>
 <head>
     <title>#title#</title>#include#
     <link rel="stylesheet" href="#path#/css/colorbox.css" />
@@ -10,35 +10,56 @@
 <body>
 #header#
 
-     <div class="col" style="float:left;width:90%;">
-                                <div class="cell panel" style="box-shadow:none;border:none;background:#2D3538;" >
-                                    <div class="cell tab-block top-nav" >
-                                                    <div class="tabs">
-                                                        <ul class="nav">
-                                                        #tabs#
+                            <div class="col">
+                                <div class="cell panel">
+                                    
+                                       <div class="cell"> 
+                                       <div style="float:left;"><label>#navi#</label></div>
+                                    <!--<div style="float:right;">#newthreads#</div> -->
+                                            <div class="col">
+                                            <!--<div class="pagination upper" style="float:right;padding-right:0.5%;">
+                                                        <ul class="nav" style="padding-right:10px;">
+                                                            #poo#
                                                         </ul>
+                                                            #newthreads#
+                                                   </div>-->
+                                                <div class="cell tab-block top-nav">
+                                                  
+                                       <div style="width:5%;clear:both;float:left;">&nbsp;</div>
+                                        <div style="width:33.5%;float:left;">Thread</div>
+                                        <div style="width:10.5%;float:left;"><center>Posts</center></div>
+                                        <div style="width:17.5%;float:left;"><center>Views</center></div>
+                                        <div style="width:29.5%;float:left;"><center>Last Post</center></div>                                                   
+                                                   <div class="tab-content" style="min-height:90%">
+                                                   
+                                                            #rowd#
+                                                           
                                                     </div>
-                                                    <div class="tab-content colorborder" style="background:#2D3538;color:#999;">
-                                                    <div style="float:left;"><label style="color:#999;">#navi#</label></div>
-                                                     <div style="width:5%;clear:both;float:left;">&nbsp;</div>
-                                       <div style="width:33.5%;float:left;">Thread</div>
-                                       <div style="width:10.5%;float:left;"><center>Posts</center></div>
-                                       <div style="width:17.5%;float:left;"><center>Views</center></div>
-                                       <div style="width:29.5%;float:left;"><center>Last Post</center></div>                         
-                                                          #rowd#
-                                                    </div>
-        						</div>
-                                        <div class="pagination lower" style="float:right;padding-right:0.5%;margin-bottom:1%;">
+                                                    <div> 
+                                                    <!-- <div style="float:right;"><a class="button" href="create_topic.php">Quick Thread</a></div> -->
+                                                    
+                                                     <div class="pagination lower" style="float:right;padding-right:0.5%;">
                                                         <ul class="nav1 nav" style="padding-right:10px;">
                                                             #poo#
                                                         </ul>
                                                            #newthreads# 
                                                    </div>
-        					  </div>	
-						#footer#
-						</div>                      
-    
-    
+                                                   
+                                                    </div>
+<div class="width-fill">
+<!-- <div style="float:left;width:6%" class="cell"><span class="icon icon-32 icon-comment color-green float-left" ></span><label>Unread</label></div>
+<div style="float:left;width:6%" class="cell"><span class="icon icon-32 icon-comment color-yellow float-left"></span><label>Read</label></div>
+<div style="float:left;width:6%" class="cell"><span class="icon icon-32 icon-comment color-red float-left"></span><label>Locked</label></div> --> 
+
+
+            </div>
+            </div>
+            
+            #footer#
+        
+        </div>
+
+    </div>
     <script>
       $(document).ready(
             function() {

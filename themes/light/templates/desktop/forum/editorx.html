@@ -5,18 +5,18 @@
 <!-- start include.tmpl -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta http-equiv="Content-Script-Type" content="text/javascript">
-<link rel="stylesheet" href="/css/alertify.core.css">
-<link rel="stylesheet" href="/css/alertify.default.css" id="toggleCSS">
-<script src="/cascade/assets/js/app.js"></script> 
+<link rel="stylesheet" href="../css/alertify.core.css">
+<link rel="stylesheet" href="../css/alertify.default.css" id="toggleCSS">
+<!-- <script src="../js/app.js"></script> --> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
- <script src="/js/alertify.min.js" type="text/javascript"></script>	
+ <script src="../js/alertify.min.js" type="text/javascript"></script>	
 <!-- <script  type="text/javascryoursite2/ipt" src="http://localhost/yoursite2/jquery.ui.datepicker.js"></script>
 <script src="http://localhost/yoursite2/js/jquery.colorbox.js"></script> --> 
- <script src="/js/ckeditor.js"></script>
-<script src="/js/editor.js" /></script>  
-<script src="/js/3.js"></script>   
-<link rel="stylesheet" type="text/css" media="all" href="/cascade/assets/css/cascade/development/build-full.css">
-<link rel="stylesheet" type="text/css" media="all" href="/cascade/assets/css/site.css">
+ <script src="../js/ckeditor.js"></script>
+<script src="../js/editor.js" /></script>
+<script src="../js/3.js"></script>   
+<link rel="stylesheet" type="text/css" media="all" href="../themes/light/css/build-full.css">
+<link rel="stylesheet" type="text/css" media="all" href="../themes/light/css/site.css">
         <!--[if lt IE 8]><link rel="stylesheet" href="assets/css/cascade/production/icons-ie7.min.css"><![endif]
                   [if lt IE 9]><script src="assets/js/shim/iehtmlshiv.js"></script><![endif]-->
               
@@ -25,19 +25,19 @@
         
 <!-- end include.tmpl -->
 	     	   
-  </head><body style="background:#2D3538;min-height:600px;">
-        <div style="background:#2D3538;min-height:600px;overflow:hidden;">
+  </head><body style="min-height:70%;">
+        <div style="min-height:70%;overflow:hidden;">
         <div class="header collapse-trigger">
               <span>
                   <div style="float:left;padding:0.5%;background:#000;color:#fff;width:100%;"><strong>Reply</strong></div>
              </span>
             </div>
-            <h3 style="padding:1%;">Reply Stuff</h3>
- 				<div class="panel cell"  style="width:58%;float:left;">
-					<form method="post" action="../reply.php" id = "input">
+            
+ 				<div class="cell"  style="width:58%;float:left;">
+					<form method="post" action="./reply.php" id = "input">
 					   <input type = "hidden" id="test" value ="#topic_id#" name="topic_id">
 					   <input type = "hidden" id="test" value ="#cat_id#" name="cat_id">
-    					<textarea class="ckeditor" style="100%;" name="reply-content" id="editor1" ></textarea>
+    					<textarea class="ckeditor" style="height:70%;display:none;" name="reply-content" id="editor1" ></textarea>
 				</div> 	
             <div style="float:left;width:40%">
 					<div style="padding:4% 1% 0%;vertical-align:top;">
@@ -69,12 +69,12 @@
 				</div>
 					</form>
       
-				<div style="float:left;padding-top:1%;margin-left:-0.5%;">
-				     <button class="button" onclick="Alert()" id="attachbtn" file-id="../user6.txt">Attach</button>
+				<div style="float:left;padding-top:1%;margin-left:-0.9%;">
+				     <button class="button" onclick="Alert()" id="attachbtn" file-id="#file#">Attach</button>
 				     <button class="button" onclick="windowclose()" />Close</button>  
 		      </div>		
         </div>
-	  			<script src="/js/editor.js" /></script>  
+	  			 <script src="../js/editor.js" /></script> 
 					  <!-- end editor -->
 					  <br>
 </body>
@@ -83,6 +83,20 @@
             function() {
                  //alert("test");
                  var editor = CKEDITOR.instances.editor1;
+         CKEDITOR.replace('editor1',
+  {  
+    on:
+    {
+      instanceReady: function(ev)
+      {
+        setTimeout(resizeEditor, 300);
+      }
+    }
+    ,uiColor: '#2D3538',removePlugins: 'elementspath',toolbar: [
+					[ 'Bold', 'Italic','Underline', 'Strike', 'Subscript', 'Superscript', 'RemoveFormat', '-', 'NumberedList', 'BulletedList' ],
+					[ 'FontSize', 'TextColor', 'Scayt' ], ['JustifyLeft', 'JustifyCenter', 'JustifyRight' ], ['CodeSnippet', 'Blockquote', 'Link', 'Image','Smiley','oembed','Youtube'],['TransformTextToUppercase', 'TransformTextToLowercase', 'TransformTextCapitalize', 'TransformTextSwitcher','Menu'] 
+				]
+  });
                  var input = $('#editor1');
                  var cat = $('#cat_id');
                  var topic = $('#test');
@@ -98,23 +112,15 @@
                
                  //editor.insertHtml(quote);
                  //alert (editor.val());
-                   input.val(quote);         
-                   checkatt();
+                   input.val(quote);
+                  
+                   var file = $('#attachbtn').attr('file-id');
+                   //alert(file);       
+                   checkatt(file);
+                   //resizeEditor ();
 
 });
-function windowclose() 
-{
-var editor = CKEDITOR.instances.editor1;
-//alert(editor.getData());
-editdata = editor.getData();
-var input = parent.$('#editor3');
-input.val(editdata);
-//alert(input.val());
-var stat = parent.$("#message");
-stat.attr("fred","0");
-stat.html("message not posted, but still there");
-//alert(stat.attr("fred"));
-parent.$.colorbox.close();
-}
+
+
 </script>          					  
 </html>

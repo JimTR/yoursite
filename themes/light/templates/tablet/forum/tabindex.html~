@@ -25,9 +25,9 @@
                                                             #rowd#
                                                    </div>
 <div class="width-fill">
-<div style="float:left;width:6%" class="cell"><span class="icon icon-32 icon-comment color-green float-left" ></span><label>Unread</label></div>
+<!-- <div style="float:left;width:6%" class="cell"><span class="icon icon-32 icon-comment color-green float-left" ></span><label>Unread</label></div>
 <div style="float:left;width:6%" class="cell"><span class="icon icon-32 icon-comment color-yellow float-left"></span><label>Read</label></div>
-<div style="float:left;width:6%" class="cell"><span class="icon icon-32 icon-comment color-red float-left"></span><label>Locked</label></div> 
+<div style="float:left;width:6%" class="cell"><span class="icon icon-32 icon-comment color-red float-left"></span><label>Locked</label></div> --> 
 <div style="float:right;" class="cell"><a class="button" href="create_topic.php">Quick Thread</a></div> 
 
             </div>

@@ -1,0 +1,7 @@
+
+<ul>
+<li><a class='iframe cboxElement' scrolling="no" seamless="seamless" href="admin.php">Admin</a></li>
+<li><a href="#path#/user.php">Settings</a></li>
+<li><a href="#path#/logout.php">Logout</a></li> 
+
+</ul>

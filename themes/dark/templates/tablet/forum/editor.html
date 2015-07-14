@@ -1,0 +1,57 @@
+  <!-- Start editor -->
+<div class="cell">
+    <div class="col">
+      <div class="cell collapsible panel">
+        <div class="header collapse-trigger" style="background-color:#2D3538;padding:0.5%;">
+             <span style="float:left;" class="icon icon-collapse color-white"></span>
+             <span class="collapsed-only color-white">
+                  <div style="float:left;">Reply</div>
+             </span>
+             <span class="uncollapsed-only color-white">
+              		<div style="float:left;">Reply</div>
+             </span>
+		  </div>
+        <div class="body collapse-section">
+ 				<div class="panel cell"  style="width:58%;float:left;">
+					<form method="post" action="reply.php?id=#topic_id#" id = "input">
+    					<textarea name="reply-content" id="editor3"></textarea>
+    					<input type = "hidden" id="test" value ="#topic_id#">
+				</div> 	
+            <div style="float:left;width:40%">
+					<div style="padding:4% 1% 0%;vertical-align:top;">
+							<h6>Post Options </h6>
+			      </div>
+               <div style="color:#999;padding:1% 3%;">
+                   <input style="width:auto;margin-right:1%;" type="radio" name="option" checked="1" value="instant">Subscribe and receive an email notification of each new reply
+               </div>
+               <div style="color:#999;padding:1% 3%;">
+                  <input style="width:auto;margin-right:1%;" type="radio" name="option" value="2">Weekly Update - receive an email every week if a new reply is made to this thread
+              </div>
+              <div style="color:#999;padding:1% 3%;">
+                  <input style="width:auto;margin-right:1%;" type="radio" name="option" value="3">Do not subscribe
+             </div>
+             <div style="padding-left:1%; vertical-align:top;">
+                  <h6>Attachments</h6>
+             </div>
+             <div style="color:#999;">
+                  <div id="attach" style="padding-left:3%; padding-top:1%">
+                        None
+                  </div>
+             </div>
+            </div>
+   			<div id="reply1" style="padding:1%;float:left;clear:both;">
+                 <input type="hidden" name="username" id="username" value="#warn#" />
+                 <input type="hidden" name= "cat_id" id="cat_id" value="#cat_id#" /> 
+			        <button type="submit" class="button" name="btnlogin" id="input1">Reply</button>
+						
+				</div>
+					</form>
+      
+				<div style="float:left;padding-top:1%;margin-left:-0.5%;">
+				     <button class="button" onclick="Alert()" id="attachbtn" file-id="#path#/forum/#file#">Attach</button>
+		      </div>		
+        </div>
+	  </div>
+	</div>
+	 <script src="#path#/js/editor.js" /></script> 
+					  <!-- end editor -->

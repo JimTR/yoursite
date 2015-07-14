@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>#title#</title>
+        #include# 
+
+</head>
+	<body>
+    	  #header#
+        #msg#
+				<div class="col" style="float:left;width:100%;">   
+				 <div class="cell panel" style="box-shadow:none;border:none;" >          
+                                   <div class="cell tab-block top-nav" >
+                                       <div class="tabs">
+                                           <ul class="nav">
+                                           #tabs#
+                                                                                           
+                                           </ul>
+                                     </div>
+                                     <div class="tab-content" style="min-height:600px;">
+                                     #tab_content#
+                                                      
+                                                </div>
+        							
+        							
+#footer#
+</div></div>
+<div id="message_box" style="visibility:hidden;">
+<div id ="test_box" >	
+<div>
+<h4>Choose Site Date & Time Format</h4><br>
+<span style="margin-left:4%;float:left;"> Choose Date Format <select style="margin-left:20px;"><option value="1">dd-mm-yyyy</option><option value="2">yyyy-mm-dd</option><option value=3">dd/mm/yyyy</option></select></span><br style="clear:both;">
+<span style="margin-left:4%;float:left;margin-top:16px;">Choose Time Format <select style="margin-left:20px;" class="text"><option value="1">line 1</option><option value="2">line 2</option></select></span>
+</div></div>
+<div id="curl"><h4>Select The Closed Resource</h4></br><form id="curl2" action= "admin.php" method="post">
+<input type="hidden" value="change_url" name="action"></input>
+<span style="margin-left:4%;float:left;">Enter The site closed URL<input type="text"style="margin-left:20px;" class="text"  name="curl1" value="a filename"></input></span>
+<br><input type="submit" class="button" style="clear:both;text-align:center;" value="Do it"></input>
+<br style="clear:both;">
+</div>
+</form>		
+</div>
+<script>
+      $(document).ready(
+            function() {
+                $(".iframe").colorbox({iframe:true, width:"85%", height:"85%", overlayClose: false, escKey:false});
+               
+            });
+            
+      function test(id) {
+      
+      switch (id) {
+      case 'dt':
+      var message = $("#test_box").html();
+      break;
+      case 'curl':
+      var message = $("#curl").html();
+      
+      }
+      
+       alertify.alert(message, function(e) {
+		if (e) {
+            
+                alert ("ready to submit "+id);
+		       
+		      //$("#curl1").val('what the fuck'); 
+                      alert ($("#curl1").val());
+                      
+                       
+            alertify.success("Admin option updated");
+            
+            
+              
+           
+            
+        } 
+        
+        else {
+            // user clicked "cancel"
+            alertify.error("You did not confirm your reservation.");
+        }
+								}, 'attach');
+			
+	
+							
+            
+        
+       
+      }
+       $('#curl2').submit(function() {
+      alert ('we have hit submit');
+      });      
+     
+</script>             
+  
+    </body>
+</html>

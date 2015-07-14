@@ -1,0 +1,19 @@
+<form  id="paypal" target="paypal" style="float:left;height:11px;width:84px;" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="add" value="1">
+<input type="hidden" name="cmd" value="_cart">
+<input type="hidden" name="business" value="#payer#">
+<input type="hidden" name="item_name" value="#post_subject#">
+<input type="hidden" name="item_number" value="##topic_id#">
+<input type="hidden" name="amount" value="5.00">
+<input type="hidden" name="currency_code" value="GBP">
+<input type ="hidden" name="shipping" value="0.01">
+<input type ="hidden" name="shipping2" value="4.00">
+<input type ="hidden" name="return" value="https://kbracing.eu/shop/topic2.php">
+<input type ="hidden" name="notify_url" value="http://kbracing.eu/ipn.php">
+<input type ="hidden" name="cancel_return" value="http://kbracing.eu/shop/topic2.php">
+<input type="hidden" name="cbt" value="Return to KB Racing">
+<input type ="hidden" name="rm" value="2">
+<input type="hidden" name="handling" value="5.50">
+<input type="hidden" name="custom" value="custom button text">
+<input type="submit" class="button" value="Add to Cart">
+</form>
