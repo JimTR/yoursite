@@ -100,7 +100,7 @@ var data = '';
 			break;	
 		case "edit_tab.php":
 			cut_url = url.split('/').pop();
-			alert(url);
+			//alert(url);
 			url = 'admin.php';	 
 		}
 		
@@ -216,3 +216,24 @@ return dow;
 
 }
 
+function loadPopupBox(pname,top) {	// To Load the Popupbox
+	          //alert(top);
+	          var ele='#'+pname
+	          $( ".popup_box" ).hide( "slow" );
+	          $(ele).css("position","absolute");
+	          $(ele).css("top", top);
+                  $(ele).css("left", Math.max(0, (($(window).width() - $(ele).outerWidth()) / 2) + 
+                                                $(window).scrollLeft()) + "px");                              
+			$('#'+pname).fadeIn("slow");
+			$("#container").css({ // this is just for style
+				"opacity": "0.3"  
+			}); 		
+		}
+		/**********************************************************/
+		function unloadPopupBox(pname) {	// TO Unload the Popupbox
+			$('#'+pname).fadeOut("slow");
+			$("#container").css({ // this is just for style		
+				"opacity": "1"  
+			}); 
+		}	
+		
