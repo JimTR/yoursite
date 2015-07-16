@@ -23,9 +23,9 @@ $tab= 0;
     define ('AREA',2); // testing area grouping
     $getid = intval($_GET['id']); //stop injection 
     $template = new Template; // start the template workspace
-    $page['header'] = $template->load($site->settings['template_path'].'header.html', COMMENT);
-	$page['footer'] = $template->load(  $site->settings['template_path'].'footer.tmpl', COMMENT);
-	$page['include'] = $template->load( $site->settings['template_path'].'include.tmpl', COMMENT);
+    $page['header'] = $template->load($page['template_path'].'header.html', COMMENT);
+	$page['footer'] = $template->load($page['template_path'].'footer.tmpl', COMMENT);
+	$page['include'] = $template->load($page['template_path'].'include.tmpl', COMMENT);
 	$page['users'] = $database->num_rows("select * from sessions");
 	$page['page'] = 'pagination  will go here';
 	$page['poo'] = '';
@@ -38,10 +38,10 @@ if($Auth->loggedIn())
 			   $nid = $Auth->nid;
 			   if ($Auth->level === 'user') {
 				  				   
-			   $login = $template->load(DOC_ROOT.'/templates/member.html', COMMENT);
+			   $login = $template->load($page['template_path'].'member.html', COMMENT);
 		   }
 		   elseif ($Auth->level === 'admin') {
-			   $login = $template->load(DOC_ROOT.'/templates/admin.html', COMMENT) ;
+			   $login = $template->load($page['template_path'].'admin.html', COMMENT) ;
 			   
 		   }
 			  
@@ -52,7 +52,7 @@ if($Auth->loggedIn())
 	else
 				{
 					$name ="Guest";
-					$login = $template->load( $site->settings['url'].'/templates/guest.html', COMMENT) ;
+					$login = $template->load( $page['template_path'].'guest.html', COMMENT) ;
 					$nid = $nid = getnid();
 					$level ="guest"; 
 				}
@@ -83,7 +83,7 @@ $tabset = $database->num_rows($groupsql);
 	                 {
 						 goto noview;
 					} */
-					$tabs->load("templates/tab.html",false); //dont show this templates remarks  
+					$tabs->load($page['template_path']."forum/tab.html",false); //dont show this templates remarks  
 					$tab_entry['tab_id'] = $tab; 
 					$tab_entry['tab_name'] = $row['cat_name']; 
 					 
@@ -192,7 +192,7 @@ else
 					//run worker template to add pagination
 					$pagegroup++; // set the page thingy
 					//do function here to paginate within the $page array
-					$subtemplate->load("templates/testit.html",COMMENT);
+					$subtemplate->load($page['template_path']."forum/testit.html",COMMENT);
 					
 				    //$pg = $pagegroup % $per_page; // check page length
 				    //echo $pg."<br>";
@@ -235,7 +235,7 @@ else
  
 // do main template
 
-$template->load("templates/category.html", COMMENT);
+$template->load($page['template_path']."forum/category.html", COMMENT);
 $page['query'] = $database->total_queries();
 	  
 	//echo 'There were '. $database->total_queries() . ' queries performed';
