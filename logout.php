@@ -11,9 +11,9 @@
     distroy_session($kill,$database);
     $Auth->logout();
     $pms="0";	
-   // die ("got here");
+    //die ("got here ".$site->settings['url'].'/index.php');
    if(!empty($_SERVER['HTTP_REFERER'])){
-   redirect($_SERVER['HTTP_REFERER']);
+       redirect( $_SERVER['HTTP_REFERER']);
 	}
 	redirect($site->settings['url'].'/index.php');
     
