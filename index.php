@@ -12,7 +12,7 @@ require 'includes/master.inc.php'; // do login and stuff
 //print_r($page);
 //die();
 define ("AREA",0);
-define ("FORUM",1);
+define ("FORUM",2);
 $time = microtime();
 $time = explode(' ', $time);
 $time = $time[1] + $time[0];
