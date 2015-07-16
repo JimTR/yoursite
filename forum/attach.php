@@ -111,8 +111,10 @@ elseif ($i >= 2) {
 	$page['attrib'] = "disabled";
 }
 
-$page['include'] = $template->load($site->settings['template_path'].'include.tmpl', COMMENT);
-$template->load($site->settings['template_path'].'forum/attach.html',COMMENT);
+$page['include'] = $template->load($page['template_path'].'include.tmpl', COMMENT);
+$template->load($page['template_path'].'forum/attach.html',COMMENT);
+//print_r ($page);
+//die();
 $page['total'] = $i;
 $template->replace_vars($page);
 $template->publish();
