@@ -63,10 +63,10 @@ if($Auth->loggedIn())
 			   $level = $Auth->level;
 			   if ($Auth->level === 'user') {
 				  				   
-			   $login = $template->load(DOC_ROOT.'/templates/member.html', COMMENT);
+			   $login = $template->load($page['template_path'].'member.html', COMMENT);
 		   }
 		   elseif ($Auth->level === 'admin') {
-			   $login = $template->load(DOC_ROOT.'/templates/admin.html', COMMENT) ;
+			   $login = $template->load($page['template_path'].'admin.html', COMMENT) ;
 		   }
 			  
 			   
@@ -76,7 +76,7 @@ if($Auth->loggedIn())
 	else
 				{
 					$name ="Guest";
-					$login = $template->load(DOC_ROOT.'/templates/guest.html', COMMENT) ;
+					$login = $template->load($page['template_path'].'guest.html', COMMENT) ;
 					$nid = $nid = getnid();
 					$level = 'guest'; 
 				}
@@ -84,13 +84,14 @@ if($Auth->loggedIn())
 	
 	//writeid ($id,$nid,$database);
 	$page['users'] = $database->num_rows("select * from sessions"); // online users count
-	$page['header'] = $template->load($site->settings['template_path'].'/header.html', COMMENT); // load header
-	$page['footer'] = $template->load($site->settings['template_path'].'/footer.tmpl', COMMENT);
-	$page['include'] = $template->load($site->settings['template_path'].'/include.tmpl', COMMENT);
+	$page['header'] = $template->load($page['template_path'].'/header.html', COMMENT); // load header
+	$page['footer'] = $template->load($page['template_path'].'/footer.tmpl', COMMENT);
+	$page['include'] = $template->load($page['template_path'].'/include.tmpl', COMMENT);
 	$page['login'] = $login;
 	$page['datetime'] = FORMAT_TIME;
 	$page['path'] = $site->settings['url'];
 	$page['title'] .= " - Forums";
+	//die('templates loaded');
 	//get the root groups
 		$groupsql ="SELECT * , permissions.*
 					FROM categories
@@ -114,7 +115,7 @@ if($Auth->loggedIn())
 	                 {
 						 goto noview;
 					} 
-					$tabs->load(DOC_ROOT."/templates/tab.html",false); //dont show this templates remarks  
+					$tabs->load($page['template_path']."forum/tab.html",false); //dont show this templates remarks  
 					$tab_entry['tab_id'] = $row['cat_id']; 
 					$tab_entry['tab_name'] = $row['cat_name']; 
 					$tab_entry['tab_title'] = ""; 
@@ -151,7 +152,7 @@ if($Auth->loggedIn())
 								  $class =  "cell hidden-tab";
 								}
 								
-				                $template->load("templates/forum_group.html",COMMENT);
+				                $template->load($page['template_path']."/forum/forum_group.html",COMMENT);
 					            $template->replace("class",$class);
 					            $template->replace("rowid",$row['cat_id']); //added the header
 					            //$foumtab = $template->get_template();
@@ -172,7 +173,7 @@ if($Auth->loggedIn())
 				         ORDER BY Latest_Action desc limit 1";
 				         $lp = $database->get_row($sql);
 				                  
-				 $subtemplate->load("templates/forum_row.html", COMMENT); // load the row template
+				 $subtemplate->load($page['template_path']."/forum/forum_row.html", COMMENT); // load the row template
 				 //$template->replace("demo",$demo);
 				 $topic_subject = $lp['topic_subject'];
 				 $post_topic = $lp['topic_id'];
@@ -232,7 +233,7 @@ if($Auth->loggedIn())
 					            $totalposts=0;
 					            noview:
 		}	 	
-		$template->load ("templates/tabindex.html", COMMENT);
+		$template->load ($page['template_path']."forum/tabindex.html", COMMENT);
 	}
 	else 
 	{
@@ -249,7 +250,7 @@ if($Auth->loggedIn())
 	                 {
 						 goto noview1;
 					} 
-					$template->load("templates/catbit.html", COMMENT);
+					$template->load($page['template_path']."forum/catbit.html", COMMENT);
 					$template->replace("cat_name",$row['cat_name']);
 					//query for forum in group 
 					 
@@ -266,7 +267,7 @@ if($Auth->loggedIn())
 								foreach ($cats as $catrow)
 								
 							{
-								$subtemplate->load("templates/forum_row.html", COMMENT); // load the row template
+								$subtemplate->load($page['template_path']."forum/forum_row.html", COMMENT); // load the row template
 								$sql = "SELECT topic_id , topic_subject, categories.cat_id, categories.cat_name,
 				         (SELECT posts.post_date FROM posts WHERE posts.post_topic = topics.topic_id ORDER BY posts.post_date DESC limit 1) AS Latest_Action , 
 				         (SELECT posts.post_by FROM posts WHERE posts.post_topic = topics.topic_id ORDER BY posts.post_date DESC limit 1) AS Latest_User ,
@@ -330,7 +331,7 @@ if($Auth->loggedIn())
 						noview1:	
 					}
 		               $page['rowd'] .= "</table></div></div>";
-		$template->load ("templates/classicindex.html", COMMENT);
+		$template->load ($page['template_path']."forum/classicindex.html", COMMENT);
 		
 	} 
 	$page['query'] = $database->total_queries();
