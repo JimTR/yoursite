@@ -39,8 +39,7 @@
     define('TIME_NOW', time()); //time stamp
     define('FORMAT_TIME',  date($time_format)); // this should be the user time format
     
-    //die ("tz = ".$tz);
-    
+        
     if ($site->settings['year'] === "1")
    {
 	       define ("COPY_YEAR", romanNumerals(date("Y"))); 
@@ -70,7 +69,7 @@
 else {$page['address'] ='';}
 
     const SALT = 'insert some random text here';
-    $database = new db();
+    if (!$database = new db()){echo 'connection failure';}
     $detect = new Mobile_Detect;
     $isMobile = $detect->isMobile();
     $isTablet = $detect->isTablet();
@@ -92,9 +91,9 @@ else {$page['address'] ='';}
         $_REQUEST = fix_slashes($_REQUEST);
         $_COOKIE  = fix_slashes($_COOKIE);
     }
-
-
-    $Auth = Auth ::getAuth();
+    
+    $Auth = new Auth;
+    $Auth = $Auth->getAuth();
     if($Auth->loggedIn()) 
            {
 			 if($Auth->theme){  
