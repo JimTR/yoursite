@@ -20,13 +20,13 @@ if($Auth->loggedIn())
                //$user_fields = $database->get_row ($sql);
 			   if ($Auth->level === 'user') {
 			   $page['warn'] = $name;   				   
-			   $login = $template->load($site->settings['template_path'].'member.html', COMMENT);
+			   $login = $template->load($page['template_path'].'member.html', COMMENT);
 		   }
 				elseif ($Auth->level === 'admin') {
-			   $login = $template->load($site->settings['template_path'].'admin.html', COMMENT) ;
+			   $login = $template->load($page['template_path'].'admin.html', COMMENT) ;
 		   }
 			   $page['basecolour'] = "aqua";
-			   $editor = $template->load($site->settings['template_path'].'forum/editor.html'); //load the editor for all logged in switch it off with permissions
+			   $editor = $template->load($page['template_path'].'forum/editor.html'); //load the editor for all logged in switch it off with permissions
 			   $page['warn'] = $name;
 			   
 			    
@@ -35,7 +35,7 @@ if($Auth->loggedIn())
 else
 				{
 					$name ="Guest";
-					$login = $template->load( $site->settings['template_path'].'guest.html') ;
+					$login = $template->load( $page['template_path'].'guest.html') ;
 					$page['basecolour'] = "aqua";
 					$editor = ''; /// set the editor off 
 					$page['warn'] = "";
@@ -48,9 +48,9 @@ else
 	$page['attach'] = DOC_ROOT."/forum/user".$Auth->id.".txt";
 	$page['css'] ="<style>".file_get_contents ($css)."</style>";
     $page['base'] = $site->settings['url'].'/css/'.$page['basecolour'];
-    $page['header'] = $template->load($site->settings['template_path'].'header.html', COMMENT);
-	$page['include'] = $template->load($site->settings['template_path'].'include.tmpl', COMMENT);
-	$page['footer'] = $template->load ($site->settings['template_path'].'footer.tmpl', COMMENT);
+    $page['header'] = $template->load($page['template_path'].'header.html', COMMENT);
+	$page['include'] = $template->load($page['template_path'].'include.tmpl', COMMENT);
+	$page['footer'] = $template->load ($page['template_path'].'footer.tmpl', COMMENT);
 	//die($page['include']);
 	$page['file'] = "user".$Auth->id.".txt";
 	$page['vari'] = $database->num_rows("select * from sessions");	
@@ -232,7 +232,7 @@ else
 					//$template->publish;
 					//print_r ($post_info);
 					//die();					
-					$template->load($site->settings['template_path'].'forum/post.html', COMMENT);
+					$template->load($page['template_path'].'forum/post.html', COMMENT);
 					$template->replace_vars($post_info);
 					$page['posts'].= $template->get_template(); // add the posts
 					$pg = $pid % 5; // check page length
@@ -266,7 +266,7 @@ else
 			}
 			 
 			    $page['cat_id'] = $row['cat_id'];
-				$template->load($site->settings['template_path'].'forum/topic.html',COMMENT);
+				$template->load($page['template_path'].'forum/topic.html',COMMENT);
 				//die('loaded');
 				$page['query'] = $database->total_queries();
 				//$page['navi'] .= "</div>";
