@@ -41,17 +41,17 @@ if (isset($_POST['post_content'])) {goto postdata;}
 			   $nid = $Auth->nid;
 			   
 			   if ($Auth->level === 'user') {
-				  	$login = $template->load($site->settings['template_path'].'/member.html', COMMENT);
+				  	$login = $template->load($page['template_path'].'member.html', COMMENT);
 				}
 				elseif ($Auth->level === 'admin') {
-					$login = $template->load($site->settings['template_path'].'/admin.html', COMMENT) ;
+					$login = $template->load($page['template_path'].'admin.html', COMMENT) ;
 				}
 		   }
 						   
 else
 		{
 			$name ="Guest";
-			$login = $template->load($site->settings['template_path'].'//guest.html', COMMENT) ;
+			$login = $template->load($page['template_path'].'/guest.html', COMMENT) ;
 			$level = 'guest';
 		}
   $page['editor_opts'] = "<script>CKEDITOR.replace( 'editor1', {uiColor: '#2D3538', height: '200px', removePlugins: 'elementspath',toolbar: [
@@ -66,9 +66,9 @@ else
 	  redirect($site->settings['url']."/error.php?action=202"); // this internal error
      }
     
-    $page['header'] = $template->load($site->settings['template_path'].'header.html', COMMENT); //load header template
-    $page['include'] = $template->load ($site->settings['template_path'].'include.tmpl',COMMENT); // load includes
-	$page['footer'] = $template->load ( $site->settings['template_path'].'footer.tmpl', COMMENT); //load footer
+    $page['header'] = $template->load($page['template_path'].'header.html', COMMENT); //load header template
+    $page['include'] = $template->load ($page['template_path'].'include.tmpl',COMMENT); // load includes
+	$page['footer'] = $template->load ($page['template_path'].'footer.tmpl', COMMENT); //load footer
 	$page['title'] = "Edit a Post";
 	$page['adminstats'] = "";
 	$page['datetime'] = FORMAT_TIME;
@@ -79,7 +79,7 @@ else
 	$root = $database->get_results($sql);
 	$page['edit_text'] = $root[0]['post_content'];
 	$page['returnid'] = $root[0]['post_topic'];
-	$template->load ($site->settings['template_path'].'forum/edit_post.html', COMMENT);
+	$template->load ($page['template_path'].'forum/edit_post.html', COMMENT);
 	$template->replace_vars($page);
 	$adminstats= "Page generated in ".$test['time']." seconds. &nbsp;
      PHP ".$test['php']."% SQL ".$test['sql']."% 
