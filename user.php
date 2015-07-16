@@ -26,7 +26,8 @@ if (isset($_POST['nid'])) {
 if($Auth->loggedIn()) 
            {
 			   if($_POST){  
-					$page['theme_path'] =  DOC_ROOT.'/themes/'.$_POST['theme'].'/templates/'.$page['udevice'].'/';  
+					$page['theme_path'] =  DOC_ROOT.'/themes/'.$_POST['theme'].'/templates/'.$page['udevice'].'/';
+					$page['css_path'] =  $page['path'].'/themes/'.$_POST['theme'].'/';   
 				}
 			if($page['template_path']<>$page['theme_path']) 
 				{$page['template_path']=$page['theme_path'];
@@ -49,7 +50,7 @@ if($Auth->loggedIn())
 	else
 				{
 					
-					redirect($page['template_path'].'index.php'); 
+					redirect($site->settings['url'].'/index.php'); 
 				}
 				
 
@@ -96,10 +97,12 @@ chdir($curdir);
 //$page['theme'] = '<select>';
 foreach ($dirs as $v) {
    // echo "Current value of \$dirs: $v.<br>";
+   if ($v == 'img') {goto protect;}
     if ($result['theme'] === $v) {
     $page['theme'] .= '<option value="'.$v.'" selected>'.$v.'</option>';
 }
 else {$page['theme'] .= '<option value="'.$v.'">'.$v.'</option>';}
+protect:
 }
 
 //$page['theme'] .= '</select>';
@@ -119,6 +122,7 @@ $page['editor_opts'] = "<script>CKEDITOR.replace( 'editor1', {uiColor: '#F58220'
 					resize_enabled : false
 			});</script>"; 
 $template->load($page['template_path'].'user.html');
+
 $page['query'] = $database->total_queries();
      if (@$Auth->level === 'admin')
     { 
