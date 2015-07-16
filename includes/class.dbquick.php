@@ -65,7 +65,13 @@ class db
         $message .= 'Error: ' . $error;
         $message .= '</p>';
         $message .='<p> The above error was generated in the script '.$_SERVER['SCRIPT_NAME'].'<br> from IP address '.$_SERVER['REMOTE_ADDR'];
-        $message .='<br>with a request string of '.$_SERVER['QUERY_STRING'].'</p>'; 
+         foreach($_REQUEST as $key=>$val) 
+  { 
+	  // loop the request array
+	  $request .= $key.' param '.$val.' value <br>';
+  }
+        $message .= '<br>with a request string of '.$_SERVER['QUERY_STRING'].'</p>';
+        $message .= $request;
 
         if( defined( 'SEND_ERRORS_TO' ) )
         {
