@@ -328,10 +328,8 @@ global $database;
     // Redirects user to $url
     function redirect($url = null)
     {
-		//die ("url = ".$url);
-        if(is_null($url)) $url = $_SERVER['PHP_SELF'];
+		if(is_null($url)) $url = $_SERVER['PHP_SELF'];
         header("Location: $url");
-        //die ("url = ".$url);
         exit();
     }
 
