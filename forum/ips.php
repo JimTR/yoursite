@@ -35,7 +35,7 @@ $page['ip'] = $_GET['ip'];
 $page['hostname'] = @gethostbyaddr($_GET['ip']);
 $page['hostlocation'] = $geoplugin->countryName;
 $page['path'] = $site->settings['url'];
-$template->load(DOC_ROOT."/templates/ips.html");
+$template->load($page['template_path']."ips.html");
 $template->replace_vars($page);
 $template->publish();
 ?>
