@@ -891,10 +891,10 @@ function filelength($file)
 			return $linecount;
 }
 
-function writeini ($settings,$file,$header,$name)
+function writeini ($ini_array,$file,$header,$name)
 	{
 		/* write settings or lang file
-		 * $ettings  Type array  - data to write 
+		 * $settings  Type array  - data to write 
 		 * $file Type string - file to write to
 		 * $header Type string - file identifier
 		 * $name Type string - array key name
@@ -904,14 +904,15 @@ function writeini ($settings,$file,$header,$name)
 		 
 		if(!isset($name)) {$name ="ini";} 
 		$writevar ="<?php
-/*********************************\\n". 
-$header.
-"\n\*********************************/\n";
-	foreach ($settings as $key => $val) {
+/*********************************\ 
+". $header."
+\*********************************/\n";
+	foreach ($ini_array as $key => $val) {
       $writevar .=  "\$".$name."['" . $key . "'] = \"".$val."\";\r\n";
     }
     $writevar .= "?>";
-	file_put_contents ($filename , $writevar,LOCK_EX);
+    	file_put_contents ($file , $writevar,LOCK_EX);
+	
 }
 
 function romanNumerals($num) 
@@ -989,18 +990,17 @@ function return_tz($tz1)
 	  
 	foreach ($tzlist as $key => $tzitem)
 		{
-			if ($key === $tz1-1) {
+			if ($key === $tz1+0) {
 				break;
 				}
 		}
+		
 		return $tzitem;
 }
 
 function build_address ($settings)
 {
-	// builds the address block
-	//print_r($settings);
-	//die ('got to function');
+	
 	$address_block = $settings['address_street'].'<br>';
 	$address_block .= $settings['address_city'].'<br>';
 	$address_block .= $settings['address_postcode'].'<br>';
