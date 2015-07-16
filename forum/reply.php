@@ -61,7 +61,7 @@ else
                                 stat.attr("fred","1");
                                 //alert("set attr");
                                 stat.html("message saved");
-                                alert(stat.attr("fred"));
+                                //alert(stat.attr("fred"));
                                 parent.$.colorbox.close();
 							});
                                 </script></head>
