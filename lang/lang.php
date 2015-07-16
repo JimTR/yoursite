@@ -29,6 +29,7 @@ $l['user_cp_welcome'] = "This is your user control panel. You can access your pr
 $l['profile_emailaddress'] = "Email Address";
 $l['profile_gender'] = "Gender";
 $l['profile_location']= "Location";
+$l['profile_theme'] = "Theme";
 $l['profile_bio'] = "Enter a few short details about yourself, your life story etc.";
 $l['profile_skype'] = "Skype ID";
 $l['profile_steam'] = "Steam ID";
