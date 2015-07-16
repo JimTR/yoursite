@@ -65,8 +65,10 @@
             $data = $db->escape($data);
             
             $updated_on = time();
+            if ($ua){
             $db->query("INSERT INTO `sessions` (`id`, `updated_on`, `ip`, `location`, `useragent` , `nid` , `usertype` ) VALUES ('".$id."','".$updated_on."','".$ip."','".$location."','".$ua."', '".$nid."', '".$usertype."') 
             ON DUPLICATE KEY UPDATE `updated_on` = ".$updated_on ." , `ip` = '".$ip."' , location = '".$location."',  useragent = '".$ua."', nid = '".$nid."', usertype = '".$usertype."'" );
+		}
             return ($db->affected() == 1);
         }
 
