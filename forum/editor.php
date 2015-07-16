@@ -8,8 +8,9 @@
  require DOC_ROOT.'/includes/master.inc.php'; // do login or not
  $template = new Template;
  //die ($site->settings['template_path']);
- $template->load($site->settings['template_path'].'forum/editorx.html');
+ $template->load($page['template_path'].'forum/editorx.html');
  $page['file'] = "./user".$Auth->id.".txt";
+ //$page['include'] = $template->load($page['template_path'].'include.tmpl', COMMENT);
  $template->replace_vars($page);
  $template->publish();  
 ?>

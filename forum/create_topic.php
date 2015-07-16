@@ -12,9 +12,9 @@ $start = $time;
 
 $template = new Template; 
 
-	$page['header'] = $template->load($site->settings['template_path'].'header.html', COMMENT);
-	$page['footer'] = $template->load($site->settings['template_path'].'footer.tmpl', COMMENT);
-	$page['include'] = $template->load( $site->settings['template_path'].'include.tmpl', COMMENT);
+	$page['header'] = $template->load($page['template_path'].'header.html', COMMENT);
+	$page['footer'] = $template->load($page['template_path'].'footer.tmpl', COMMENT);
+	$page['include'] = $template->load($page['template_path'].'include.tmpl', COMMENT);
 	$page['css'] = $site->settings['url'].'/css/aqua.css';
 	$page['editor_opts'] = "<script>CKEDITOR.replace( 'editor1', {uiColor: '#067AC5',removePlugins: 'elementspath',toolbar: [
 					[ 'Bold', 'Italic','Underline', 'Strike', 'Subscript', 'Superscript', 'RemoveFormat', '-', 'NumberedList', 'BulletedList' ],
@@ -40,10 +40,10 @@ if($Auth->loggedIn())
 			   $nid = $Auth->nid;
 			   if ($Auth->level === 'user') {
 				  				   
-			   $login = $template->load(DOC_ROOT.'/templates/member.html', COMMENT);
+			   $login = $template->load($page['template_path'].'member.html', COMMENT);
 		   }
 		   elseif ($Auth->level === 'admin') {
-			   $login = $template->load(DOC_ROOT.'/templates/admin.html', COMMENT) ;
+			   $login = $template->load($page['template_path'].'admin.html', COMMENT) ;
 		   }
 			  
 			   $page['attach'] = "user".$Auth->id.".txt";
@@ -105,7 +105,7 @@ if($Auth->loggedIn())
 						foreach ($cat as $row){}
 					$page['navi'] = '<a style="color:#FFFFFF" href="index.php">Forum-></a><a style="color:#FFFFFF" href="category.php?id='.$row['cat_id'].'">'. $row['cat_name'] .'-></a>New Thread';
 					$page['catlist'] = '<input type= "hidden" name= "topic_cat" value ="'.$getid.'">';}
-					$template->load("templates/create_thread.html", COMMENT);   
+					$template->load($page['template_path']."forum/create_thread.html", COMMENT);   
 						$page['query'] = $database->total_queries();
 	                    $template->replace_vars($page);
 	                    $linecount = filelength($_SERVER['SCRIPT_FILENAME']);
