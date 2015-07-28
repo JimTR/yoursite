@@ -68,7 +68,7 @@ class db
          foreach($_REQUEST as $key=>$val) 
   { 
 	  // loop the request array
-	  $request .= $key.' param '.$val.' value <br>';
+	  $request .= 'Key = '.$key.' Value  = '.$val.'<br>';
   }
         $message .= '<br>with a request string of '.$_SERVER['QUERY_STRING'].'</p>';
         $message .= $request;
@@ -360,7 +360,7 @@ class db
         }
         $check = implode(' AND ', $check);
 
-        $rs_check = "SELECT $check_val FROM ".$table." WHERE $check";
+        $rs_check = "SELECT $check_val FROM ".$table." WHERE '$check'";
        
         $number = $this->num_rows( $rs_check );
         if( $number === 0 )
