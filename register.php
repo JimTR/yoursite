@@ -1,7 +1,7 @@
 <?php
 /*
  * Register script
- * reworked 8-1-15
+ * reworked 28-7-15
  *  
  */
  
@@ -12,7 +12,7 @@
 			   // logged in already go back from whence you came
 			   redirect("index.php");
 			    }
-			   
+if ($_POST['r']) { redirect("index.php");} //indicates an automated login			   
 	 if(!empty($_POST['username']))
 	{
 		
@@ -20,8 +20,8 @@
 		$ip = getip();
 		$ips = $database->num_rows("select * from users where ip = '".$ip."'");
 		
-		if ($ips >= 2) {
-			$Error = "<li>This IP is already registered</li>";
+		if ($ips >= $site->settings['ip_count']) {
+			$Error = "<li>This IP has too many registrations</li>";
 			//goto render;
 		}
 		$invalidwords = array ("select","delete","insert","update","'");
@@ -43,7 +43,7 @@
 			$Error .= "Invalid Password, passwords must be longer than ".$site->settings['pwdlen']." chrs and not contain your username";
 			goto render;
 		}
-		$checke['email'] = $_POST['email'];
+		$checke['email'] = "'".$_POST['email']."'";
 		//else {$Error = "test this out"; goto render;} 
 		
 		if (!$_POST['email'])
@@ -55,7 +55,7 @@
 				$validemail=valid_email($_POST['email'], true);
 		              if(!$validemail)
 		              { 
-						  $Error .= "There appears to be a problem with your email address check & retry";
+						  $Error .= 'There appears to be a problem with your email address check & retry';
 						  goto render;}
 			}
 		
@@ -130,8 +130,6 @@ $page['header'] = $template->load($page['template_path'].'header.html', COMMENT)
 $page['footer'] = $template->load($page['template_path'].'footer.tmpl', COMMENT);
 $page['include'] = $template->load($page['template_path'].'include.tmpl',COMMENT);
 $page['title'] .=" - Register";
-$page['css'] = '';// $template->load ('css/yuiapp.css');
-$page['css'] ="<style>".$page['css']."</style>";
 $page['stuff'] = "register page";
 $page['email'] = $_POST['email'];
 $page['pwdlen']  = $site->settings['pwdlen'];
