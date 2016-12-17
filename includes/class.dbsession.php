@@ -11,6 +11,7 @@
         {
             //$db = Database::getDatabase();
             //return $db->isWriteConnected();
+		return true;
         }
 
         public static function close()
