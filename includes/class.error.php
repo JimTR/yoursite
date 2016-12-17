@@ -96,7 +96,7 @@
 
         // Below are a collection of tests for error conditions in your user's input...
         // Be sure to customize these to suit your app's needs. Especially the error messages.
-
+        // no longer used
         // Is the (string) value empty?
         public function blank($val, $id, $name = null)
         {
